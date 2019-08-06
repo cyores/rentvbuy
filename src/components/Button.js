@@ -8,7 +8,8 @@ const StyledButton = styled.button`
 class Button extends Component {
     render() { 
         return ( 
-            <StyledButton 
+            <StyledButton
+                className={this.props.className}
                 type={this.props.type}
                 onClick={this.props.onPress}
                 disabled={this.props.isDisabled}>

@@ -17,8 +17,11 @@ class TextInput extends Component {
                 <StyledInput
                     className="u-full-width"
                     type={this.props.type}
+                    step={this.props.step}
+                    defaultValue={this.props.defaultValue}
                     placeholder={this.props.placeholder}
                     onKeyUp={this.props.onTyping}
+                    onChange={this.props.Typing}
                 />
             </React.Fragment>
          );
