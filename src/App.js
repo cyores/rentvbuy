@@ -3,6 +3,7 @@ import React from 'react';
 // Components
 import Button from "./components/Button";
 import TextInput from "./components/TextInput";
+import Sheet from './components/Sheet';
 
 
 class App extends React.Component {
@@ -33,8 +34,8 @@ class App extends React.Component {
     
     calculate() {
         let s = this.state;
-        s.calcs.downpayment = (s.VOP * s.DP).toFixed(2);
-        s.calcs.rent = (s.RENT).toFixed(2);
+        s.calcs.downpayment = parseFloat((s.VOP * s.DP).toFixed(2));
+        s.calcs.rent = parseFloat((s.RENT).toFixed(2));
 
         if(s.TAX > 0) {
             s.calcs.taxes = s.TAX;
@@ -42,7 +43,7 @@ class App extends React.Component {
         else {
             s.calcs.taxes = (s.VOP * 0.01) / 12; // asume taxes at 1% of VOP
         }
-        s.calcs.taxes = (s.calcs.taxes).toFixed(2);
+        s.calcs.taxes = parseFloat((s.calcs.taxes).toFixed(2));
 
         if(s.CF > 0) {
             console.log('m', ((s.VOP * 0.005) / 12));
@@ -52,9 +53,9 @@ class App extends React.Component {
         else {
             s.calcs.maint = (s.VOP * 0.01) / 12; // assume maintenance of 1% if no condo fee
         }
-        s.calcs.maint = (s.calcs.maint).toFixed(2);
+        s.calcs.maint = parseFloat((s.calcs.maint).toFixed(2));
 
-        s.calcs.percentRule = ((s.VOP * (s.SMA - s.REA) + s.calcs.maint + s.calcs.taxes) / 12).toFixed(2);
+        s.calcs.percentRule = parseFloat(((s.VOP * (s.SMA - s.REA) + s.calcs.maint + s.calcs.taxes) / 12).toFixed(2));
 
         if(s.calcs.percentRule < s.calcs.rent) {
             s.calcs.buy = true;
@@ -150,15 +151,17 @@ class App extends React.Component {
                             </div>
                             <div className="row">
                                 <div className="six columns">
-                                    <h2>Buy</h2>
-                                    <p>Downpayment: {this.state.calcs.downpayment}</p>
-                                    <p>Taxes: {this.state.calcs.taxes}/month</p>
-                                    <p>Maintenance: {this.state.calcs.maint}/month</p>
-                                    <p>Percent Rule: {this.state.calcs.percentRule}/month</p>
+                                    <Sheet title={"Buy"}>
+                                        <p>Downpayment: {this.state.calcs.downpayment}</p>
+                                        <p>Taxes: {this.state.calcs.taxes}/month</p>
+                                        <p>Maintenance: {this.state.calcs.maint}/month</p>
+                                        <p>Percent Rule: {this.state.calcs.percentRule}/month</p>  
+                                    </Sheet>
                                 </div>
                                 <div className="six columns">
-                                    <h2>Rent</h2>
-                                    <p>Rent: {this.state.calcs.rent}/month</p>
+                                    <Sheet title={"Rent"}>
+                                        <p>Rent: {this.state.calcs.rent}/month</p>
+                                    </Sheet>
                                 </div>
                             </div>
                         </React.Fragment>
