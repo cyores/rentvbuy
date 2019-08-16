@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(233, 232, 232);
+}
+
+/* backgrounds */
+.bg-green {
+    background-color: #7de7bd;
+}
+button.button-primary {
+    background-color: #7b3ddd;
+    border-color: #7b3ddd;
+}
+
+/* utils */
+.u-full-height {
+    height: 100%;
+}
+.text-center {
+    text-align: center;
+}
+.p-1 {
+    padding: 1rem;
+}
+.p-2 {
+    padding: 1.5rem;
+}
+.p-3 {
+    padding: 2rem;
+}
+.p-4 {
+    padding: 2.5rem;
+}
+.p-5 {
+    padding: 3rem;
+}
+
+/* main title */
+.main-title {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+.main-title:after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #7a3dddb7;
+    height: 10px;
+    width: 105%;
+    left: 50%;
+    bottom: 1px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
