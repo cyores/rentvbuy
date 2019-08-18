@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-    margin: 0.5rem;
+    // margin: 0.5rem;
 `
 
 class Button extends Component {

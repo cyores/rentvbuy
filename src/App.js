@@ -90,8 +90,8 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <div className="row u-full-height">
-                    <div className="four columns p-2 bg-green u-full-height">
-                        <h5 className="main-title">Rent vs Buy</h5>
+                    <div className="four columns p-2 bg-grad u-full-height">
+                        <h3 className="main-title">Rent vs Buy</h3>
                         <CollectInfo
                             handleChange={this.handleChange}
                             advanced={this.state.advanced}
@@ -112,7 +112,7 @@ class App extends React.Component {
                             onPress={() => this.calculate()}
                         />
                     </div>
-                    <div className="eight columns p-2 svgbg" style={{minHeight: '100%'}}>
+                    <div className="eight columns p-2">
                         {this.state.calcs.donecalcs ? (
                             <React.Fragment>
                                 <div className="row">
@@ -138,7 +138,7 @@ class App extends React.Component {
                                                 {this.state.calcs.maint}
                                                 /month
                                             </p>
-                                            <p>
+                                            <p style={{margin: 0}}>
                                                 Percent Rule:{" "}
                                                 {this.state.calcs.percentRule}
                                                 /month
