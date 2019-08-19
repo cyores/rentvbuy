@@ -41,7 +41,7 @@ class App extends React.Component {
         s.calcs.rent = parseFloat(s.RENT.toFixed(2));
 
         if (s.TAX > 0) {
-            s.calcs.taxes = s.TAX;
+            s.calcs.taxes = s.TAX / 12;
         } else {
             s.calcs.taxes = (s.VOP * 0.01) / 12; // asume taxes at 1% of VOP
         }
@@ -50,7 +50,7 @@ class App extends React.Component {
         if (s.CF > 0) {
             console.log("m", (s.VOP * 0.005) / 12);
             console.log("cf", s.CF);
-            s.calcs.maint = s.CF + (s.VOP * 0.005) / 12;
+            s.calcs.maint = s.CF + ((s.VOP * 0.005) / 12) ;
         } else {
             s.calcs.maint = (s.VOP * 0.01) / 12; // assume maintenance of 1% if no condo fee
         }
@@ -58,8 +58,7 @@ class App extends React.Component {
 
         s.calcs.percentRule = parseFloat(
             (
-                (s.VOP * (s.SMA - s.REA) + s.calcs.maint + s.calcs.taxes) /
-                12
+                (s.VOP * (s.SMA - s.REA) / 12) + s.calcs.maint + s.calcs.taxes
             ).toFixed(2)
         );
 
