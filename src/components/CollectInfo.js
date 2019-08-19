@@ -13,7 +13,8 @@ class CollectInfo extends Component {
                 <div className="row">
                     <div className="u-full-width">
                         <TextInput
-                            type="text"
+                            type="number"
+                            step="0.01"
                             placeholder=""
                             label="Value of Property"
                             onTyping={input =>
@@ -25,7 +26,8 @@ class CollectInfo extends Component {
                 <div className="row">
                     <div className="u-full-width">
                         <TextInput
-                            type="text"
+                            type="number"
+                            step="0.01"
                             placeholder=""
                             label="Rent"
                             onTyping={input =>

@@ -1,12 +1,14 @@
 import React from "react";
 
-import './app.css';
+import "./app.css";
 
 // Components
 import Button from "./components/Button";
 // import TextInput from "./components/TextInput";
 import Sheet from "./components/Sheet";
 import CollectInfo from "./components/CollectInfo";
+import Verdict from "./components/Verdict";
+import Footer from "./components/Footer";
 
 class App extends React.Component {
     constructor(props) {
@@ -50,7 +52,7 @@ class App extends React.Component {
         if (s.CF > 0) {
             console.log("m", (s.VOP * 0.005) / 12);
             console.log("cf", s.CF);
-            s.calcs.maint = s.CF + ((s.VOP * 0.005) / 12) ;
+            s.calcs.maint = s.CF + (s.VOP * 0.005) / 12;
         } else {
             s.calcs.maint = (s.VOP * 0.01) / 12; // assume maintenance of 1% if no condo fee
         }
@@ -58,7 +60,9 @@ class App extends React.Component {
 
         s.calcs.percentRule = parseFloat(
             (
-                (s.VOP * (s.SMA - s.REA) / 12) + s.calcs.maint + s.calcs.taxes
+                (s.VOP * (s.SMA - s.REA)) / 12 +
+                s.calcs.maint +
+                s.calcs.taxes
             ).toFixed(2)
         );
 
@@ -89,40 +93,39 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <div className="row u-full-height">
-                    <div className="four columns p-2 bg-grad u-full-height">
-                        <h3 className="main-title">Rent vs Buy</h3>
-                        <CollectInfo
-                            handleChange={this.handleChange}
-                            advanced={this.state.advanced}
-                            VOP={this.state.VOP}
-                            RENT={this.state.RENT}
-                            TAX={this.state.TAX}
-                            CF={this.state.CF}
-                            MR={this.state.MR}
-                            DP={this.state.DP}
-                            AP={this.state.AP}
-                            REA={this.state.REA}
-                            SMA={this.state.SMA}
-                        />
-                        <Button
-                            type="button"
-                            className="button-primary"
-                            text="Calculate"
-                            onPress={() => this.calculate()}
-                        />
+                    <div className="four columns u-full-height">
+                        <div className="bg-grad p-2 u-full-height" style={{ position: "fixed" }}>
+                            <h3 className="fancy-underline">Rent vs Buy</h3>
+                            <CollectInfo
+                                handleChange={this.handleChange}
+                                advanced={this.state.advanced}
+                                VOP={this.state.VOP}
+                                RENT={this.state.RENT}
+                                TAX={this.state.TAX}
+                                CF={this.state.CF}
+                                MR={this.state.MR}
+                                DP={this.state.DP}
+                                AP={this.state.AP}
+                                REA={this.state.REA}
+                                SMA={this.state.SMA}
+                            />
+                            <Button
+                                type="button"
+                                className="button-primary"
+                                text="Calculate"
+                                onPress={() => this.calculate()}
+                            />
+                            <Footer />
+                        </div>
                     </div>
-                    <div className="eight columns p-2">
+                    <div className="eight columns p-2" style={{ margin: "2%" }}>
                         {this.state.calcs.donecalcs ? (
                             <React.Fragment>
                                 <div className="row">
-                                    {this.state.calcs.buy ? (
-                                        <p>You should buy</p>
-                                    ) : (
-                                        <p>You should rent</p>
-                                    )}
+                                    <Verdict buy={this.state.calcs.buy} />
                                 </div>
                                 <div className="row">
-                                    <div className="six columns">
+                                    <div className="six columns" style={{height: "120vh"}}>
                                         <Sheet title={"Buy"}>
                                             <p>
                                                 Downpayment:{" "}
@@ -137,7 +140,7 @@ class App extends React.Component {
                                                 {this.state.calcs.maint}
                                                 /month
                                             </p>
-                                            <p style={{margin: 0}}>
+                                            <p style={{ margin: 0 }}>
                                                 Percent Rule:{" "}
                                                 {this.state.calcs.percentRule}
                                                 /month
@@ -157,7 +160,6 @@ class App extends React.Component {
                         ) : null}
                     </div>
                 </div>
-
             </React.Fragment>
         );
     }

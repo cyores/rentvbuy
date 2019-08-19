@@ -15,12 +15,12 @@ const StyledSheet = styled.div`
 class Sheet extends Component {
     render() {
         return (
-            <GradBorder>
-                <StyledSheet>
-                    <h2>{this.props.title}</h2>
-                    {this.props.children}
-                </StyledSheet>
-            </GradBorder>
+            // <GradBorder>
+            <StyledSheet>
+                <h2>{this.props.title}</h2>
+                {this.props.children}
+            </StyledSheet>
+            // </GradBorder>
         );
     }
 }
