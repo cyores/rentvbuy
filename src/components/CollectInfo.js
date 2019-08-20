@@ -15,7 +15,7 @@ class CollectInfo extends Component {
                         <TextInput
                             type="number"
                             step="0.01"
-                            placeholder=""
+                            defaultValue={this.props.VOP}
                             label="Value of Property"
                             onTyping={input =>
                                 this.props.handleChange(input, "VOP")
@@ -28,7 +28,7 @@ class CollectInfo extends Component {
                         <TextInput
                             type="number"
                             step="0.01"
-                            placeholder=""
+                            defaultValue={this.props.RENT}
                             label="Rent"
                             onTyping={input =>
                                 this.props.handleChange(input, "RENT")

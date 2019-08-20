@@ -13,11 +13,11 @@ button.button-primary {
     background-color: #7b3ddd;
     border-color: #7b3ddd;
 }
-button.button-primary:hover, button.button-primary:focus {
+button.button-primary:hover,
+button.button-primary:focus {
     background-color: #7a3ddde3;
     border-color: #7a3ddde3;
 }
-
 
 /* main title */
 .fancy-underline {
@@ -38,6 +38,25 @@ button.button-primary:hover, button.button-primary:focus {
     transform: translateX(-50%);
 }
 
+/* Left panel where nav and stuff are */
+.left-panel {
+    position: fixed;
+    width: 30%;
+    height: 100%;
+}
+.nav-item {
+    cursor: pointer;
+}
+.nav-item p {
+    margin: 0;
+    padding: 1.5rem;
+}
+.nav-item:hover {
+    background: #7a3dddab;
+}
+.active {
+    border-bottom: 2px solid #7b3ddd;
+}
 
 /* utils */
 .u-full-height {
@@ -45,6 +64,9 @@ button.button-primary:hover, button.button-primary:focus {
 }
 .text-center {
     text-align: center;
+}
+.pos-fixed {
+    position: fixed;
 }
 .m-0 {
     margin: 0;
@@ -67,4 +89,3 @@ button.button-primary:hover, button.button-primary:focus {
 .p-5 {
     padding: 3rem;
 }
-
