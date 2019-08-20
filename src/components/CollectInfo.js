@@ -16,7 +16,7 @@ class CollectInfo extends Component {
                             type="number"
                             step="0.01"
                             defaultValue={this.props.VOP}
-                            label="Value of Property"
+                            label="Value of Property ($)"
                             onTyping={input =>
                                 this.props.handleChange(input, "VOP")
                             }
@@ -29,7 +29,7 @@ class CollectInfo extends Component {
                             type="number"
                             step="0.01"
                             defaultValue={this.props.RENT}
-                            label="Rent"
+                            label="Monthly Rent at Property ($)"
                             onTyping={input =>
                                 this.props.handleChange(input, "RENT")
                             }
@@ -45,7 +45,7 @@ class CollectInfo extends Component {
                             type="number"
                             step="0.01"
                             defaultValue={this.props.TAX}
-                            label="Taxes"
+                            label="Annual Taxes ($)"
                             onTyping={input =>
                                 this.props.handleChange(input, "TAX")
                             }
@@ -56,7 +56,7 @@ class CollectInfo extends Component {
                             type="number"
                             step="0.01"
                             defaultValue={this.props.CF}
-                            label="Condo Fee"
+                            label="Monthly Condo Fee ($)"
                             onTyping={input =>
                                 this.props.handleChange(input, "CF")
                             }
@@ -69,7 +69,7 @@ class CollectInfo extends Component {
                             type="number"
                             step="0.01"
                             defaultValue={this.props.MR}
-                            label="Mortgage Rate"
+                            label="Mortgage Rate (%)"
                             onTyping={input =>
                                 this.props.handleChange(input, "MR")
                             }
@@ -93,38 +93,38 @@ class CollectInfo extends Component {
                             type="number"
                             step="0.01"
                             defaultValue={this.props.AP}
-                            label="Amortization Period"
+                            label="Amortization Period (years)"
                             onTyping={input =>
                                 this.props.handleChange(input, "AP")
                             }
                         />
                     </div>
-                    <div className="six columns">
+                    {/* <div className="six columns">
                         <TextInput
                             type="number"
                             step="0.01"
                             defaultValue={this.props.SMA}
-                            label="Stock Market Appreciation"
+                            label="Stock Market Appreciation (%)"
                             onChange={input =>
                                 this.props.handleChange(input, "SMA")
                             }
                         />
-                    </div>
+                    </div> */}
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     <div className="six columns">
                         <TextInput
                             type="number"
                             step="0.01"
                             defaultValue={this.props.REA}
-                            label="Real Estate Appreciation"
+                            label="Real Estate Appreciation (%)"
                             onTyping={input =>
                                 this.props.handleChange(input, "REA")
                             }
                         />
                     </div>
                     <div className="six columns"></div>
-                </div>
+                </div> */}
 
 
             </StyledCollectInfo>

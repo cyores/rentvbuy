@@ -24,7 +24,7 @@ class Footer extends Component {
                             this.props.changeView("calculator");
                         }}
                     >
-                        <p>Calculator</p>
+                        <p>calculator</p>
                     </div>
                     <div
                         className={"four columns nav-item " + aboutClasses}
@@ -32,7 +32,7 @@ class Footer extends Component {
                             this.props.changeView("about");
                         }}
                     >
-                        <p>About</p>
+                        <p>about</p>
                     </div>
                     <div
                         className={"four columns nav-item " + helpClasses}
@@ -40,7 +40,7 @@ class Footer extends Component {
                             this.props.changeView("help");
                         }}
                     >
-                        <p>Help</p>
+                        <p>help</p>
                     </div>
                 </div>
                 <div className="row p-0 m-0">

@@ -21,8 +21,8 @@ class App extends React.Component {
             RENT: 0, // rent
             TAX: 0, // annual property taxes
             CF: 0, // condo fee
-            MR: 0.03, // mortgage rate
-            DP: 0.3, // down payment percentage
+            MR: 3.0, // mortgage rate
+            DP: 30, // down payment percentage
             AP: 25, // amortization period
             REA: 0.03, // real estate appriciation
             SMA: 0.06, // stock market appriciation

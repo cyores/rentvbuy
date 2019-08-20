@@ -16,8 +16,9 @@ class Calculator extends Component {
 
     calculate() {
         let s = this.state;
-        s.calcs.downpayment = parseFloat((s.VOP * s.DP).toFixed(2));
+        s.calcs.downpayment = parseFloat((s.VOP * (s.DP / 100)).toFixed(2));
         s.calcs.rent = parseFloat(s.RENT.toFixed(2));
+        const MR = s.MR / 100;
 
         if (s.TAX > 0) {
             s.calcs.taxes = s.TAX / 12;
@@ -58,6 +59,7 @@ class Calculator extends Component {
         // console.log(input.target.value, metric);
         let s = this.state;
         s[metric] = parseFloat(input.target.value);
+        if(Number.isNaN(s[metric])) return;
         this.setState({ metric: s[metric] });
     }
 

@@ -50,9 +50,11 @@ button.button-primary:focus {
 .nav-item p {
     margin: 0;
     padding: 1.5rem;
+    text-transform: uppercase;
 }
 .nav-item:hover {
     background: #7a3dddab;
+    color: #f0f0f0;
 }
 .active {
     border-bottom: 2px solid #7b3ddd;
