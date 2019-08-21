@@ -45,7 +45,7 @@ class Footer extends Component {
                 </div>
                 <div className="row p-0 m-0">
                     <div className="u-full-width">
-                        <p>
+                        <p className="mb-1">
                             <small>
                                 <em style={{ color: "#777" }}>
                                     made by christian yores

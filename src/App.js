@@ -5,13 +5,12 @@ import "./app.css";
 // Components
 import About from "./components/About";
 import Help from "./components/Help";
-import Button from "./components/Button";
-// import TextInput from "./components/TextInput";
 import Sheet from "./components/Sheet";
-import CollectInfo from "./components/CollectInfo";
 import Verdict from "./components/Verdict";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
+import Rent from "./components/Rent";
+import Buy from "./components/Buy";
 
 class App extends React.Component {
     constructor(props) {
@@ -55,7 +54,10 @@ class App extends React.Component {
                 <div className="left-panel bg-grad p-2">
                     <h3 className="fancy-underline">Rent vs Buy</h3>
                     {this.state.view === "calculator" ? (
-                        <Calculator defaultState={this.state} sendToApp={this.receiveFromCalculator} />
+                        <Calculator
+                            defaultState={this.state}
+                            sendToApp={this.receiveFromCalculator}
+                        />
                     ) : null}
                     {this.state.view === "about" ? <About /> : null}
                     {this.state.view === "help" ? <Help /> : null}
@@ -73,40 +75,30 @@ class App extends React.Component {
                         {this.state.calcs.donecalcs ? (
                             <React.Fragment>
                                 <div className="row">
-                                    <Verdict buy={this.state.calcs.buy} />
+                                    <div className="u-full-width">
+                                        <Verdict buy={this.state.calcs.buy} />
+                                    </div>
                                 </div>
                                 <div className="row">
-                                    <div
-                                        className="six columns"
-                                        style={{ height: "120vh" }}
-                                    >
-                                        <Sheet title={"Buy"}>
-                                            <p>
-                                                Downpayment:{" "}
-                                                {this.state.calcs.downpayment}
-                                            </p>
-                                            <p>
-                                                Taxes: {this.state.calcs.taxes}
-                                                /month
-                                            </p>
-                                            <p>
-                                                Maintenance:{" "}
-                                                {this.state.calcs.maint}
-                                                /month
-                                            </p>
-                                            <p style={{ margin: 0 }}>
-                                                Percent Rule:{" "}
-                                                {this.state.calcs.percentRule}
-                                                /month
-                                            </p>
+                                    <div className="six columns">
+                                        <Sheet
+                                            title={"Buy"}
+                                            subtitle={
+                                                "5% Rule: $" +
+                                                this.state.calcs.percentRule
+                                            }
+                                        >
+                                            <Buy data={this.state} />
                                         </Sheet>
                                     </div>
                                     <div className="six columns">
-                                        <Sheet title={"Rent"}>
-                                            <p>
-                                                Rent: {this.state.calcs.rent}
-                                                /month
-                                            </p>
+                                        <Sheet
+                                            title={"Rent"}
+                                            subtitle={
+                                                "Assumption: the downpayment is invested in the stock market."
+                                            }
+                                        >
+                                            <Rent data={this.state} />
                                         </Sheet>
                                     </div>
                                 </div>

@@ -28,13 +28,20 @@ class Calculator extends Component {
         s.calcs.taxes = parseFloat(s.calcs.taxes.toFixed(2));
 
         if (s.CF > 0) {
-            console.log("m", (s.VOP * 0.005) / 12);
-            console.log("cf", s.CF);
             s.calcs.maint = s.CF + (s.VOP * 0.005) / 12;
         } else {
             s.calcs.maint = (s.VOP * 0.01) / 12; // assume maintenance of 1% if no condo fee
         }
         s.calcs.maint = parseFloat(s.calcs.maint.toFixed(2));
+
+        s.calcs.mortgagePrinciple = s.VOP - s.calcs.downpayment;
+
+        // PMT=(Pv∗Rate∗(1+Rate)Nper)/[(1+Rate)Nper−1]
+        const R = s.MR / 100 / 12;
+        const N = -12 * s.AP;
+        s.calcs.pmt =
+            (s.calcs.mortgagePrinciple * R) / (1 - Math.pow(1 + R, N));
+        s.calcs.pmt = parseFloat(s.calcs.pmt.toFixed(2));
 
         s.calcs.percentRule = parseFloat(
             (
@@ -59,7 +66,7 @@ class Calculator extends Component {
         // console.log(input.target.value, metric);
         let s = this.state;
         s[metric] = parseFloat(input.target.value);
-        if(Number.isNaN(s[metric])) return;
+        if (Number.isNaN(s[metric])) return;
         this.setState({ metric: s[metric] });
     }
 

@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const GradBorder = styled.div`
-    padding: 2px;
-    background: linear-gradient(-30deg, #7ddce7, #7de7bd);
-`;
-
 const StyledSheet = styled.div`
-    width: 100%;
     background-color: #fff;
-    text-align: center;
+    padding: 1.5rem;
+    margin: 0 auto;
+    // text-align: center;
 `;
 
 class Sheet extends Component {
     render() {
         return (
-            // <GradBorder>
             <StyledSheet>
-                <h2>{this.props.title}</h2>
+                <h3>{this.props.title}</h3>
+                {this.props.subtitle ? <h6><em>{this.props.subtitle}</em></h6> : null}
+                <hr></hr>
                 {this.props.children}
             </StyledSheet>
-            // </GradBorder>
         );
     }
 }
