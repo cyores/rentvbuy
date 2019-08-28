@@ -18,7 +18,6 @@ class Calculator extends Component {
         let s = this.state;
         s.calcs.downpayment = parseFloat((s.VOP * (s.DP / 100)).toFixed(2));
         s.calcs.rent = parseFloat(s.RENT.toFixed(2));
-        const MR = s.MR / 100;
 
         if (s.TAX > 0) {
             s.calcs.taxes = s.TAX / 12;

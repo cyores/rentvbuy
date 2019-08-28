@@ -9,8 +9,6 @@ import Sheet from "./components/Sheet";
 import Verdict from "./components/Verdict";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
-import Rent from "./components/Rent";
-import Buy from "./components/Buy";
 
 class App extends React.Component {
     constructor(props) {
@@ -31,6 +29,8 @@ class App extends React.Component {
                 maint: 0,
                 rent: 0,
                 percentRule: 0,
+                mortgagePrinciple: 0,
+                pmt: 0,
                 rentOrBuy: null
             },
             donecalcs: false,
@@ -82,23 +82,25 @@ class App extends React.Component {
                                 <div className="row">
                                     <div className="six columns">
                                         <Sheet
+                                            type={"buy"}
                                             title={"Buy"}
                                             subtitle={
                                                 "5% Rule: $" +
                                                 this.state.calcs.percentRule
                                             }
+                                            calcs={this.state.calcs}
                                         >
-                                            <Buy data={this.state} />
                                         </Sheet>
                                     </div>
                                     <div className="six columns">
                                         <Sheet
+                                            type={"rent"}
                                             title={"Rent"}
                                             subtitle={
                                                 "Assumption: the downpayment is invested in the stock market."
                                             }
+                                            calcs={this.state.calcs}
                                         >
-                                            <Rent data={this.state} />
                                         </Sheet>
                                     </div>
                                 </div>
