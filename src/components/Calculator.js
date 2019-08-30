@@ -16,49 +16,84 @@ class Calculator extends Component {
 
     calculate() {
         let s = this.state;
-        s.calcs.downpayment = parseFloat((s.VOP * (s.DP / 100)).toFixed(2));
-        s.calcs.rent = parseFloat(s.RENT.toFixed(2));
 
-        if (s.TAX > 0) {
-            s.calcs.taxes = s.TAX / 12;
-        } else {
-            s.calcs.taxes = (s.VOP * 0.01) / 12; // asume taxes at 1% of VOP
-        }
-        s.calcs.taxes = parseFloat(s.calcs.taxes.toFixed(2));
+        // the order matters
+        s.calcs.buy.initialCosts.downpayment = this.calcDownpayment(s);
+        
+        s.calcs.rent.initialCosts.stockInvestment = this.calcDownpayment(s);
 
-        if (s.CF > 0) {
-            s.calcs.maint = s.CF + (s.VOP * 0.005) / 12;
-        } else {
-            s.calcs.maint = (s.VOP * 0.01) / 12; // assume maintenance of 1% if no condo fee
-        }
-        s.calcs.maint = parseFloat(s.calcs.maint.toFixed(2));
+        s.calcs.rent.monthlyCosts.rent = this.calcMonthlyCostsRent(s);
 
-        s.calcs.mortgagePrinciple = s.VOP - s.calcs.downpayment;
+        s.calcs.buy.monthlyCosts.taxes = this.calcMonthlyCostsTaxes(s);
 
-        // PMT=(Pv∗Rate∗(1+Rate)Nper)/[(1+Rate)Nper−1]
-        const R = s.MR / 100 / 12;
-        const N = -12 * s.AP;
-        s.calcs.pmt =
-            (s.calcs.mortgagePrinciple * R) / (1 - Math.pow(1 + R, N));
-        s.calcs.pmt = parseFloat(s.calcs.pmt.toFixed(2));
+        s.calcs.buy.monthlyCosts.maint = this.calcMonthlyCostsMaint(s);
 
-        s.calcs.percentRule = parseFloat(
-            (
-                (s.VOP * (s.SMA - s.REA)) / 12 +
-                s.calcs.maint +
-                s.calcs.taxes
-            ).toFixed(2)
-        );
+        s.calcs.buy.mortgagePrinciple = this.calcMortgagePrinciple(s);
+
+        s.calcs.buy.monthlyCosts.pmt = this.calcMonthlyCostsPMT(s);
+
+        s.calcs.percentRule = this.calcPercentRule(s);
 
         if (s.calcs.percentRule < s.calcs.rent) {
-            s.calcs.buy = true;
+            s.calcs.rentOrBuy = "buy";
         } else {
-            s.calcs.buy = false;
+            s.calcs.rentOrBuy = "rent";
         }
 
         s.calcs.donecalcs = true;
+        console.log("calcs", s.calcs);
         this.setState({ calcs: s.calcs });
-        this.props.sendToApp(this.state);
+        this.props.sendToApp(s.calcs);
+    }
+
+    calcDownpayment(s) {
+        return parseFloat((s.VOP * (s.DP / 100)).toFixed(2));
+    }
+
+    calcMonthlyCostsRent(s) {
+        return parseFloat(s.RENT.toFixed(2));
+    }
+
+    calcMonthlyCostsTaxes(s) {
+        if (s.TAX > 0) {
+            return parseFloat((s.TAX / 12).toFixed(2));
+        } else {
+            return parseFloat(((s.VOP * 0.01) / 12).toFixed(2)); // assume taxes at 1% of VOP
+        }
+    }
+
+    calcMonthlyCostsMaint(s) {
+        if (s.CF > 0) {
+            return parseFloat((s.CF + (s.VOP * 0.005) / 12).toFixed(2));
+        } else {
+            return parseFloat(((s.VOP * 0.01) / 12).toFixed(2)); // assume maintenance of 1% if no condo fee
+        }
+    }
+
+    calcMortgagePrinciple(s) {
+        return s.VOP - s.calcs.buy.initialCosts.downpayment;
+    }
+
+    calcMonthlyCostsPMT(s) {
+        // PMT=(Pv∗Rate∗(1+Rate)Nper)/[(1+Rate)Nper−1]
+        const R = s.MR / 100 / 12;
+        const N = -12 * s.AP;
+        return parseFloat(
+            (
+                (s.calcs.buy.mortgagePrinciple * R) /
+                (1 - Math.pow(1 + R, N))
+            ).toFixed(2)
+        );
+    }
+
+    calcPercentRule(s) {
+        return parseFloat(
+            (
+                (s.VOP * (s.SMA - s.REA)) / 12 +
+                s.calcs.buy.monthlyCosts.maint +
+                s.calcs.buy.monthlyCosts.taxes
+            ).toFixed(2)
+        );
     }
 
     handleChange(input, metric) {

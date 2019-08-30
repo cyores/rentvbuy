@@ -24,24 +24,41 @@ class App extends React.Component {
             REA: 0.03, // real estate appriciation
             SMA: 0.06, // stock market appriciation
             calcs: {
-                downpayment: 0,
-                taxes: 0,
-                maint: 0,
-                rent: 0,
+                buy: {
+                    mortgagePrinciple: 0,
+                    initialCosts: {
+                        downpayment: 0
+                    },
+                    monthlyCosts: {
+                        taxes: 0,
+                        maint: 0,
+                        pmt: 0,
+                        diffToRent: 0
+                    }
+                },
+                rent: {
+                    initialCosts: {
+                        stockInvestment: 0
+                    },
+                    monthlyCosts: {
+                        rent: 0,
+                        diffToBuy: 0
+                    }
+                },
+
                 percentRule: 0,
-                mortgagePrinciple: 0,
-                pmt: 0,
-                rentOrBuy: null
+                rentOrBuy: null,
+                donecalcs: false
             },
-            donecalcs: false,
             view: "calculator"
         };
         this.receiveFromCalculator = this.receiveFromCalculator.bind(this);
         this.changeView = this.changeView.bind(this);
     }
 
-    receiveFromCalculator(numbers) {
-        this.setState(numbers);
+    receiveFromCalculator(calcs) {
+        this.setState({ calcs: calcs});
+        console.log("app state", this.state);
     }
 
     changeView(view) {
@@ -76,7 +93,9 @@ class App extends React.Component {
                             <React.Fragment>
                                 <div className="row">
                                     <div className="u-full-width">
-                                        <Verdict buy={this.state.calcs.buy} />
+                                        <Verdict
+                                            buy={this.state.calcs.rentOrBuy}
+                                        />
                                     </div>
                                 </div>
                                 <div className="row">
@@ -88,9 +107,13 @@ class App extends React.Component {
                                                 "5% Rule: $" +
                                                 this.state.calcs.percentRule
                                             }
-                                            calcs={this.state.calcs}
-                                        >
-                                        </Sheet>
+                                            initialCosts={
+                                                this.state.calcs.buy.initialCosts
+                                            }
+                                            monthlyCosts={
+                                                this.state.calcs.buy.monthlyCosts
+                                            }
+                                        ></Sheet>
                                     </div>
                                     <div className="six columns">
                                         <Sheet
@@ -99,9 +122,13 @@ class App extends React.Component {
                                             subtitle={
                                                 "Assumption: the downpayment is invested in the stock market."
                                             }
-                                            calcs={this.state.calcs}
-                                        >
-                                        </Sheet>
+                                            initialCosts={
+                                                this.state.calcs.rent.initialCosts
+                                            }
+                                            monthlyCosts={
+                                                this.state.calcs.rent.monthlyCosts
+                                            }
+                                        ></Sheet>
                                     </div>
                                 </div>
                             </React.Fragment>
