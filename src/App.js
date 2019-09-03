@@ -25,24 +25,26 @@ class App extends React.Component {
             SMA: 0.06, // stock market appriciation
             calcs: {
                 buy: {
-                    mortgagePrinciple: 0,
+                    Mortgage_Principle: 0,
                     initialCosts: {
-                        downpayment: 0
+                        Downpayment: 0
                     },
                     monthlyCosts: {
-                        taxes: 0,
-                        maint: 0,
-                        pmt: 0,
-                        diffToRent: 0
+                        Taxes: 0,
+                        Maintenance: 0,
+                        Mortgage_Payment: 0,
+                        Difference_To_Rent: 0,
+                        Total: 0
                     }
                 },
                 rent: {
                     initialCosts: {
-                        stockInvestment: 0
+                        Stock_Investment: 0
                     },
                     monthlyCosts: {
-                        rent: 0,
-                        diffToBuy: 0
+                        Rent: 0,
+                        Difference_To_Buy: 0,
+                        Total: 0
                     }
                 },
 

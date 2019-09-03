@@ -16,6 +16,13 @@ const MoveRight = styled.div`
 `;
 
 class Sheet extends Component {
+    formatKeyText(key) {
+        while (key.includes("_")) {
+            key = key.replace("_", " ");
+        }
+        return key;
+    }
+
     render() {
         const { initialCosts, monthlyCosts, type } = this.props;
         return (
@@ -37,7 +44,8 @@ class Sheet extends Component {
                         <MoveRight>
                             {Object.keys(initialCosts).map((key, index) => (
                                 <p key={`ic-${type}-${index}`}>
-                                    <b>{key}: </b>${initialCosts[key]}
+                                    <b>{this.formatKeyText(key)}: </b>$
+                                    {initialCosts[key]}
                                 </p>
                             ))}
                         </MoveRight>
@@ -49,7 +57,8 @@ class Sheet extends Component {
                         <MoveRight>
                             {Object.keys(monthlyCosts).map((key, index) => (
                                 <p key={`mc-${type}-${index}`}>
-                                    <b>{key}: </b>${monthlyCosts[key]}
+                                    <b>{this.formatKeyText(key)}: </b>$
+                                    {monthlyCosts[key]}
                                 </p>
                             ))}
                         </MoveRight>

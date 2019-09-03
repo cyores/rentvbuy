@@ -18,19 +18,29 @@ class Calculator extends Component {
         let s = this.state;
 
         // the order matters
-        s.calcs.buy.initialCosts.downpayment = this.calcDownpayment(s);
-        
-        s.calcs.rent.initialCosts.stockInvestment = this.calcDownpayment(s);
+        s.calcs.buy.initialCosts.Downpayment = this.calcDownpayment(s);
 
-        s.calcs.rent.monthlyCosts.rent = this.calcMonthlyCostsRent(s);
+        s.calcs.rent.initialCosts.Stock_Investment = this.calcDownpayment(s);
 
-        s.calcs.buy.monthlyCosts.taxes = this.calcMonthlyCostsTaxes(s);
+        s.calcs.rent.monthlyCosts.Rent = this.calcMonthlyCostsRent(s);
 
-        s.calcs.buy.monthlyCosts.maint = this.calcMonthlyCostsMaint(s);
+        s.calcs.buy.monthlyCosts.Taxes = this.calcMonthlyCostsTaxes(s);
 
-        s.calcs.buy.mortgagePrinciple = this.calcMortgagePrinciple(s);
+        s.calcs.buy.monthlyCosts.Maintenance = this.calcMonthlyCostsMaint(s);
 
-        s.calcs.buy.monthlyCosts.pmt = this.calcMonthlyCostsPMT(s);
+        s.calcs.buy.Mortgage_Principle = this.calcMortgagePrinciple(s);
+
+        s.calcs.buy.monthlyCosts.Mortgage_Payment = this.calcMonthlyCostsPMT(s);
+
+        s.calcs.rent.monthlyCosts.Total = this.calcMonthlyRentTotal(s);
+
+        s.calcs.buy.monthlyCosts.Total = this.calcMonthlyBuyTotal(s);
+
+        s.calcs.rent.monthlyCosts.DifferenceToBuy =
+            parseFloat((s.calcs.buy.monthlyCosts.Total - s.calcs.rent.monthlyCosts.Total).toFixed(2));
+
+        s.calcs.buy.monthlyCosts.DifferenceToRent =
+            parseFloat((s.calcs.rent.monthlyCosts.Total - s.calcs.buy.monthlyCosts.Total).toFixed(2));
 
         s.calcs.percentRule = this.calcPercentRule(s);
 
@@ -71,7 +81,7 @@ class Calculator extends Component {
     }
 
     calcMortgagePrinciple(s) {
-        return s.VOP - s.calcs.buy.initialCosts.downpayment;
+        return s.VOP - s.calcs.buy.initialCosts.Downpayment;
     }
 
     calcMonthlyCostsPMT(s) {
@@ -80,7 +90,7 @@ class Calculator extends Component {
         const N = -12 * s.AP;
         return parseFloat(
             (
-                (s.calcs.buy.mortgagePrinciple * R) /
+                (s.calcs.buy.Mortgage_Principle * R) /
                 (1 - Math.pow(1 + R, N))
             ).toFixed(2)
         );
@@ -90,9 +100,25 @@ class Calculator extends Component {
         return parseFloat(
             (
                 (s.VOP * (s.SMA - s.REA)) / 12 +
-                s.calcs.buy.monthlyCosts.maint +
-                s.calcs.buy.monthlyCosts.taxes
+                s.calcs.buy.monthlyCosts.Maintenance +
+                s.calcs.buy.monthlyCosts.Taxes
             ).toFixed(2)
+        );
+    }
+
+    calcMonthlyRentTotal(s) {
+        return Object.values(s.calcs.rent.monthlyCosts).reduce(
+            (accumlator, curr) => {
+                return accumlator + curr;
+            }
+        );
+    }
+
+    calcMonthlyBuyTotal(s) {
+        return Object.values(s.calcs.buy.monthlyCosts).reduce(
+            (accumlator, curr) => {
+                return accumlator + curr;
+            }
         );
     }
 
