@@ -21,7 +21,7 @@ class App extends React.Component {
             MR: 3.0, // mortgage rate
             DP: 30, // down payment percentage
             AP: 25, // amortization period
-            REA: 0.03, // real estate appriciation
+            REA: 0.035, // real estate appriciation
             SMA: 0.06, // stock market appriciation
             calcs: {
                 buy: {
@@ -35,6 +35,10 @@ class App extends React.Component {
                         Mortgage_Payment: 0,
                         Difference_To_Rent: 0,
                         Total: 0
+                    },
+                    afterPeriod: {
+                        Property_Value: 0,
+                        Total_Sunk_Costs: 0,
                     }
                 },
                 rent: {
@@ -45,6 +49,10 @@ class App extends React.Component {
                         Rent: 0,
                         Difference_To_Buy: 0,
                         Total: 0
+                    },
+                    afterPeriod: {
+                        Investments_Value: 0,
+                        Total_Sunk_Costs: 0
                     }
                 },
 
@@ -59,7 +67,7 @@ class App extends React.Component {
     }
 
     receiveFromCalculator(calcs) {
-        this.setState({ calcs: calcs});
+        this.setState({ calcs: calcs });
         console.log("app state", this.state);
     }
 
@@ -96,7 +104,9 @@ class App extends React.Component {
                                 <div className="row">
                                     <div className="u-full-width">
                                         <Verdict
-                                            buy={this.state.calcs.rentOrBuy}
+                                            rentOrBuy={
+                                                this.state.calcs.rentOrBuy
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -110,10 +120,16 @@ class App extends React.Component {
                                                 this.state.calcs.percentRule
                                             }
                                             initialCosts={
-                                                this.state.calcs.buy.initialCosts
+                                                this.state.calcs.buy
+                                                    .initialCosts
                                             }
                                             monthlyCosts={
-                                                this.state.calcs.buy.monthlyCosts
+                                                this.state.calcs.buy
+                                                    .monthlyCosts
+                                            }
+                                            period={this.state.AP}
+                                            afterPeriod={
+                                                this.state.calcs.buy.afterPeriod
                                             }
                                         ></Sheet>
                                     </div>
@@ -125,10 +141,17 @@ class App extends React.Component {
                                                 "Assumption: the downpayment is invested in the stock market."
                                             }
                                             initialCosts={
-                                                this.state.calcs.rent.initialCosts
+                                                this.state.calcs.rent
+                                                    .initialCosts
                                             }
                                             monthlyCosts={
-                                                this.state.calcs.rent.monthlyCosts
+                                                this.state.calcs.rent
+                                                    .monthlyCosts
+                                            }
+                                            period={this.state.AP}
+                                            afterPeriod={
+                                                this.state.calcs.rent
+                                                    .afterPeriod
                                             }
                                         ></Sheet>
                                     </div>

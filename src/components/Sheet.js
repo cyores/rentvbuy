@@ -24,7 +24,7 @@ class Sheet extends Component {
     }
 
     render() {
-        const { initialCosts, monthlyCosts, type } = this.props;
+        const { initialCosts, monthlyCosts, afterPeriod, type, period } = this.props;
         return (
             <StyledSheet>
                 <div className="row">
@@ -59,6 +59,19 @@ class Sheet extends Component {
                                 <p key={`mc-${type}-${index}`}>
                                     <b>{this.formatKeyText(key)}: </b>$
                                     {monthlyCosts[key]}
+                                </p>
+                            ))}
+                        </MoveRight>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column">
+                        <h5>After {period} Years</h5>
+                        <MoveRight>
+                            {Object.keys(afterPeriod).map((key, index) => (
+                                <p key={`ap-${type}-${index}`}>
+                                    <b>{this.formatKeyText(key)}: </b>$
+                                    {afterPeriod[key]}
                                 </p>
                             ))}
                         </MoveRight>

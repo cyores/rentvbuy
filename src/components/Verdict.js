@@ -19,7 +19,7 @@ class Verdict extends Component {
         return (
             <StyledVerdict className="u-full-width">
                 <h4>
-                    You should <b className="fancy-underline">buy</b>
+                    You should <b className="fancy-underline">{this.props.rentOrBuy}</b>
                 </h4>
             </StyledVerdict>
         );

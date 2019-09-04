@@ -20,6 +20,9 @@ class Calculator extends Component {
         // the order matters
         s.calcs.buy.initialCosts.Downpayment = this.calcDownpayment(s);
 
+        s.calcs.buy.Mortgage_Principle =
+            s.VOP - s.calcs.buy.initialCosts.Downpayment;
+
         s.calcs.rent.initialCosts.Stock_Investment = this.calcDownpayment(s);
 
         s.calcs.rent.monthlyCosts.Rent = this.calcMonthlyCostsRent(s);
@@ -32,15 +35,29 @@ class Calculator extends Component {
 
         s.calcs.buy.monthlyCosts.Mortgage_Payment = this.calcMonthlyCostsPMT(s);
 
-        s.calcs.rent.monthlyCosts.Total = this.calcMonthlyRentTotal(s);
-
         s.calcs.buy.monthlyCosts.Total = this.calcMonthlyBuyTotal(s);
 
-        s.calcs.rent.monthlyCosts.Difference_To_Buy =
-            parseFloat((s.calcs.buy.monthlyCosts.Total - s.calcs.rent.monthlyCosts.Total).toFixed(2));
+        s.calcs.rent.monthlyCosts.Total = this.calcMonthlyRentTotal(s);
 
-        s.calcs.buy.monthlyCosts.Difference_To_Rent =
-            parseFloat((s.calcs.rent.monthlyCosts.Total - s.calcs.buy.monthlyCosts.Total).toFixed(2));
+        s.calcs.rent.monthlyCosts.Difference_To_Buy = parseFloat(
+            (
+                s.calcs.buy.monthlyCosts.Total - s.calcs.rent.monthlyCosts.Total
+            ).toFixed(2)
+        );
+
+        s.calcs.buy.monthlyCosts.Difference_To_Rent = parseFloat(
+            (
+                s.calcs.rent.monthlyCosts.Total - s.calcs.buy.monthlyCosts.Total
+            ).toFixed(2)
+        );
+
+        s.calcs.buy.afterPeriod.Property_Value = this.calcEndPropertyValue(s);
+
+        s.calcs.rent.afterPeriod.Investments_Value = this.calcEndStocksValue(s);
+
+        s.calcs.buy.afterPeriod.Total_Sunk_Costs = this.calcBuySunkCosts(s);
+
+        s.calcs.rent.afterPeriod.Total_Sunk_Costs = this.calcRentSunkCosts(s);
 
         s.calcs.percentRule = this.calcPercentRule(s);
 
@@ -107,18 +124,46 @@ class Calculator extends Component {
     }
 
     calcMonthlyRentTotal(s) {
-        return Object.values(s.calcs.rent.monthlyCosts).reduce(
-            (accumlator, curr) => {
-                return accumlator + curr;
-            }
-        );
+        return s.calcs.rent.monthlyCosts.Rent;
     }
 
     calcMonthlyBuyTotal(s) {
-        return Object.values(s.calcs.buy.monthlyCosts).reduce(
+        s.calcs.buy.monthlyCosts.Difference_To_Rent = 0;
+        s.calcs.buy.monthlyCosts.Total = 0;
+        return parseFloat((Object.values(s.calcs.buy.monthlyCosts).reduce(
             (accumlator, curr) => {
                 return accumlator + curr;
             }
+        )).toFixed(2));
+    }
+
+    calcEndPropertyValue(s) {
+        return parseFloat((s.VOP * (Math.pow(1 + s.REA, s.AP) - 1)).toFixed(2));
+    }
+
+    calcEndStocksValue(s) {
+        return parseFloat(
+            (
+                s.calcs.rent.initialCosts.Stock_Investment *
+                (Math.pow(1 + s.SMA, s.AP) - 1)
+            ).toFixed(2)
+        );
+    }
+
+    calcRentSunkCosts(s) {
+        return parseFloat(
+            (s.calcs.rent.monthlyCosts.Rent * 12 * s.AP).toFixed(20)
+        );
+    }
+
+    calcBuySunkCosts(s) {
+        return parseFloat(
+            (
+                (s.calcs.buy.monthlyCosts.Taxes +
+                    s.calcs.buy.monthlyCosts.Maintenance) *
+                12 *
+                s.AP
+            ).toFixed(2)
         );
     }
 
