@@ -49,7 +49,7 @@ class App extends React.Component {
                 },
 
                 percentRule: 0,
-                rentOrBuy: null,
+                rentOrBuy: "",
                 donecalcs: false
             },
             view: "calculator"

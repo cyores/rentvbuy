@@ -36,15 +36,15 @@ class Calculator extends Component {
 
         s.calcs.buy.monthlyCosts.Total = this.calcMonthlyBuyTotal(s);
 
-        s.calcs.rent.monthlyCosts.DifferenceToBuy =
+        s.calcs.rent.monthlyCosts.Difference_To_Buy =
             parseFloat((s.calcs.buy.monthlyCosts.Total - s.calcs.rent.monthlyCosts.Total).toFixed(2));
 
-        s.calcs.buy.monthlyCosts.DifferenceToRent =
+        s.calcs.buy.monthlyCosts.Difference_To_Rent =
             parseFloat((s.calcs.rent.monthlyCosts.Total - s.calcs.buy.monthlyCosts.Total).toFixed(2));
 
         s.calcs.percentRule = this.calcPercentRule(s);
 
-        if (s.calcs.percentRule < s.calcs.rent) {
+        if (s.calcs.percentRule < s.calcs.rent.monthlyCosts.Rent) {
             s.calcs.rentOrBuy = "buy";
         } else {
             s.calcs.rentOrBuy = "rent";

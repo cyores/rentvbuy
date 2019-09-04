@@ -18,15 +18,9 @@ class Verdict extends Component {
     render() {
         return (
             <StyledVerdict className="u-full-width">
-                {this.props.rentOrBuy === "buy" ? (
-                    <h4>
-                        You should <b className="fancy-underline">buy</b>
-                    </h4>
-                ) : (
-                    <h4>
-                        You should <b className="fancy-underline">rent</b>
-                    </h4>
-                )}
+                <h4>
+                    You should <b className="fancy-underline">buy</b>
+                </h4>
             </StyledVerdict>
         );
     }
