@@ -59,6 +59,14 @@ class Calculator extends Component {
 
         s.calcs.rent.afterPeriod.Total_Sunk_Costs = this.calcRentSunkCosts(s);
 
+        s.calcs.rent.afterPeriod.Net =
+            parseFloat((s.calcs.rent.afterPeriod.Investments_Value -
+            s.calcs.rent.afterPeriod.Total_Sunk_Costs).toFixed(2));
+
+        s.calcs.buy.afterPeriod.Net =
+            parseFloat((s.calcs.buy.afterPeriod.Property_Value -
+            s.calcs.buy.afterPeriod.Total_Sunk_Costs).toFixed(2));
+
         s.calcs.percentRule = this.calcPercentRule(s);
 
         if (s.calcs.percentRule < s.calcs.rent.monthlyCosts.Rent) {
@@ -130,11 +138,13 @@ class Calculator extends Component {
     calcMonthlyBuyTotal(s) {
         s.calcs.buy.monthlyCosts.Difference_To_Rent = 0;
         s.calcs.buy.monthlyCosts.Total = 0;
-        return parseFloat((Object.values(s.calcs.buy.monthlyCosts).reduce(
-            (accumlator, curr) => {
-                return accumlator + curr;
-            }
-        )).toFixed(2));
+        return parseFloat(
+            Object.values(s.calcs.buy.monthlyCosts)
+                .reduce((accumlator, curr) => {
+                    return accumlator + curr;
+                })
+                .toFixed(2)
+        );
     }
 
     calcEndPropertyValue(s) {
@@ -142,12 +152,25 @@ class Calculator extends Component {
     }
 
     calcEndStocksValue(s) {
-        return parseFloat(
-            (
-                s.calcs.rent.initialCosts.Stock_Investment *
-                (Math.pow(1 + s.SMA, s.AP) - 1)
-            ).toFixed(2)
-        );
+        if (s.calcs.rent.monthlyCosts.Difference_To_Buy > 0) {
+            let T = s.AP * 12;
+            let monthlyGain = s.SMA / 12;
+            let monthlyDeposit = s.calcs.rent.monthlyCosts.Difference_To_Buy;
+            let investmentValue = s.calcs.rent.initialCosts.Stock_Investment;
+            while (T >= 0) {
+                investmentValue *= 1 + monthlyGain;
+                investmentValue += monthlyDeposit;
+                T--;
+            }
+            return parseFloat(investmentValue.toFixed(2));
+        } else {
+            return parseFloat(
+                (
+                    s.calcs.rent.initialCosts.Stock_Investment *
+                    (Math.pow(1 + s.SMA, s.AP) - 1)
+                ).toFixed(2)
+            );
+        }
     }
 
     calcRentSunkCosts(s) {

@@ -6,6 +6,7 @@ const StyledSheet = styled.div`
     padding: 1.5rem;
     // margin: 0 auto;
     // text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
     & > hr {
         margin: 0 0 20px 0;
     }
@@ -24,7 +25,13 @@ class Sheet extends Component {
     }
 
     render() {
-        const { initialCosts, monthlyCosts, afterPeriod, type, period } = this.props;
+        const {
+            initialCosts,
+            monthlyCosts,
+            afterPeriod,
+            type,
+            period
+        } = this.props;
         return (
             <StyledSheet>
                 <div className="row">

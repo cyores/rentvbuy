@@ -39,6 +39,7 @@ class App extends React.Component {
                     afterPeriod: {
                         Property_Value: 0,
                         Total_Sunk_Costs: 0,
+                        Net: 0
                     }
                 },
                 rent: {
@@ -52,7 +53,8 @@ class App extends React.Component {
                     },
                     afterPeriod: {
                         Investments_Value: 0,
-                        Total_Sunk_Costs: 0
+                        Total_Sunk_Costs: 0,
+                        Net: 0
                     }
                 },
 
@@ -115,10 +117,10 @@ class App extends React.Component {
                                         <Sheet
                                             type={"buy"}
                                             title={"Buy"}
-                                            subtitle={
-                                                "5% Rule: $" +
-                                                this.state.calcs.percentRule
-                                            }
+                                            // subtitle={
+                                            //     "5% Rule: $" +
+                                            //     this.state.calcs.percentRule
+                                            // }
                                             initialCosts={
                                                 this.state.calcs.buy
                                                     .initialCosts
@@ -137,9 +139,9 @@ class App extends React.Component {
                                         <Sheet
                                             type={"rent"}
                                             title={"Rent"}
-                                            subtitle={
-                                                "Assumption: the downpayment is invested in the stock market."
-                                            }
+                                            // subtitle={
+                                            //     "Assumption: the downpayment is invested in the stock market."
+                                            // }
                                             initialCosts={
                                                 this.state.calcs.rent
                                                     .initialCosts
