@@ -12,6 +12,7 @@ body {
 button.button-primary {
     background-color: #7b3ddd;
     border-color: #7b3ddd;
+    border-radius: 0;
 }
 button.button-primary:hover,
 button.button-primary:focus {
