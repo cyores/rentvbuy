@@ -23,7 +23,7 @@ class App extends React.Component {
             MR: 3.0, // mortgage rate
             DP: 30, // down payment percentage
             AP: 25, // amortization period
-            REA: 0.035, // real estate appriciation
+            REA: 0.03, // real estate appriciation
             SMA: 0.06, // stock market appriciation
             calcs: {
                 buy: {
@@ -70,8 +70,8 @@ class App extends React.Component {
         this.changeView = this.changeView.bind(this);
     }
 
-    receiveFromCalculator(calcs) {
-        this.setState({ calcs: calcs });
+    receiveFromCalculator(s) {
+        this.setState(s);
         console.log("app state", this.state);
     }
 

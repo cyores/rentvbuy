@@ -59,13 +59,19 @@ class Calculator extends Component {
 
         s.calcs.rent.afterPeriod.Total_Sunk_Costs = this.calcRentSunkCosts(s);
 
-        s.calcs.rent.afterPeriod.Net =
-            parseFloat((s.calcs.rent.afterPeriod.Investments_Value -
-            s.calcs.rent.afterPeriod.Total_Sunk_Costs).toFixed(2));
+        s.calcs.rent.afterPeriod.Net = parseFloat(
+            (
+                s.calcs.rent.afterPeriod.Investments_Value -
+                s.calcs.rent.afterPeriod.Total_Sunk_Costs
+            ).toFixed(2)
+        );
 
-        s.calcs.buy.afterPeriod.Net =
-            parseFloat((s.calcs.buy.afterPeriod.Property_Value -
-            s.calcs.buy.afterPeriod.Total_Sunk_Costs).toFixed(2));
+        s.calcs.buy.afterPeriod.Net = parseFloat(
+            (
+                s.calcs.buy.afterPeriod.Property_Value -
+                s.calcs.buy.afterPeriod.Total_Sunk_Costs
+            ).toFixed(2)
+        );
 
         s.calcs.percentRule = this.calcPercentRule(s);
 
@@ -78,7 +84,7 @@ class Calculator extends Component {
         s.calcs.donecalcs = true;
         console.log("calcs", s.calcs);
         this.setState({ calcs: s.calcs });
-        this.props.sendToApp(s.calcs);
+        this.props.sendToApp(s);
     }
 
     calcDownpayment(s) {
@@ -148,7 +154,9 @@ class Calculator extends Component {
     }
 
     calcEndPropertyValue(s) {
-        return parseFloat((s.VOP * (Math.pow(1 + s.REA, s.AP) - 1)).toFixed(2));
+        return parseFloat(
+            (s.VOP * (Math.pow(1 + s.REA, s.AP) - 1) + s.VOP).toFixed(2)
+        );
     }
 
     calcEndStocksValue(s) {
