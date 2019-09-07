@@ -2,6 +2,8 @@ import React from "react";
 
 import "./app.css";
 
+import contentPlaceholder from "./images/undraw_buy_house.svg";
+
 // Components
 import About from "./components/About";
 import Help from "./components/Help";
@@ -80,27 +82,26 @@ class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="left-panel bg-grad p-2">
-                    <h3 className="fancy-underline">Rent vs Buy</h3>
-                    {this.state.view === "calculator" ? (
-                        <Calculator
-                            defaultState={this.state}
-                            sendToApp={this.receiveFromCalculator}
-                        />
-                    ) : null}
-                    {this.state.view === "about" ? <About /> : null}
-                    {this.state.view === "help" ? <Help /> : null}
+                <div className="left-panel bg-grad" style={{ width: "33vw" }}>
+                    <div className="p-2">
+                        <h3 className="fancy-underline">Rent vs Buy</h3>
+                        {this.state.view === "calculator" ? (
+                            <Calculator
+                                defaultState={this.state}
+                                sendToApp={this.receiveFromCalculator}
+                            />
+                        ) : null}
+                        {this.state.view === "about" ? <About /> : null}
+                        {this.state.view === "help" ? <Help /> : null}
+                    </div>
                     <Footer
                         view={this.state.view}
                         changeView={this.changeView}
                     />
                 </div>
-                <div className="row u-full-height">
-                    <div className="four columns p-2 u-full-height" />
-                    <div
-                        className="eight columns p-2 u-full-height"
-                        style={{ margin: "2%" }}
-                    >
+                <div className="u-full-height" style={{ marginLeft: "33vw" }}>
+                    {/* <div className="four columns p-2 u-full-height" /> */}
+                    <div className="p-5 u-full-height">
                         {this.state.calcs.donecalcs ? (
                             <React.Fragment>
                                 <div className="row">
@@ -159,7 +160,38 @@ class App extends React.Component {
                                     </div>
                                 </div>
                             </React.Fragment>
-                        ) : null}
+                        ) : (
+                            <>
+                                <div
+                                    className="u-full-height"
+                                    style={{
+                                        display: "flex",
+                                        flexFlow: "column",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
+                                >
+                                    <div>
+                                        <img
+                                            src={contentPlaceholder}
+                                            width="500px"
+                                            height="auto"
+                                            style={{
+                                                opacity: "0.9",
+                                                margin: "2rem"
+                                            }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <p>
+                                            Fill out the details to the left to
+                                            see a full analysis of the Rent Vs
+                                            Buy decision
+                                        </p>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </React.Fragment>

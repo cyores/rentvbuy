@@ -20,6 +20,33 @@ button.button-primary:focus {
     border-color: #7a3ddde3;
 }
 
+/* table */
+table {
+    width: 100%;
+}
+th, td {
+    border: none;
+    border-top: 1px solid #7a3ddde3;
+}
+th:first-child, td:first-child {
+    padding-left: 15px
+}
+tr:last-child {
+    font-weight: bold;
+}
+thead > tr {
+    color: #fff;
+    background: #7b3ddd;
+}
+thead > tr > th {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+tbody > tr:hover {
+    background: #ded5ec94;
+}
+
 /* main title */
 .fancy-underline {
     text-align: center;

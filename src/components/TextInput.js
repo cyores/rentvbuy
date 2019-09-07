@@ -10,9 +10,7 @@ const StyledInput = styled.input`
     transition: all 0.15s ease-in-out !important;
     &:focus {
         border-radius: 0 !important;
-        // background: #7a3dddab !important;
-        background: rgba(0, 0 , 0, 0.1) !important;
-        // color: #fff !important;
+        background: rgba(0, 0 , 0, 0.075) !important;
         border: 0px solid black !important;
         border-bottom: 2px solid #7b3ddd !important;
         font-size: 1.75rem !important;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { format } from "path";
 
 const StyledSheet = styled.div`
     background-color: #fff;
@@ -13,7 +14,7 @@ const StyledSheet = styled.div`
 `;
 
 const MoveRight = styled.div`
-    padding-left: 2rem;
+    padding-left: 4rem;
 `;
 
 class Sheet extends Component {
@@ -22,6 +23,27 @@ class Sheet extends Component {
             key = key.replace("_", " ");
         }
         return key;
+    }
+
+    // format the float into a currency string
+    // ex: 12345 => $12,345.00
+    // thanks: https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-currency-string-in-javascript
+    formatCurrency(num) {
+        const negativeSign = num < 0 ? "-" : "";
+        num = Math.abs(num);
+        let splitNum = num.toString().split(".");
+        let dollars = splitNum[0];
+        let cents = splitNum.length > 2 ? splitNum[1] : "00";
+        let firstComma = dollars.length > 3 ? dollars.length % 3 : 0;
+
+        return (
+            negativeSign +
+            "$" +
+            (firstComma ? dollars.substr(0, firstComma) + "," : "") +
+            dollars.substr(firstComma).replace(/(\d{3})(?=\d)/g, "$1" + ",") +
+            "." +
+            cents
+        );
     }
 
     render() {
@@ -48,40 +70,103 @@ class Sheet extends Component {
                 <div className="row">
                     <div className="column">
                         <h5>Initial Costs</h5>
-                        <MoveRight>
-                            {Object.keys(initialCosts).map((key, index) => (
-                                <p key={`ic-${type}-${index}`}>
-                                    <b>{this.formatKeyText(key)}: </b>$
-                                    {initialCosts[key]}
-                                </p>
-                            ))}
-                        </MoveRight>
+                        <div
+                            className="u-full-width p-4"
+                            style={{ paddingTop: "0" }}
+                        >
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(initialCosts).map(
+                                        (key, index) => (
+                                            <tr key={`ic-${type}-${index}`}>
+                                                <td>
+                                                    {this.formatKeyText(key)}
+                                                </td>
+                                                <td>
+                                                    {this.formatCurrency(
+                                                        initialCosts[key]
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="column">
                         <h5>Monthly Costs</h5>
-                        <MoveRight>
-                            {Object.keys(monthlyCosts).map((key, index) => (
-                                <p key={`mc-${type}-${index}`}>
-                                    <b>{this.formatKeyText(key)}: </b>$
-                                    {monthlyCosts[key]}
-                                </p>
-                            ))}
-                        </MoveRight>
+                        <div
+                            className="u-full-width p-4"
+                            style={{ paddingTop: "0" }}
+                        >
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(monthlyCosts).map(
+                                        (key, index) => (
+                                            <tr key={`mc-${type}-${index}`}>
+                                                <td>
+                                                    {this.formatKeyText(key)}
+                                                </td>
+                                                <td>
+                                                    {this.formatCurrency(
+                                                        monthlyCosts[key]
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="column">
                         <h5>After {period} Years</h5>
-                        <MoveRight>
-                            {Object.keys(afterPeriod).map((key, index) => (
-                                <p key={`ap-${type}-${index}`}>
-                                    <b>{this.formatKeyText(key)}: </b>$
-                                    {afterPeriod[key]}
-                                </p>
-                            ))}
-                        </MoveRight>
+                        <div
+                            className="u-full-width p-4"
+                            style={{ paddingTop: "0" }}
+                        >
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(afterPeriod).map(
+                                        (key, index) => (
+                                            <tr key={`ap-${type}-${index}`}>
+                                                <td>
+                                                    {this.formatKeyText(key)}
+                                                </td>
+                                                <td>
+                                                    {this.formatCurrency(
+                                                        afterPeriod[key]
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </StyledSheet>
