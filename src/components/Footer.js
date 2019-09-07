@@ -6,7 +6,7 @@ const StyledFooter = styled.div`
     width: 100%;
     margin: 0;
     left: 0;
-    bottom: 2rem;
+    bottom: 0;
     text-align: center;
 `;
 

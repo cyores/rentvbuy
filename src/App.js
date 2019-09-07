@@ -82,7 +82,7 @@ class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="left-panel bg-grad" style={{ width: "33vw" }}>
+                <div className="left-panel u-full-height bg-grad" style={{ width: "25vw" }}>
                     <div className="p-2">
                         <h3 className="fancy-underline">Rent vs Buy</h3>
                         {this.state.view === "calculator" ? (
@@ -99,7 +99,7 @@ class App extends React.Component {
                         changeView={this.changeView}
                     />
                 </div>
-                <div className="u-full-height" style={{ marginLeft: "33vw" }}>
+                <div className="u-full-height" style={{ marginLeft: "25vw" }}>
                     {/* <div className="four columns p-2 u-full-height" /> */}
                     <div className="p-5 u-full-height">
                         {this.state.calcs.donecalcs ? (
@@ -173,6 +173,7 @@ class App extends React.Component {
                                 >
                                     <div>
                                         <img
+                                            alt=""
                                             src={contentPlaceholder}
                                             width="500px"
                                             height="auto"
