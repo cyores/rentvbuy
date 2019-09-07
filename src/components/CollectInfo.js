@@ -57,6 +57,7 @@ class CollectInfo extends Component {
                             step="0.01"
                             defaultValue={this.props.CF}
                             label="Monthly Condo Fee ($)"
+                            tooltip="Or HOA fee"
                             onTyping={input =>
                                 this.props.handleChange(input, "CF")
                             }
