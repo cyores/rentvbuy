@@ -9,20 +9,42 @@ class About extends Component {
             <StyledAbout>
                 <div className="row">
                     <div className="eleven columns">
-                        <h2>About</h2>
+                        <h4>ABOUT</h4>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            This tool was built to help shed some light on the
+                            financial side of the rent vs buy decision. It is
+                            meant as an aid in the decision making process, not
+                            as a hard rule to follow. There are many things to
+                            consider (both financial and non-financial) when
+                            determining whether to buy a home or rent a home.
+                            This tool attempts to take into account as many of
+                            the financial factors as possible but is not a
+                            guarantee of anything. Predicting the future is very
+                            hard and requires a lot of assumptions that could
+                            prove to be untrue. The assumptions used in the tool
+                            (and the inspiration for it) come from this video
+                            created by Ben Felix on the subject of rent vs buy.
+                        </p>
+
+                        <div className="u-full-width">
+                            <iframe
+                                title="Ben Felix Video"
+                                width="100%"
+                                height="250px"
+                                src="https://www.youtube-nocookie.com/embed/Uwl3-jBNEd4"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+
+                        <br></br>
+
+                        <p>
+                            <small>
+                                I am not a financial expert, this is not
+                                financial advice. Follow it at your own peril.
+                            </small>
                         </p>
                     </div>
                 </div>
