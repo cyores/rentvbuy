@@ -39,13 +39,13 @@ class Calculator extends Component {
 
         s.calcs.rent.monthlyCosts.Total = this.calcMonthlyRentTotal(s);
 
-        s.calcs.rent.monthlyCosts.Difference_To_Buy = parseFloat(
+        s.calcs.rent.analysis.Difference_To_Buy = parseFloat(
             (
                 s.calcs.buy.monthlyCosts.Total - s.calcs.rent.monthlyCosts.Total
             ).toFixed(2)
         );
 
-        s.calcs.buy.monthlyCosts.Difference_To_Rent = parseFloat(
+        s.calcs.buy.analysis.Difference_To_Rent = parseFloat(
             (
                 s.calcs.rent.monthlyCosts.Total - s.calcs.buy.monthlyCosts.Total
             ).toFixed(2)
@@ -142,7 +142,7 @@ class Calculator extends Component {
     }
 
     calcMonthlyBuyTotal(s) {
-        s.calcs.buy.monthlyCosts.Difference_To_Rent = 0;
+        s.calcs.buy.analysis.Difference_To_Rent = 0;
         s.calcs.buy.monthlyCosts.Total = 0;
         return parseFloat(
             Object.values(s.calcs.buy.monthlyCosts)
@@ -160,10 +160,10 @@ class Calculator extends Component {
     }
 
     calcEndStocksValue(s) {
-        if (s.calcs.rent.monthlyCosts.Difference_To_Buy > 0) {
+        if (s.calcs.rent.analysis.Difference_To_Buy > 0) {
             let T = s.AP * 12;
             let monthlyGain = s.SMA / 12;
-            let monthlyDeposit = s.calcs.rent.monthlyCosts.Difference_To_Buy;
+            let monthlyDeposit = s.calcs.rent.analysis.Difference_To_Buy;
             let investmentValue = s.calcs.rent.initialCosts.Stock_Investment;
             while (T >= 0) {
                 investmentValue *= 1 + monthlyGain;

@@ -35,13 +35,15 @@ class App extends React.Component {
                         Taxes: 0,
                         Maintenance: 0,
                         Mortgage_Payment: 0,
-                        Difference_To_Rent: 0,
                         Total: 0
                     },
                     afterPeriod: {
                         Property_Value: 0,
                         Total_Sunk_Costs: 0,
                         Net: 0
+                    },
+                    analysis: {
+                        Difference_To_Rent: 0
                     }
                 },
                 rent: {
@@ -50,13 +52,15 @@ class App extends React.Component {
                     },
                     monthlyCosts: {
                         Rent: 0,
-                        Difference_To_Buy: 0,
                         Total: 0
                     },
                     afterPeriod: {
                         Investments_Value: 0,
                         Total_Sunk_Costs: 0,
                         Net: 0
+                    },
+                    analysis: {
+                        Difference_To_Buy: 0
                     }
                 },
 
