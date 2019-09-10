@@ -1,4 +1,4 @@
-import calcMonthlyTaxes from "../utils/calculators/calcMonthlyTaxes";
+import calcMonthlyTaxes from "../../../utils/calculators/calcMonthlyTaxes";
 
 it("calculate monthly taxes", () => {
     expect(calcMonthlyTaxes(1200)).toEqual(100);

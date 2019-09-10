@@ -1,4 +1,4 @@
-import calcMonthlyBuyTotal from "../utils/calculators/calcMonthlyBuyTotal";
+import calcMonthlyBuyTotal from "../../../utils/calculators/calcMonthlyBuyTotal";
 
 it("calculate monthly buy total", () => {
     let mcb = {

@@ -1,4 +1,4 @@
-import calcMonthlyPMT from "../utils/calculators/calcMonthlyPMT";
+import calcMonthlyPMT from "../../../utils/calculators/calcMonthlyPMT";
 
 it("calculate PMT", () => {
     expect(calcMonthlyPMT(3, 25, 700000)).toEqual(3319.48);

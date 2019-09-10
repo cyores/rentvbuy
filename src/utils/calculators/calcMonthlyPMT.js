@@ -9,7 +9,7 @@
  *
  * @return {number}   The monthly dollar amount of property taxes due.
  */
-function calcMonthlyMaint(amr, ap, mp) {
+function calcMonthlyPMT(amr, ap, mp) {
     if (amr === undefined || ap === undefined || mp === undefined)
         throw new Error("Missing argument(s)");
     if (amr < 0 || ap < 0 || mp < 0)
@@ -20,4 +20,4 @@ function calcMonthlyMaint(amr, ap, mp) {
     return parseFloat(((mp * R) / (1 - Math.pow(1 + R, N))).toFixed(2));
 }
 
-export default calcMonthlyMaint;
+export default calcMonthlyPMT;

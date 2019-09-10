@@ -1,4 +1,4 @@
-import calcMonthlyMaint from "../utils/calculators/calcMonthlyMaint";
+import calcMonthlyMaint from "../../../utils/calculators/calcMonthlyMaint";
 
 it("calculate monthly maintenance", () => {
     expect(calcMonthlyMaint(1200, 0)).toEqual(1200);

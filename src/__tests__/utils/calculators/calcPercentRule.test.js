@@ -1,4 +1,4 @@
-import calcPercentRule from "../utils/calculators/calcPercentRule";
+import calcPercentRule from "../../../utils/calculators/calcPercentRule";
 
 it("calculate 5 percent rule", () => {
     expect(calcPercentRule(1000000)).toEqual(4166.67);

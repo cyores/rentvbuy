@@ -1,4 +1,4 @@
-import calcDownpayment from "../utils/calculators/calcDownpayment";
+import calcDownpayment from "../../../utils/calculators/calcDownpayment";
 
 it("calculate downpayment", () => {
     expect(calcDownpayment(1000000, 30)).toEqual(300000);
