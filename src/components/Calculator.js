@@ -5,6 +5,9 @@ import styled from "styled-components";
 import Button from "./Button";
 import CollectInfo from "./CollectInfo";
 
+// calculators
+import * as Calculators from "../utils/calculators/index.js";
+
 const StyledCalculator = styled.div``;
 
 class Calculator extends Component {
@@ -15,191 +18,105 @@ class Calculator extends Component {
     }
 
     calculate() {
-        let s = this.state;
+        let temp = this.state;
+        let { VOP, RENT, TAX, CF, MR, DP, AP, REA, SMA } = this.state;
+        let buyInitials = {};
+        let rentInitials = {};
+        let buyMonthlys = {};
+        let rentMonthlys = {};
+        let buyAfters = {};
+        let rentAfters = {};
 
         // the order matters
-        s.calcs.buy.initialCosts.Downpayment = this.calcDownpayment(s);
 
-        s.calcs.buy.Mortgage_Principle =
-            s.VOP - s.calcs.buy.initialCosts.Downpayment;
+        // BUY INITIALS
+        buyInitials.Downpayment = Calculators.calcDownpayment(VOP, DP);
 
-        s.calcs.rent.initialCosts.Stock_Investment = this.calcDownpayment(s);
+        // RENT INITIALS
+        rentInitials.Stock_Investment = buyInitials.Downpayment;
 
-        s.calcs.rent.monthlyCosts.Rent = this.calcMonthlyCostsRent(s);
+        // MORTGAGE PRINCIPLE
+        temp.calcs.buy.Mortgage_Principle = VOP - buyInitials.Downpayment;
 
-        s.calcs.buy.monthlyCosts.Taxes = this.calcMonthlyCostsTaxes(s);
+        // RENT MONTHLY COSTS
+        rentMonthlys.Rent = RENT;
+        rentMonthlys.Total = RENT;
 
-        s.calcs.buy.monthlyCosts.Maintenance = this.calcMonthlyCostsMaint(s);
+        // BUY MONTHLY COSTS
+        buyMonthlys.Taxes = Calculators.calcMonthlyTaxes(TAX, VOP);
+        buyMonthlys.Maintenance = Calculators.calcMonthlyMaint(CF, VOP);
+        buyMonthlys.Mortgage_Payment = Calculators.calcMonthlyPMT(
+            MR,
+            AP,
+            temp.calcs.buy.Mortgage_Principle
+        );
+        buyMonthlys.Total = Calculators.calcMonthlyBuyTotal(buyMonthlys);
 
-        s.calcs.buy.Mortgage_Principle = this.calcMortgagePrinciple(s);
+    
+        // DIFFERENCES TO RENT/BUY
+        temp.calcs.rent.analysis.Difference_To_Buy = parseFloat(
+            (buyMonthlys.Total - rentMonthlys.Total).toFixed(2)
+        );
 
-        s.calcs.buy.monthlyCosts.Mortgage_Payment = this.calcMonthlyCostsPMT(s);
+        temp.calcs.buy.analysis.Difference_To_Rent = parseFloat(
+            (rentMonthlys.Total - buyMonthlys.Total).toFixed(2)
+        );
 
-        s.calcs.buy.monthlyCosts.Total = this.calcMonthlyBuyTotal(s);
-
-        s.calcs.rent.monthlyCosts.Total = this.calcMonthlyRentTotal(s);
-
-        s.calcs.rent.analysis.Difference_To_Buy = parseFloat(
+        // BUY AFTERS
+        buyAfters.Property_Value = Calculators.calcEndPropertyValue(
+            VOP,
+            REA,
+            AP
+        );
+        rentAfters.Investments_Value = Calculators.calcEndStockValue(
+            temp.calcs.rent.analysis.Difference_To_Buy,
+            SMA,
+            rentInitials.Stock_Investment,
+            AP
+        );
+        buyAfters.Total_Sunk_Costs = Calculators.calcBuySunkCosts(
+            buyMonthlys.Taxes,
+            buyMonthlys.Maintenance,
+            AP
+        );
+        buyAfters.Net = parseFloat(
             (
-                s.calcs.buy.monthlyCosts.Total - s.calcs.rent.monthlyCosts.Total
+                buyAfters.Property_Value -
+                buyAfters.Total_Sunk_Costs
             ).toFixed(2)
         );
 
-        s.calcs.buy.analysis.Difference_To_Rent = parseFloat(
+        // RENT AFTERS
+        rentAfters.Total_Sunk_Costs = Calculators.calcRentSunkCosts(RENT, AP);
+        rentAfters.Net = parseFloat(
             (
-                s.calcs.rent.monthlyCosts.Total - s.calcs.buy.monthlyCosts.Total
+                rentAfters.Investments_Value -
+                rentAfters.Total_Sunk_Costs
             ).toFixed(2)
         );
 
-        s.calcs.buy.afterPeriod.Property_Value = this.calcEndPropertyValue(s);
+        // 5% RULE
+        temp.calcs.percentRule = Calculators.calcPercentRule(VOP);
 
-        s.calcs.rent.afterPeriod.Investments_Value = this.calcEndStocksValue(s);
+        // ASSIGNING OBJECTS
+        temp.calcs.buy.initialCosts = buyInitials;
+        temp.calcs.buy.monthlyCosts = buyMonthlys;
+        temp.calcs.buy.afterPeriod = buyAfters;
 
-        s.calcs.buy.afterPeriod.Total_Sunk_Costs = this.calcBuySunkCosts(s);
+        temp.calcs.rent.initialCosts = rentInitials;
+        temp.calcs.rent.monthlyCosts = rentMonthlys;
+        temp.calcs.rent.afterPeriod = rentAfters;
 
-        s.calcs.rent.afterPeriod.Total_Sunk_Costs = this.calcRentSunkCosts(s);
-
-        s.calcs.rent.afterPeriod.Net = parseFloat(
-            (
-                s.calcs.rent.afterPeriod.Investments_Value -
-                s.calcs.rent.afterPeriod.Total_Sunk_Costs
-            ).toFixed(2)
-        );
-
-        s.calcs.buy.afterPeriod.Net = parseFloat(
-            (
-                s.calcs.buy.afterPeriod.Property_Value -
-                s.calcs.buy.afterPeriod.Total_Sunk_Costs
-            ).toFixed(2)
-        );
-
-        s.calcs.percentRule = this.calcPercentRule(s);
-
-        if (s.calcs.percentRule < s.calcs.rent.monthlyCosts.Rent) {
-            s.calcs.rentOrBuy = "buy";
+        if (temp.calcs.percentRule < temp.calcs.rent.monthlyCosts.Rent) {
+            temp.calcs.rentOrBuy = "buy";
         } else {
-            s.calcs.rentOrBuy = "rent";
+            temp.calcs.rentOrBuy = "rent";
         }
 
-        s.calcs.donecalcs = true;
-        console.log("calcs", s.calcs);
-        this.setState({ calcs: s.calcs });
-        this.props.sendToApp(s);
-    }
-
-    calcDownpayment(s) {
-        return parseFloat((s.VOP * (s.DP / 100)).toFixed(2));
-    }
-
-    // not utiled
-    calcMonthlyCostsRent(s) {
-        return parseFloat(s.RENT.toFixed(2));
-    }
-
-    calcMonthlyCostsTaxes(s) {
-        if (s.TAX > 0) {
-            return parseFloat((s.TAX / 12).toFixed(2));
-        } else {
-            return parseFloat(((s.VOP * 0.01) / 12).toFixed(2)); // assume taxes at 1% of VOP
-        }
-    }
-
-    calcMonthlyCostsMaint(s) {
-        if (s.CF > 0) {
-            return parseFloat((s.CF + (s.VOP * 0.005) / 12).toFixed(2));
-        } else {
-            return parseFloat(((s.VOP * 0.01) / 12).toFixed(2)); // assume maintenance of 1% if no condo fee
-        }
-    }
-
-    // not utiled
-    calcMortgagePrinciple(s) {
-        return s.VOP - s.calcs.buy.initialCosts.Downpayment;
-    }
-
-    calcMonthlyCostsPMT(s) {
-        // PMT=(Pv∗Rate∗(1+Rate)Nper)/[(1+Rate)Nper−1]
-        // PMT = Principle * Rate / (1 - (1 + Rate)^Payments)
-        const R = s.MR / 100 / 12;
-        const N = -12 * s.AP;
-        return parseFloat(
-            (
-                (s.calcs.buy.Mortgage_Principle * R) /
-                (1 - Math.pow(1 + R, N))
-            ).toFixed(2)
-        );
-    }
-
-    calcPercentRule(s) {
-        return parseFloat(
-            (
-                (s.VOP * (s.SMA - s.REA)) / 12 +
-                s.calcs.buy.monthlyCosts.Maintenance +
-                s.calcs.buy.monthlyCosts.Taxes
-            ).toFixed(2)
-        );
-    }
-
-    // not utiled
-    calcMonthlyRentTotal(s) {
-        return s.calcs.rent.monthlyCosts.Rent;
-    }
-
-    calcMonthlyBuyTotal(s) {
-        s.calcs.buy.analysis.Difference_To_Rent = 0;
-        s.calcs.buy.monthlyCosts.Total = 0;
-        return parseFloat(
-            Object.values(s.calcs.buy.monthlyCosts)
-                .reduce((accumlator, curr) => {
-                    return accumlator + curr;
-                })
-                .toFixed(2)
-        );
-    }
-
-    calcEndPropertyValue(s) {
-        return parseFloat(
-            (s.VOP * (Math.pow(1 + s.REA, s.AP) - 1) + s.VOP).toFixed(2)
-        );
-    }
-
-    calcEndStocksValue(s) {
-        if (s.calcs.rent.analysis.Difference_To_Buy > 0) {
-            let T = s.AP * 12;
-            let monthlyGain = s.SMA / 12;
-            let monthlyDeposit = s.calcs.rent.analysis.Difference_To_Buy;
-            let investmentValue = s.calcs.rent.initialCosts.Stock_Investment;
-            while (T >= 0) {
-                investmentValue *= 1 + monthlyGain;
-                investmentValue += monthlyDeposit;
-                T--;
-            }
-            return parseFloat(investmentValue.toFixed(2));
-        } else {
-            return parseFloat(
-                (
-                    s.calcs.rent.initialCosts.Stock_Investment *
-                    (Math.pow(1 + s.SMA, s.AP) - 1)
-                ).toFixed(2)
-            );
-        }
-    }
-
-    calcRentSunkCosts(s) {
-        return parseFloat(
-            (s.calcs.rent.monthlyCosts.Rent * 12 * s.AP).toFixed(20)
-        );
-    }
-
-    calcBuySunkCosts(s) {
-        return parseFloat(
-            (
-                (s.calcs.buy.monthlyCosts.Taxes +
-                    s.calcs.buy.monthlyCosts.Maintenance) *
-                12 *
-                s.AP
-            ).toFixed(2)
-        );
+        temp.calcs.donecalcs = true;
+        console.log("calcs", temp.calcs);
+        this.setState({ calcs: temp.calcs });
+        this.props.sendToApp(temp);
     }
 
     handleChange(input, metric) {
