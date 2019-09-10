@@ -29,7 +29,7 @@ class Sheet extends Component {
         num = Math.abs(num);
         let splitNum = num.toString().split(".");
         let dollars = splitNum[0];
-        let cents = splitNum.length > 2 ? splitNum[1] : "00";
+        let cents = splitNum.length > 1 ? splitNum[1] : "00";
         let firstComma = dollars.length > 3 ? dollars.length % 3 : 0;
 
         return (

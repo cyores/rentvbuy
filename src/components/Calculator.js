@@ -91,6 +91,7 @@ class Calculator extends Component {
         return parseFloat((s.VOP * (s.DP / 100)).toFixed(2));
     }
 
+    // not utiled
     calcMonthlyCostsRent(s) {
         return parseFloat(s.RENT.toFixed(2));
     }
@@ -111,12 +112,14 @@ class Calculator extends Component {
         }
     }
 
+    // not utiled
     calcMortgagePrinciple(s) {
         return s.VOP - s.calcs.buy.initialCosts.Downpayment;
     }
 
     calcMonthlyCostsPMT(s) {
         // PMT=(Pv∗Rate∗(1+Rate)Nper)/[(1+Rate)Nper−1]
+        // PMT = Principle * Rate / (1 - (1 + Rate)^Payments)
         const R = s.MR / 100 / 12;
         const N = -12 * s.AP;
         return parseFloat(
@@ -137,6 +140,7 @@ class Calculator extends Component {
         );
     }
 
+    // not utiled
     calcMonthlyRentTotal(s) {
         return s.calcs.rent.monthlyCosts.Rent;
     }
