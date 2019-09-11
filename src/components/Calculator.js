@@ -19,7 +19,7 @@ class Calculator extends Component {
 
     calculate() {
         let temp = this.state;
-        let { VOP, RENT, TAX, CF, MR, DP, AP, REA, SMA } = this.state;
+        let { VOP, RENT, PTR, CF, MR, DP, AP, REA, SMA } = this.state;
         let buyInitials = {};
         let rentInitials = {};
         let buyMonthlys = {};
@@ -43,7 +43,7 @@ class Calculator extends Component {
         rentMonthlys.Total = RENT;
 
         // BUY MONTHLY COSTS
-        buyMonthlys.Taxes = Calculators.calcMonthlyTaxes(TAX, VOP);
+        buyMonthlys.Taxes = Calculators.calcMonthlyTaxes(PTR, VOP);
         buyMonthlys.Maintenance = Calculators.calcMonthlyMaint(CF, VOP);
         buyMonthlys.Mortgage_Payment = Calculators.calcMonthlyPMT(
             MR,
@@ -74,7 +74,8 @@ class Calculator extends Component {
             AP
         );
         buyAfters.Total_Sunk_Costs = Calculators.calcBuySunkCosts(
-            buyMonthlys.Taxes,
+            PTR,
+            VOP,
             buyMonthlys.Maintenance,
             AP,
             buyMonthlys.Mortgage_Payment,
@@ -140,7 +141,7 @@ class Calculator extends Component {
                     advanced={this.state.advanced}
                     VOP={this.state.VOP}
                     RENT={this.state.RENT}
-                    TAX={this.state.TAX}
+                    PTR={this.state.PTR}
                     CF={this.state.CF}
                     MR={this.state.MR}
                     DP={this.state.DP}

@@ -18,7 +18,7 @@ class App extends React.Component {
         this.state = {
             VOP: 0, // value of property
             RENT: 0, // rent
-            TAX: 0, // annual property taxes
+            PTR: 1.0, // property tax rate
             CF: 0, // condo fee
             MR: 3.0, // mortgage rate
             DP: 30, // down payment percentage

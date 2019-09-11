@@ -44,10 +44,10 @@ class CollectInfo extends Component {
                         <TextInput
                             type="number"
                             step="0.01"
-                            defaultValue={this.props.TAX}
-                            label="Annual Taxes ($)"
+                            defaultValue={this.props.PTR}
+                            label="Property Tax Rate (%)"
                             onTyping={input =>
-                                this.props.handleChange(input, "TAX")
+                                this.props.handleChange(input, "PTR")
                             }
                         />
                     </div>

@@ -2,7 +2,8 @@
  * Calculate Buy Sunk Costs
  * Calculates the total sunk costs of buying over the amortization period.
  *
- * @param {number} tax   Monthly taxes.
+ * @param {number} ptr   Property Tax Rate.
+ * @param {number} vop   Value of Property.
  * @param {number} maint Monthly maintenance.
  * @param {number} ap    Amortization Period.
  * @param {number} pmt   Monthly Mortgage Payment.
@@ -13,9 +14,10 @@
  *
  * @return {number}      The total sunk costs of buying after the amortization period in dollars.
  */
-function calcBuySunkCosts(tax, maint, ap, pmt, mp, dtr, sma, rea) {
+function calcBuySunkCosts(ptr, vop, maint, ap, pmt, mp, dtr, sma, rea) {
     if (
-        tax === undefined ||
+        ptr === undefined ||
+        vop === undefined ||
         maint === undefined ||
         ap === undefined ||
         pmt === undefined ||
@@ -26,7 +28,8 @@ function calcBuySunkCosts(tax, maint, ap, pmt, mp, dtr, sma, rea) {
     )
         throw new Error("Missing argument(s)");
     if (
-        tax < 0 ||
+        ptr < 0 ||
+        vop < 0 ||
         maint < 0 ||
         ap < 0 ||
         pmt < 0 ||
@@ -37,7 +40,7 @@ function calcBuySunkCosts(tax, maint, ap, pmt, mp, dtr, sma, rea) {
         throw new Error("Values can't be less than 0");
 
     let interest = pmt * 12 * ap - mp;
-    let taxAndMaint = (tax + maint) * 12 * ap;
+    let taxAndMaint = ((vop * (ptr / 100)) / 12 + maint) * 12 * ap;
     let opportunityCost = 0;
     if (dtr < 0) {
         opportunityCost = ((sma - rea) / 12) * Math.abs(dtr) * 12 * ap;
