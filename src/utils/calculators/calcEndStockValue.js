@@ -17,7 +17,7 @@ function calcEndStockValue(dtb, sma, isi, ap) {
         ap === undefined
     )
         throw new Error("Missing argument(s)");
-    if (dtb < 0 || sma < 0 || isi < 0 || ap < 0)
+    if (sma < 0 || isi < 0 || ap < 0)
         throw new Error("Values can't be less than 0");
 
     if (dtb > 0) {

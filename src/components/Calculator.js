@@ -52,7 +52,6 @@ class Calculator extends Component {
         );
         buyMonthlys.Total = Calculators.calcMonthlyBuyTotal(buyMonthlys);
 
-    
         // DIFFERENCES TO RENT/BUY
         temp.calcs.rent.analysis.Difference_To_Buy = parseFloat(
             (buyMonthlys.Total - rentMonthlys.Total).toFixed(2)
@@ -77,21 +76,22 @@ class Calculator extends Component {
         buyAfters.Total_Sunk_Costs = Calculators.calcBuySunkCosts(
             buyMonthlys.Taxes,
             buyMonthlys.Maintenance,
-            AP
+            AP,
+            buyMonthlys.Mortgage_Payment,
+            temp.calcs.buy.Mortgage_Principle,
+            temp.calcs.buy.analysis.Difference_To_Rent,
+            SMA,
+            REA
         );
         buyAfters.Net = parseFloat(
-            (
-                buyAfters.Property_Value -
-                buyAfters.Total_Sunk_Costs
-            ).toFixed(2)
+            (buyAfters.Property_Value - buyAfters.Total_Sunk_Costs).toFixed(2)
         );
 
         // RENT AFTERS
         rentAfters.Total_Sunk_Costs = Calculators.calcRentSunkCosts(RENT, AP);
         rentAfters.Net = parseFloat(
             (
-                rentAfters.Investments_Value -
-                rentAfters.Total_Sunk_Costs
+                rentAfters.Investments_Value - rentAfters.Total_Sunk_Costs
             ).toFixed(2)
         );
 

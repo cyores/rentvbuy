@@ -21,18 +21,14 @@ it("calculate end stock value", () => {
     }).toThrow("Missing argument(s)");
 
     expect(() => {
-        calcEndStockValue(-1000000, 30, 3211, 4);
+        calcEndStockValue(1, -30, 3211, 4);
     }).toThrow("Values can't be less than 0");
 
     expect(() => {
-        calcEndStockValue(1000000, -30, 3211, 4);
+        calcEndStockValue(1, 30, -3211, 4);
     }).toThrow("Values can't be less than 0");
 
     expect(() => {
-        calcEndStockValue(1000000, 30, -3211, 4);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcEndStockValue(1000000, 30, 3211, -4);
+        calcEndStockValue(1, 30, 3211, -4);
     }).toThrow("Values can't be less than 0");
 });
