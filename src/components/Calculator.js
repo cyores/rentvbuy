@@ -88,7 +88,12 @@ class Calculator extends Component {
         );
 
         // RENT AFTERS
-        rentAfters.Total_Sunk_Costs = Calculators.calcRentSunkCosts(RENT, AP);
+        rentAfters.Total_Sunk_Costs = Calculators.calcRentSunkCosts(
+            RENT,
+            AP,
+            temp.calcs.rent.analysis.Difference_To_Buy,
+            REA
+        );
         rentAfters.Net = parseFloat(
             (
                 rentAfters.Investments_Value - rentAfters.Total_Sunk_Costs
