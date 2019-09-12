@@ -4,7 +4,7 @@
  * If condo fee is 0, it is assumed the maintenance is equal to 1% of the value of property per year.
  * If conde fee is grecfer than 0, the maintenance is 0.5% plus the condo fee.
  * 
- * @param {number} cf  Annual Taxes.
+ * @param {number} cf  Condo Fee.
  * @param {number} vop Value of Property.
  *
  * @return {number}    The monthly dollar amount of property taxes due.

@@ -1,7 +1,6 @@
 import calcBuySunkCosts from "../../../utils/calculators/calcBuySunkCosts";
 
 it("calculate buy sunk costs", () => {
-
     expect(
         calcBuySunkCosts(
             1,
@@ -14,7 +13,7 @@ it("calculate buy sunk costs", () => {
             0.06,
             0.03
         )
-    ).toEqual(955764);
+    ).toEqual(1093275.17);
 
     expect(() => {
         calcBuySunkCosts();

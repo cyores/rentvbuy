@@ -40,13 +40,21 @@ function calcBuySunkCosts(ptr, vop, maint, ap, pmt, mp, dtr, sma, rea) {
         throw new Error("Values can't be less than 0");
 
     let interest = pmt * 12 * ap - mp;
-    let taxAndMaint = ((vop * (ptr / 100)) / 12 + maint) * 12 * ap;
+    let tax = 0;
+    let ivop = vop;
+    for (var i = 0; i < ap; i++) {
+        tax += ivop * (ptr / 100);
+        ivop *= 1 + rea;
+    }
+
     let opportunityCost = 0;
     if (dtr < 0) {
         opportunityCost = ((sma - rea) / 12) * Math.abs(dtr) * 12 * ap;
     }
 
-    return parseFloat((interest + taxAndMaint + opportunityCost).toFixed(2));
+    return parseFloat(
+        (interest + tax + maint * 12 * ap + opportunityCost).toFixed(2)
+    );
 }
 
 export default calcBuySunkCosts;
