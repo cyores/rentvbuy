@@ -19,7 +19,7 @@ class Calculator extends Component {
 
     calculate() {
         let temp = this.state;
-        let { VOP, RENT, PTR, CF, MR, DP, AP, REA, SMA } = this.state;
+        let { VOP, RENT, PTR, LTT, CF, MR, DP, AP, REA, SMA } = this.state;
         let buyInitials = {};
         let rentInitials = {};
         let buyMonthlys = {};
@@ -31,9 +31,13 @@ class Calculator extends Component {
 
         // BUY INITIALS
         buyInitials.Downpayment = Calculators.calcDownpayment(VOP, DP);
+        buyInitials.Land_Transfer_Tax = LTT;
+        buyInitials.Total =
+            buyInitials.Downpayment + buyInitials.Land_Transfer_Tax;
 
         // RENT INITIALS
-        rentInitials.Stock_Investment = buyInitials.Downpayment;
+        rentInitials.Stock_Investment = buyInitials.Total;
+        rentInitials.Total = rentInitials.Stock_Investment;
 
         // MORTGAGE PRINCIPLE
         temp.calcs.buy.Mortgage_Principle = VOP - buyInitials.Downpayment;
@@ -70,19 +74,19 @@ class Calculator extends Component {
         rentAfters.Investments_Value = Calculators.calcEndStockValue(
             temp.calcs.rent.analysis.Difference_To_Buy,
             SMA,
-            rentInitials.Stock_Investment,
+            rentInitials.Total,
             AP
         );
         buyAfters.Total_Sunk_Costs = Calculators.calcBuySunkCosts(
             PTR,
             VOP,
-            buyMonthlys.Maintenance,
             AP,
             buyMonthlys.Mortgage_Payment,
             temp.calcs.buy.Mortgage_Principle,
             temp.calcs.buy.analysis.Difference_To_Rent,
             SMA,
-            REA
+            REA,
+            LTT
         );
         buyAfters.Net = parseFloat(
             (buyAfters.Property_Value - buyAfters.Total_Sunk_Costs).toFixed(2)
@@ -142,6 +146,7 @@ class Calculator extends Component {
                     VOP={this.state.VOP}
                     RENT={this.state.RENT}
                     PTR={this.state.PTR}
+                    LTT={this.state.LTT}
                     CF={this.state.CF}
                     MR={this.state.MR}
                     DP={this.state.DP}

@@ -16,20 +16,23 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            VOP: 0, // value of property
-            RENT: 0, // rent
-            PTR: 1.0, // property tax rate
-            CF: 0, // condo fee
-            MR: 3.0, // mortgage rate
-            DP: 30, // down payment percentage
-            AP: 25, // amortization period
+            VOP: 0,    // value of property
+            RENT: 0,   // rent
+            PTR: 1.0,  // property tax rate
+            LTT: 0,    // Land Transfer Tax
+            CF: 0,     // condo fee
+            MR: 3.0,   // mortgage rate
+            DP: 30,    // down payment percentage
+            AP: 25,    // amortization period
             REA: 0.03, // real estate appriciation
             SMA: 0.06, // stock market appriciation
             calcs: {
                 buy: {
                     Mortgage_Principle: 0,
                     initialCosts: {
-                        Downpayment: 0
+                        Downpayment: 0,
+                        Land_Transfer_Tax: 0,
+                        Total: 0
                     },
                     monthlyCosts: {
                         Taxes: 0,
@@ -48,7 +51,8 @@ class App extends React.Component {
                 },
                 rent: {
                     initialCosts: {
-                        Stock_Investment: 0
+                        Stock_Investment: 0,
+                        Total: 0
                     },
                     monthlyCosts: {
                         Rent: 0,
@@ -122,10 +126,10 @@ class App extends React.Component {
                                         <Sheet
                                             type={"buy"}
                                             title={"Buy"}
-                                            // subtitle={
-                                            //     "5% Rule: $" +
-                                            //     this.state.calcs.percentRule
-                                            // }
+                                            subtitle={
+                                                "5% Rule: $" +
+                                                this.state.calcs.percentRule
+                                            }
                                             initialCosts={
                                                 this.state.calcs.buy
                                                     .initialCosts
@@ -144,9 +148,9 @@ class App extends React.Component {
                                         <Sheet
                                             type={"rent"}
                                             title={"Rent"}
-                                            // subtitle={
-                                            //     "Assumption: the downpayment is invested in the stock market."
-                                            // }
+                                            subtitle={
+                                                "Assumption: the downpayment is invested in the stock market."
+                                            }
                                             initialCosts={
                                                 this.state.calcs.rent
                                                     .initialCosts

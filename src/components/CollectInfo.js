@@ -52,7 +52,7 @@ class CollectInfo extends Component {
                         />
                     </div>
                     <div className="six columns">
-                        <TextInput
+                        {/* <TextInput
                             type="number"
                             step="0.01"
                             defaultValue={this.props.CF}
@@ -60,6 +60,16 @@ class CollectInfo extends Component {
                             tooltip="Or HOA fee"
                             onTyping={input =>
                                 this.props.handleChange(input, "CF")
+                            }
+                        /> */}
+                        <TextInput
+                            type="number"
+                            step="0.01"
+                            defaultValue={this.props.LTT}
+                            label="Land Transfer Tax ($)"
+                            tooltip="If applicable"
+                            onTyping={input =>
+                                this.props.handleChange(input, "LTT")
                             }
                         />
                     </div>
@@ -126,8 +136,6 @@ class CollectInfo extends Component {
                     </div>
                     <div className="six columns"></div>
                 </div> */}
-
-
             </StyledCollectInfo>
         );
     }

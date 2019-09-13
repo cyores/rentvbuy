@@ -2,7 +2,7 @@ import calcRentSunkCosts from "../../../utils/calculators/calcRentSunkCosts";
 
 it("calculate rent sunk costs", () => {
 
-    expect(calcRentSunkCosts(1000, 25, -100, 0.03)).toEqual(300075);
+    expect(calcRentSunkCosts(1000, 25, -100, 0.03)).toEqual(437586.17);
 
     expect(() => {
         calcRentSunkCosts();

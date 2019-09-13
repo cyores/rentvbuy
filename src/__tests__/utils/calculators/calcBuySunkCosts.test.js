@@ -5,15 +5,15 @@ it("calculate buy sunk costs", () => {
         calcBuySunkCosts(
             1,
             1200000,
-            1000,
             25,
             3983.38,
             840000,
             -1000,
             0.06,
-            0.03
+            0.03,
+            1000
         )
-    ).toEqual(1093275.17);
+    ).toEqual(1240036.34);
 
     expect(() => {
         calcBuySunkCosts();
@@ -48,38 +48,6 @@ it("calculate buy sunk costs", () => {
     }).toThrow("Missing argument(s)");
 
     expect(() => {
-        calcBuySunkCosts(1, 2, 3, 4, 5, 6, 7, 8);
-    }).toThrow("Missing argument(s)");
-
-    expect(() => {
-        calcBuySunkCosts(-1, 2, 3, 4, 5, 6, 7, 8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, -2, 3, 4, 5, 6, 7, 8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, 2, -3, 4, 5, 6, 7, 8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, 2, 3, -4, 5, 6, 7, 8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, 2, 3, 4, -5, 6, 7, 8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, 2, 3, 4, 5, -6, 7, 8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, 2, 3, 4, 5, 6, 7, -8, 9);
-    }).toThrow("Values can't be less than 0");
-
-    expect(() => {
-        calcBuySunkCosts(1, 2, 3, 4, 5, 6, 7, 8, -9);
+        calcBuySunkCosts(-1, 2, 3, 4, 5, 6, 7, 8);
     }).toThrow("Values can't be less than 0");
 });

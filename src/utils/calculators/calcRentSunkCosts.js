@@ -24,7 +24,7 @@ function calcRentSunkCosts(rent, ap, dtb, rea) {
     let irent = rent;
     for (var i = 1; i <= ap * 12; i++) {
         rentCost += irent;
-        if (i % 12 == 0) irent *= 1 + rea;
+        if (i % 12 === 0) irent *= 1 + rea;
     }
     let opportunityCost = 0;
     if (dtb < 0) {
