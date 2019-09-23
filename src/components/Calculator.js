@@ -74,13 +74,8 @@ class Calculator extends Component {
         );
         buyAfters.Property_Value = propertyValueCalcs[0];
         temp.calcs.graphData.propertyValue = propertyValueCalcs[1];
-        rentAfters.Investments_Value = Calculators.calcEndStockValue(
-            temp.calcs.rent.analysis.Difference_To_Buy,
-            SMA,
-            rentInitials.Total,
-            AP
-        );
-        buyAfters.Total_Sunk_Costs = Calculators.calcBuySunkCosts(
+        
+        let buySunkCostCalcs = Calculators.calcBuySunkCosts(
             PTR,
             VOP,
             AP,
@@ -91,11 +86,20 @@ class Calculator extends Component {
             REA,
             LTT
         );
+        buyAfters.Total_Sunk_Costs = buySunkCostCalcs[0];
+        temp.calcs.graphData.buySunkCosts = buySunkCostCalcs[1];
+
         buyAfters.Net = parseFloat(
             (buyAfters.Property_Value - buyAfters.Total_Sunk_Costs).toFixed(2)
         );
 
         // RENT AFTERS
+        rentAfters.Investments_Value = Calculators.calcEndStockValue(
+            temp.calcs.rent.analysis.Difference_To_Buy,
+            SMA,
+            rentInitials.Total,
+            AP
+        );
         rentAfters.Total_Sunk_Costs = Calculators.calcRentSunkCosts(
             RENT,
             AP,

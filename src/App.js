@@ -16,14 +16,14 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            VOP: 0,    // value of property
-            RENT: 0,   // rent
-            PTR: 1.0,  // property tax rate
-            LTT: 0,    // Land Transfer Tax
-            CF: 0,     // condo fee
-            MR: 3.0,   // mortgage rate
-            DP: 30,    // down payment percentage
-            AP: 25,    // amortization period
+            VOP: 0, // value of property
+            RENT: 0, // rent
+            PTR: 1.0, // property tax rate
+            LTT: 0, // Land Transfer Tax
+            CF: 0, // condo fee
+            MR: 3.0, // mortgage rate
+            DP: 30, // down payment percentage
+            AP: 25, // amortization period
             REA: 0.03, // real estate appriciation
             SMA: 0.06, // stock market appriciation
             calcs: {
@@ -90,7 +90,10 @@ class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="left-panel u-full-height bg-grad" style={{ width: "25vw" }}>
+                <div
+                    className="left-panel u-full-height bg-grad"
+                    style={{ width: "25vw" }}
+                >
                     <div className="p-2">
                         <h3 className="fancy-underline">Rent vs Buy</h3>
                         {this.state.view === "calculator" ? (
@@ -142,7 +145,12 @@ class App extends React.Component {
                                             afterPeriod={
                                                 this.state.calcs.buy.afterPeriod
                                             }
-                                            graphData={this.state.calcs.graphData.propertyValue}
+                                            graphData={[
+                                                this.state.calcs.graphData
+                                                    .propertyValue,
+                                                this.state.calcs.graphData
+                                                    .buySunkCosts
+                                            ]}
                                         ></Sheet>
                                     </div>
                                     <div className="six columns">

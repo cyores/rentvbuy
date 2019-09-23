@@ -67,7 +67,7 @@ class Sheet extends Component {
                 </div>
                 <hr></hr>
                 <div className="row">
-                    <div className="column">
+                    <div className="column" style={{minHeight: "30vh"}}>
                         <h5>Initial Costs</h5>
                         <div
                             className="u-full-width p-4"
@@ -101,7 +101,7 @@ class Sheet extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column">
+                    <div className="column" style={{minHeight: "37vh"}}>
                         <h5>Monthly Costs</h5>
                         <div
                             className="u-full-width p-4"
@@ -135,7 +135,7 @@ class Sheet extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column">
+                    <div className="column" style={{minHeight: "30vh"}}>
                         <h5>After {period} Years</h5>
                         <div
                             className="u-full-width p-4"
@@ -168,13 +168,18 @@ class Sheet extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="column" style={{height: "15vh"}}>
-                        {this.props.graphData ? (
-                            <AreaGraph data={this.props.graphData} />
-                        ) : null}
-                    </div>
-                </div>
+                {this.props.graphData ? (
+                    <>
+                        <div className="row">
+                            <div className="column">
+                                <h5>Property Value Over Time</h5>
+                                <div style={{ height: "33vh" }}>
+                                    <AreaGraph data={this.props.graphData} />
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                ) : null}
             </StyledSheet>
         );
     }

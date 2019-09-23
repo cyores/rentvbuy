@@ -2,14 +2,16 @@ import React, { Component } from "react";
 
 // vx
 import { ParentSize } from "@vx/responsive";
-import { AreaClosed, Line, Bar } from "@vx/shape";
+import { AreaClosed } from "@vx/shape";
 import { curveMonotoneX } from "@vx/curve";
 import { GridRows, GridColumns } from "@vx/grid";
-import { scaleTime, scaleLinear } from "@vx/scale";
-import { withTooltip, Tooltip } from "@vx/tooltip";
-import { localPoint } from "@vx/event";
-import { bisector } from "d3-array";
-import { timeFormat } from "d3-time-format";
+import { scaleLinear } from "@vx/scale";
+import { AxisLeft, AxisBottom } from "@vx/axis";
+import { Group } from "@vx/group";
+// import { withTooltip, Tooltip } from "@vx/tooltip";
+// import { localPoint } from "@vx/event";
+// import { bisector } from "d3-array";
+// import { timeFormat } from "d3-time-format";
 
 // util
 const min = (arr, fn) => Math.min(...arr.map(fn));
@@ -19,16 +21,18 @@ const extent = (arr, fn) => [min(arr, fn), max(arr, fn)];
 class AreaGraph extends Component {
     state = {};
     render() {
-        const { data } = this.props;
-        const x = d => d.year;
-        const y = d => d.value;
+        // const { data } = this.props;
+        const data = this.props.data[0];
+        const data2 = this.props.data[1];
+        const x = d => d.year + 1;
+        const y = d => d.value / 1000;
         const margin = {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0
+            top: 10,
+            bottom: 60,
+            left: 60,
+            right: 10
         };
-        console.log("data", data);
+        console.log("data", this.props.data);
 
         return (
             <ParentSize>
@@ -38,7 +42,7 @@ class AreaGraph extends Component {
                     const yMax = height - margin.top - margin.bottom;
 
                     const xScale = scaleLinear({
-                        range: [0, xMax],
+                        range: [1, xMax],
                         domain: extent(data, x),
                         nice: true
                     });
@@ -59,28 +63,85 @@ class AreaGraph extends Component {
                                     fill="#fff"
                                     rx={14}
                                 />
-                                <GridRows
-                                    lineStyle={{ pointerEvents: "none" }}
-                                    scale={yScale}
-                                    width={xMax}
-                                    stroke="#cecece"
-                                />
-                                <GridColumns
-                                    lineStyle={{ pointerEvents: "none" }}
-                                    scale={xScale}
-                                    height={yMax}
-                                    stroke="#cecece"
-                                />
-                                <AreaClosed
-                                    data={data}
-                                    x={d => xScale(x(d))}
-                                    y={d => yScale(y(d))}
-                                    yScale={yScale}
-                                    strokeWidth={1}
-                                    stroke={"rgb(123, 61, 221)"}
-                                    fill={"rgba(123, 61, 221, 0.5)"}
-                                    curve={curveMonotoneX}
-                                />
+                                <Group
+                                    left={margin.left}
+                                    top={margin.top}
+                                    right={margin.right}
+                                >
+                                    <GridRows
+                                        lineStyle={{ pointerEvents: "none" }}
+                                        scale={yScale}
+                                        width={xMax}
+                                        stroke="#cecece"
+                                    />
+                                    <GridColumns
+                                        lineStyle={{ pointerEvents: "none" }}
+                                        scale={xScale}
+                                        height={yMax}
+                                        stroke="#cecece"
+                                    />
+                                </Group>
+
+                                <Group
+                                    left={margin.left}
+                                    top={margin.top}
+                                    right={margin.right}
+                                >
+                                    <AreaClosed
+                                        data={data}
+                                        x={d => xScale(x(d))}
+                                        y={d => yScale(y(d))}
+                                        yScale={yScale}
+                                        strokeWidth={1}
+                                        stroke={"rgb(123, 61, 221)"}
+                                        fill={"rgba(123, 61, 221, 0.5)"}
+                                        curve={curveMonotoneX}
+                                    />
+                                    <AreaClosed
+                                        data={data2}
+                                        x={d => xScale(x(d))}
+                                        y={d => yScale(y(d))}
+                                        yScale={yScale}
+                                        strokeWidth={1}
+                                        stroke={"rgb(125, 220, 231)"}
+                                        fill={"rgba(125, 220, 231, 0.5)"}
+                                        curve={curveMonotoneX}
+                                    />
+                                </Group>
+
+                                <Group left={margin.left} top={margin.top}>
+                                    <>
+                                        <AxisBottom
+                                            top={yMax}
+                                            left={0}
+                                            scale={xScale}
+                                            numTicks={10}
+                                            stroke="#000"
+                                            tickStroke="#000"
+                                            label="Year"
+                                            labelProps={{
+                                                y: margin.bottom - 10,
+                                                fill: "#000",
+                                                textAnchor: "middle",
+                                                fontSize: "1.5rem",
+                                                fontFamily: "Nunito"
+                                            }}
+                                        />
+                                        <AxisLeft
+                                            top={0}
+                                            left={0}
+                                            scale={yScale}
+                                            numTicks={10}
+                                            label="Value (x1000)"
+                                            labelProps={{
+                                                fill: "#000",
+                                                textAnchor: "middle",
+                                                fontSize: "1.5rem",
+                                                fontFamily: "Nunito"
+                                            }}
+                                        />
+                                    </>
+                                </Group>
                             </svg>
                         </div>
                     );
