@@ -16,42 +16,48 @@ import { Group } from "@vx/group";
 // util
 const min = (arr, fn) => Math.min(...arr.map(fn));
 const max = (arr, fn) => Math.max(...arr.map(fn));
-const extent = (arr, fn) => [min(arr, fn), max(arr, fn)];
 
 class AreaGraph extends Component {
     state = {};
     render() {
-        // const { data } = this.props;
-        const data = this.props.data[0];
-        const data2 = this.props.data[1];
-        const x = d => d.year + 1;
-        const y = d => d.value / 1000;
-        const margin = {
-            top: 10,
-            bottom: 60,
-            left: 60,
-            right: 10
-        };
+        const { data } = this.props;
+        // const data = this.props.data[0];
+        // const data2 = this.props.data[1];
+
         console.log("data", this.props.data);
 
         return (
             <ParentSize>
                 {({ width, height }) => {
+                    // define margins
+                    const margin = {
+                        top: 10,
+                        bottom: 60,
+                        left: 60,
+                        right: 10
+                    };
+
                     // bounds
                     const xMax = width - margin.left - margin.right;
                     const yMax = height - margin.top - margin.bottom;
 
+                    // x, y translations
+                    const x = d => d.year + 0;
+                    const y = d => d.value / 1000;
+
+                    // scalings
                     const xScale = scaleLinear({
-                        range: [1, xMax],
-                        domain: extent(data, x),
+                        range: [0, xMax],
+                        domain: [0, data[0].length - 2],
                         nice: true
                     });
 
                     const yScale = scaleLinear({
                         range: [yMax, 0],
-                        domain: [0, max(data, y) + yMax / 3],
+                        domain: [0, max(data[0], y)],
                         nice: true
                     });
+
                     return (
                         <div>
                             <svg width={width} height={height}>
@@ -63,6 +69,7 @@ class AreaGraph extends Component {
                                     fill="#fff"
                                     rx={14}
                                 />
+
                                 <Group
                                     left={margin.left}
                                     top={margin.top}
@@ -87,26 +94,20 @@ class AreaGraph extends Component {
                                     top={margin.top}
                                     right={margin.right}
                                 >
-                                    <AreaClosed
-                                        data={data}
-                                        x={d => xScale(x(d))}
-                                        y={d => yScale(y(d))}
-                                        yScale={yScale}
-                                        strokeWidth={1}
-                                        stroke={"rgb(123, 61, 221)"}
-                                        fill={"rgba(123, 61, 221, 0.5)"}
-                                        curve={curveMonotoneX}
-                                    />
-                                    <AreaClosed
-                                        data={data2}
-                                        x={d => xScale(x(d))}
-                                        y={d => yScale(y(d))}
-                                        yScale={yScale}
-                                        strokeWidth={1}
-                                        stroke={"rgb(125, 220, 231)"}
-                                        fill={"rgba(125, 220, 231, 0.5)"}
-                                        curve={curveMonotoneX}
-                                    />
+                                    {data.map((dataset, i) => (
+                                        <AreaClosed
+                                            data={dataset}
+                                            x={d => xScale(x(d))}
+                                            y={d => yScale(y(d))}
+                                            yScale={yScale}
+                                            strokeWidth={1}
+                                            stroke={"rgba(123, 61, 221, 1)"}
+                                            // fill={`rgba(123, 61, 221, ${(1 + i) * 0.3})`}
+                                            fill={`rgba(123, 61, 221, ${1 /
+                                                (i + 2)})`}
+                                            curve={curveMonotoneX}
+                                        />
+                                    ))}
                                 </Group>
 
                                 <Group left={margin.left} top={margin.top}>
@@ -115,7 +116,7 @@ class AreaGraph extends Component {
                                             top={yMax}
                                             left={0}
                                             scale={xScale}
-                                            numTicks={10}
+                                            numTicks={data[0].length / 2}
                                             stroke="#000"
                                             tickStroke="#000"
                                             label="Year"
