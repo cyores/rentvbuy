@@ -19,6 +19,7 @@ class Calculator extends Component {
 
     calculate() {
         let temp = this.state;
+        temp.calcs.graphData = {};
         let { VOP, RENT, PTR, LTT, CF, MR, DP, AP, REA, SMA } = this.state;
         let buyInitials = {};
         let rentInitials = {};
@@ -66,11 +67,13 @@ class Calculator extends Component {
         );
 
         // BUY AFTERS
-        buyAfters.Property_Value = Calculators.calcEndPropertyValue(
+        let propertyValueCalcs = Calculators.calcEndPropertyValue(
             VOP,
             REA,
             AP
         );
+        buyAfters.Property_Value = propertyValueCalcs[0];
+        temp.calcs.graphData.propertyValue = propertyValueCalcs[1];
         rentAfters.Investments_Value = Calculators.calcEndStockValue(
             temp.calcs.rent.analysis.Difference_To_Buy,
             SMA,

@@ -14,7 +14,14 @@ function calcEndPropertyValue(vop, rea, ap) {
     if (vop < 0 || rea < 0 || ap < 0)
         throw new Error("Values can't be less than 0");
 
-    return parseFloat((vop * (Math.pow(1 + rea, ap) - 1) + vop).toFixed(2));
+    let graphData = [];
+    let ivop = vop;
+    for (var i = 0; i < ap; i++) {
+        graphData.push({ year: i, value: ivop });
+        ivop *= 1 + rea;
+    }
+
+    return [parseFloat((vop * (Math.pow(1 + rea, ap) - 1) + vop).toFixed(2)), graphData];
 }
 
 export default calcEndPropertyValue;

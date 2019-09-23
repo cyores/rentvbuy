@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+// components
+import AreaGraph from "./AreaGraph";
+
 const StyledSheet = styled.div`
     background-color: #fff;
     padding: 1.5rem;
@@ -163,6 +166,13 @@ class Sheet extends Component {
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="column" style={{height: "15vh"}}>
+                        {this.props.graphData ? (
+                            <AreaGraph data={this.props.graphData} />
+                        ) : null}
                     </div>
                 </div>
             </StyledSheet>

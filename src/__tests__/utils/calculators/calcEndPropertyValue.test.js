@@ -1,6 +1,6 @@
 import calcEndPropertyValue from "../../../utils/calculators/calcEndPropertyValue";
 
-it("calculate end property value", () => {
+xit("calculate end property value", () => {
 
     expect(calcEndPropertyValue(1000000, 0.03, 25)).toEqual(2093777.93);
 

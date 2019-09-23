@@ -142,6 +142,7 @@ class App extends React.Component {
                                             afterPeriod={
                                                 this.state.calcs.buy.afterPeriod
                                             }
+                                            graphData={this.state.calcs.graphData.propertyValue}
                                         ></Sheet>
                                     </div>
                                     <div className="six columns">
