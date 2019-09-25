@@ -17,21 +17,21 @@ function calcRentNet(vop, ptr, sma, isi, rent, ap, rea, pmt) {
     let graphData = [];
     let sav = isi; // Stock Account Value
     let currRent = rent;
-    let currNet = 0;
+    let currNet = isi;
     let totalSunkCosts = 0;
     let ivop = vop;
     let bmc = 0; // buy monthly costs
 
     for (var i = 0; i <= ap; i++) {
+        // add to graph
+        graphData.push({ year: i, value: currNet });
+
         // calcs
         totalSunkCosts += currRent * 12;
         currNet = sav - totalSunkCosts;
 
-        bmc = pmt + ((ivop * (ptr / 100) + (ivop * 0.01)) / 12);
+        bmc = pmt + (ivop * (ptr / 100) + ivop * 0.01) / 12;
         // console.log(i, bmc.toFixed(2), currRent.toFixed(2));
-
-        // add to graph
-        graphData.push({ year: i, value: currNet });
 
         // next year's numbers
         if (!(i === ap)) {

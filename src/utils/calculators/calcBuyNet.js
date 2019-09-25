@@ -21,7 +21,7 @@ function calcBuyNet(vop, rea, mp, mr, pmt, ptr, sma, ap, ltt, rent) {
     let ivop = vop;
     let imp = mp;
     let currInterest = 0;
-    let currNet = 0;
+    let currNet = vop - mp - ltt;
     let currTax = 0;
     let currMaint = 0;
     let currOP = 0; // opportunity cost
@@ -30,27 +30,24 @@ function calcBuyNet(vop, rea, mp, mr, pmt, ptr, sma, ap, ltt, rent) {
     let currSunkCosts = 0;
     let totalSunkCosts = ltt;
     for (var i = 0; i <= ap; i++) {
+        // add to graph
+        graphData.push({ year: i, value: currNet });
+
         // calcs
         currTax = ivop * (ptr / 100);
         currMaint = ivop * 0.01;
         currInterest = imp * (mr / 100);
-        currOP = pmt * 12 + currTax + currMaint - irent;
+        currOP = (pmt * 12 + currTax + currMaint - irent) * (sma - rea);
 
-        if (currOP > 0) {
-            currOP *= sma - rea;
-        } else {
+        if (currOP < 0) {
             currOP = 0;
         }
         totalOP += currOP;
 
         currSunkCosts = currTax + currMaint + currInterest;
         totalSunkCosts += currSunkCosts + totalOP;
-        console.log(totalSunkCosts.toFixed(2));
 
         currNet = ivop - imp - totalSunkCosts;
-
-        // add to graph
-        graphData.push({ year: i, value: currNet });
 
         // next year's data
         if (!(i === ap)) {

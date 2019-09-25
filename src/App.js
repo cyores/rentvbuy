@@ -127,7 +127,7 @@ class App extends React.Component {
                                 </div>
                                 <div className="row">
                                     <div className="column">
-                                        <h5>Net Assets Over Time</h5>
+                                        <h5>Rent vs Buy Over Time</h5>
                                         <div style={{ height: "40vh" }}>
                                             <AreaGraph
                                                 data={[
