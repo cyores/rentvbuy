@@ -11,6 +11,7 @@ import Sheet from "./components/Sheet";
 import Verdict from "./components/Verdict";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
+import AreaGraph from "./components/AreaGraph";
 
 class App extends React.Component {
     constructor(props) {
@@ -122,6 +123,21 @@ class App extends React.Component {
                                                 this.state.calcs.rentOrBuy
                                             }
                                         />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="column">
+                                        <h5>Net Assets Over Time</h5>
+                                        <div style={{ height: "40vh" }}>
+                                            <AreaGraph
+                                                data={[
+                                                    this.state.calcs.graphData
+                                                        .buyNets,
+                                                    this.state.calcs.graphData
+                                                        .rentNets
+                                                ]}
+                                            ></AreaGraph>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="row">
