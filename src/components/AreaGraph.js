@@ -116,7 +116,7 @@ class AreaGraph extends Component {
                                 <Group left={margin.left} top={margin.top}>
                                     <>
                                         <AxisBottom
-                                            top={yMax / 2}
+                                            top={yMax}
                                             left={0}
                                             scale={xScale}
                                             numTicks={data[0].length / 2}

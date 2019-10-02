@@ -24,8 +24,6 @@ function calcBuyNet(vop, rea, mp, mr, pmt, ptr, sma, ap, ltt, rent) {
     let currNet = vop - mp - ltt;
     let currTax = 0;
     let currMaint = 0;
-    let currOP = 0; // opportunity cost
-    let totalOP = 0;
     let irent = rent;
     let currSunkCosts = 0;
     let totalSunkCosts = ltt;
@@ -37,15 +35,9 @@ function calcBuyNet(vop, rea, mp, mr, pmt, ptr, sma, ap, ltt, rent) {
         currTax = ivop * (ptr / 100);
         currMaint = ivop * 0.01;
         currInterest = imp * (mr / 100);
-        currOP = (pmt * 12 + currTax + currMaint - irent) * (sma - rea);
-
-        if (currOP < 0) {
-            currOP = 0;
-        }
-        totalOP += currOP;
 
         currSunkCosts = currTax + currMaint + currInterest;
-        totalSunkCosts += currSunkCosts + totalOP;
+        totalSunkCosts += currSunkCosts;
 
         currNet = ivop - imp - totalSunkCosts;
 
@@ -54,7 +46,6 @@ function calcBuyNet(vop, rea, mp, mr, pmt, ptr, sma, ap, ltt, rent) {
             ivop *= 1 + rea;
             imp -= mp / ap;
             irent *= 1 + rea;
-            totalOP *= 1 + sma;
             // imp -= (pmt * 12 - currInterest);
         }
     }
