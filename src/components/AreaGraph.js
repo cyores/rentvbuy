@@ -24,7 +24,7 @@ class AreaGraph extends Component {
         // const data = this.props.data[0];
         // const data2 = this.props.data[1];
 
-        console.log("data", this.props.data);
+        // console.log("data", this.props.data);
 
         return (
             <ParentSize>
@@ -48,13 +48,15 @@ class AreaGraph extends Component {
                     // scalings
                     const xScale = scaleLinear({
                         range: [0, xMax],
-                        domain: [0, data[0].length - 2],
+                        domain: [0, Math.max(data[0].length, data[1].length)],
                         nice: true
                     });
 
                     const yScale = scaleLinear({
+                        // range: [yMax, 0],
+                        // domain: [0, Math.max(max(data[0], y), max(data[1], y))],
                         range: [yMax, 0],
-                        domain: [0, max(data[0], y)],
+                        domain: [Math.min(min(data[0], y), min(data[1], y)), Math.max(max(data[0], y), max(data[1], y))],
                         nice: true
                     });
 
@@ -96,6 +98,7 @@ class AreaGraph extends Component {
                                 >
                                     {data.map((dataset, i) => (
                                         <AreaClosed
+                                            key={`grapharea-${i}`}
                                             data={dataset}
                                             x={d => xScale(x(d))}
                                             y={d => yScale(y(d))}

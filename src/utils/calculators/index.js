@@ -8,6 +8,8 @@ import calcMonthlyPMT from "./calcMonthlyPMT";
 import calcMonthlyTaxes from "./calcMonthlyTaxes";
 import calcPercentRule from "./calcPercentRule";
 import calcRentSunkCosts from "./calcRentSunkCosts";
+import calcBuyNet from "./calcBuyNet";
+import calcRentNet from "./calcRentNet";
 
 export {
     calcBuySunkCosts,
@@ -19,5 +21,7 @@ export {
     calcMonthlyPMT,
     calcMonthlyTaxes,
     calcPercentRule,
-    calcRentSunkCosts
+    calcRentSunkCosts,
+    calcBuyNet,
+    calcRentNet
 };

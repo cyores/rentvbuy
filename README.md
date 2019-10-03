@@ -1,3 +1,40 @@
+# Rent vs Buy
+
+Rent vs Buy is a tool that attempts to shed some light on the tough decision many people make: should I rent of house or buy a home?
+
+The tool provides a full accounting of the costs of each decision using some user inputed data and a few assumptions (which can be found below).
+
+The tool focuses on the sunk costs of each case and the appreciation of the assets in each case (real estate or stock market).
+
+I am not a financial advisor. I do not have any formal financial or economic education. This tool is not substitute for real financial advice. It is only meant to help or supplement the decision making process.
+
+<!-- The tool was largely inspired by this YouTube video by Ben Felix.
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Uwl3-jBNEd4/0.jpg)](https://www.youtube.com/watch?v=Uwl3-jBNEd4) -->
+
+## Buy Case
+The Buy sunk costs are as follows:
+- initial taxes (ex. land transfer tax)
+- annual property tax
+- home maintenance
+- interest on mortgage payments
+
+Note that opportunity cost is not taken into account (at least for now). Having the Rent case calculations right beside the Buy case should illustrate the opportunity cost.
+
+## Rent Case
+The Rent sunk costs are as follows:
+- monthly rent
+
+## Assumptions
+- The renter is investing in the stock market.
+- Real Estate Appreciation: 3% per year
+- Stock Marcket Appreciation: 6% per year
+- Home Maintenance: 1% of the value of the home per year
+
+<br>
+<hr><hr>
+<br>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

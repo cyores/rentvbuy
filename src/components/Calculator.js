@@ -67,14 +67,10 @@ class Calculator extends Component {
         );
 
         // BUY AFTERS
-        let propertyValueCalcs = Calculators.calcEndPropertyValue(
-            VOP,
-            REA,
-            AP
-        );
+        let propertyValueCalcs = Calculators.calcEndPropertyValue(VOP, REA, AP);
         buyAfters.Property_Value = propertyValueCalcs[0];
         temp.calcs.graphData.propertyValue = propertyValueCalcs[1];
-        
+
         let buySunkCostCalcs = Calculators.calcBuySunkCosts(
             PTR,
             VOP,
@@ -114,6 +110,36 @@ class Calculator extends Component {
 
         // 5% RULE
         temp.calcs.percentRule = Calculators.calcPercentRule(VOP);
+
+        // new net stuff
+        let buyNets = Calculators.calcBuyNet(
+            VOP,
+            REA,
+            temp.calcs.buy.Mortgage_Principle,
+            MR,
+            buyMonthlys.Mortgage_Payment,
+            PTR,
+            SMA,
+            AP,
+            LTT,
+            RENT
+        );
+        console.log("BN", buyNets);
+
+        let rentNets = Calculators.calcRentNet(
+            VOP, 
+            PTR,
+            SMA,
+            rentInitials.Total,
+            RENT,
+            AP,
+            REA,
+            buyMonthlys.Mortgage_Payment
+        );
+        console.log("RN", rentNets);
+
+        temp.calcs.graphData.buyNets = buyNets.graphData;
+        temp.calcs.graphData.rentNets = rentNets.graphData;
 
         // ASSIGNING OBJECTS
         temp.calcs.buy.initialCosts = buyInitials;
