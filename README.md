@@ -30,6 +30,7 @@ The Rent sunk costs are as follows:
 - Real Estate Appreciation: 3% per year
 - Stock Marcket Appreciation: 6% per year
 - Home Maintenance: 1% of the value of the home per year
+- Rent increases 1% per year
 
 <br>
 <hr><hr>

@@ -7,6 +7,7 @@ import CollectInfo from "./CollectInfo";
 
 // calculators
 import * as Calculators from "../utils/calculators/index.js";
+import buyCalcs from "../utils/buyCalcs";
 
 const StyledCalculator = styled.div``;
 
@@ -27,6 +28,8 @@ class Calculator extends Component {
         let rentMonthlys = {};
         let buyAfters = {};
         let rentAfters = {};
+
+        buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
 
         // the order matters
 
