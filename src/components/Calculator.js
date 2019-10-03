@@ -8,6 +8,7 @@ import CollectInfo from "./CollectInfo";
 // calculators
 import * as Calculators from "../utils/calculators/index.js";
 import buyCalcs from "../utils/buyCalcs";
+import rentCalcs from "../utils/rentCalcs";
 
 const StyledCalculator = styled.div``;
 
@@ -29,7 +30,17 @@ class Calculator extends Component {
         let buyAfters = {};
         let rentAfters = {};
 
-        buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
+        let xbuyCalcs = buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
+        let xrentCalcs = rentCalcs(
+            RENT,
+            xbuyCalcs.initialCosts.Total,
+            xbuyCalcs.monthlyCosts.Total,
+            SMA,
+            REA,
+            AP
+        );
+
+        // old but still maybe needed
 
         // the order matters
 
@@ -127,10 +138,10 @@ class Calculator extends Component {
             LTT,
             RENT
         );
-        console.log("BN", buyNets);
+        // console.log("BN", buyNets);
 
         let rentNets = Calculators.calcRentNet(
-            VOP, 
+            VOP,
             PTR,
             SMA,
             rentInitials.Total,
@@ -139,7 +150,7 @@ class Calculator extends Component {
             REA,
             buyMonthlys.Mortgage_Payment
         );
-        console.log("RN", rentNets);
+        // console.log("RN", rentNets);
 
         temp.calcs.graphData.buyNets = buyNets.graphData;
         temp.calcs.graphData.rentNets = rentNets.graphData;
@@ -160,7 +171,7 @@ class Calculator extends Component {
         }
 
         temp.calcs.donecalcs = true;
-        console.log("calcs", temp.calcs);
+        // console.log("calcs", temp.calcs);
         this.setState({ calcs: temp.calcs });
         this.props.sendToApp(temp);
     }

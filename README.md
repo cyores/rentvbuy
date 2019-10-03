@@ -26,11 +26,11 @@ The Rent sunk costs are as follows:
 - monthly rent
 
 ## Assumptions
-- The renter is investing in the stock market.
+- The renter is investing in the stock market
 - Real Estate Appreciation: 3% per year
 - Stock Marcket Appreciation: 6% per year
 - Home Maintenance: 1% of the value of the home per year
-- Rent increases 1% per year
+- Rent increases at the same rate as real estate
 
 <br>
 <hr><hr>

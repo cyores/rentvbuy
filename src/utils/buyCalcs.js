@@ -50,7 +50,7 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
 
     let mp = vop - calcs.initialCosts.Downpayment;
 
-    // Monthly Cost
+    // Monthly Costs
     calcs.monthlyCosts.Maintenance = (vop * 0.01) / 12;
     calcs.monthlyCosts.Taxes = (vop * ptr) / 12;
     calcs.monthlyCosts.Mortgage_Payment = calcPMT(mr, ap, mp);
@@ -79,7 +79,7 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
     calcs.endValue.Net =
         calcs.endValue.Property_Value - calcs.endValue.Total_Sunk_Costs;
 
-    console.log("new new new", calcs);
+    console.log("new new new buy", calcs);
 
     return calcs;
 }
