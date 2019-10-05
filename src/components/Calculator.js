@@ -20,7 +20,6 @@ class Calculator extends Component {
 
     calculate() {
         let temp = this.state;
-        temp.calcs.graphData = {};
         let { VOP, RENT, PTR, LTT, MR, DP, AP, REA, SMA } = this.state;
 
         let xbuyCalcs = buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
@@ -44,7 +43,6 @@ class Calculator extends Component {
         }
 
         temp.calcs.donecalcs = true;
-        // console.log("calcs", temp.calcs);
         this.setState({ calcs: temp.calcs });
         this.props.sendToApp(temp);
     }

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import "./app.css";
 
@@ -12,6 +13,13 @@ import Verdict from "./components/Verdict";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
 import AreaGraph from "./components/AreaGraph";
+
+const GraphWrapper = styled.div`
+    height: 40vh;
+    background: white;
+    padding: 2rem;
+    margin-bottom: 3rem;
+`;
 
 class App extends React.Component {
     constructor(props) {
@@ -125,21 +133,21 @@ class App extends React.Component {
                                         />
                                     </div>
                                 </div>
-                                {/* <div className="row">
+                                <div className="row">
                                     <div className="column">
-                                        <h5>Rent vs Buy Over Time</h5>
-                                        <div style={{ height: "40vh" }}>
+                                        <h5>Rent vs Buy Net Value Over Time</h5>
+                                        <GraphWrapper>
                                             <AreaGraph
                                                 data={[
-                                                    this.state.calcs.graphData
-                                                        .buyNets,
-                                                    this.state.calcs.graphData
-                                                        .rentNets
+                                                    this.state.calcs.buy
+                                                        .graphData.net,
+                                                    this.state.calcs.rent
+                                                        .graphData.net
                                                 ]}
                                             ></AreaGraph>
-                                        </div>
+                                        </GraphWrapper>
                                     </div>
-                                </div> */}
+                                </div>
                                 <div className="row">
                                     <div className="six columns">
                                         <Sheet
