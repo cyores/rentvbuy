@@ -80,6 +80,35 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
     calcs.endValue.Net =
         calcs.endValue.Property_Value - calcs.endValue.Total_Sunk_Costs;
 
+    // round everything to 2 decimal places
+    // initial
+    calcs.initialCosts.Downpayment = parseFloat(
+        calcs.initialCosts.Downpayment.toFixed(2)
+    );
+    calcs.initialCosts.Land_Transfer_Tax = parseFloat(
+        calcs.initialCosts.Land_Transfer_Tax.toFixed(2)
+    );
+    calcs.initialCosts.Total = parseFloat(calcs.initialCosts.Total.toFixed(2));
+
+    // monthly
+    calcs.monthlyCosts.Maintenance = parseFloat(
+        calcs.monthlyCosts.Maintenance.toFixed(2)
+    );
+    calcs.monthlyCosts.Taxes = parseFloat(calcs.monthlyCosts.Taxes.toFixed(2));
+    calcs.monthlyCosts.Mortgage_Payment = parseFloat(
+        calcs.monthlyCosts.Mortgage_Payment.toFixed(2)
+    );
+    calcs.monthlyCosts.Total = parseFloat(calcs.monthlyCosts.Total.toFixed(2));
+
+    // end
+    calcs.endValue.Property_Value = parseFloat(
+        calcs.endValue.Property_Value.toFixed(2)
+    );
+    calcs.endValue.Total_Sunk_Costs = parseFloat(
+        calcs.endValue.Total_Sunk_Costs.toFixed(2)
+    );
+    calcs.endValue.Net = parseFloat(calcs.endValue.Net.toFixed(2));
+
     return calcs;
 }
 

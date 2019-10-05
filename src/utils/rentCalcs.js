@@ -62,7 +62,7 @@ export default function rentCalcs(rent, iiv, bmp, sma, rea, ap) {
         calcs.graphData.sunkCosts.push({ year: i, value: sunkCosts });
         calcs.graphData.net.push({ year: i, value: assets - sunkCosts });
 
-        rent += 1 + rea;
+        rent *= 1 + rea;
     }
 
     // set end values
@@ -70,6 +70,28 @@ export default function rentCalcs(rent, iiv, bmp, sma, rea, ap) {
     calcs.endValue.Total_Sunk_Costs = sunkCosts;
     calcs.endValue.Net =
         calcs.endValue.Investments_Value - calcs.endValue.Total_Sunk_Costs;
+
+    // round everything to 2 decimal places
+    // initial
+    calcs.initialCosts.Stock_Investment = parseFloat(
+        calcs.initialCosts.Stock_Investment.toFixed(2)
+    );
+    calcs.initialCosts.Total = calcs.initialCosts.Stock_Investment;
+
+    // monthly
+    calcs.monthlyCosts.Stock_Investment = parseFloat(
+        calcs.monthlyCosts.Stock_Investment.toFixed(2)
+    );
+    calcs.monthlyCosts.Total = parseFloat(calcs.monthlyCosts.Total.toFixed(2));
+
+    // end
+    calcs.endValue.Investments_Value = parseFloat(
+        calcs.endValue.Investments_Value.toFixed(2)
+    );
+    calcs.endValue.Total_Sunk_Costs = parseFloat(
+        calcs.endValue.Total_Sunk_Costs.toFixed(2)
+    );
+    calcs.endValue.Net = parseFloat(calcs.endValue.Net.toFixed(2));
 
     return calcs;
 }
