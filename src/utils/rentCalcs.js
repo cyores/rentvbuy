@@ -71,7 +71,5 @@ export default function rentCalcs(rent, iiv, bmp, sma, rea, ap) {
     calcs.endValue.Net =
         calcs.endValue.Investments_Value - calcs.endValue.Total_Sunk_Costs;
 
-    console.log("new new new rent", calcs);
-
     return calcs;
 }

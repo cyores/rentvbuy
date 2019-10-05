@@ -125,7 +125,7 @@ class App extends React.Component {
                                         />
                                     </div>
                                 </div>
-                                <div className="row">
+                                {/* <div className="row">
                                     <div className="column">
                                         <h5>Rent vs Buy Over Time</h5>
                                         <div style={{ height: "40vh" }}>
@@ -139,7 +139,7 @@ class App extends React.Component {
                                             ></AreaGraph>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="row">
                                     <div className="six columns">
                                         <Sheet
@@ -159,14 +159,14 @@ class App extends React.Component {
                                             }
                                             period={this.state.AP}
                                             afterPeriod={
-                                                this.state.calcs.buy.afterPeriod
+                                                this.state.calcs.buy.endValue
                                             }
-                                            graphData={[
-                                                this.state.calcs.graphData
-                                                    .propertyValue,
-                                                this.state.calcs.graphData
-                                                    .buySunkCosts
-                                            ]}
+                                            // graphData={[
+                                            //     this.state.calcs.graphData
+                                            //         .propertyValue,
+                                            //     this.state.calcs.graphData
+                                            //         .buySunkCosts
+                                            // ]}
                                         ></Sheet>
                                     </div>
                                     <div className="six columns">
@@ -186,8 +186,7 @@ class App extends React.Component {
                                             }
                                             period={this.state.AP}
                                             afterPeriod={
-                                                this.state.calcs.rent
-                                                    .afterPeriod
+                                                this.state.calcs.rent.endValue
                                             }
                                         ></Sheet>
                                     </div>

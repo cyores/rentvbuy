@@ -22,13 +22,7 @@ class Calculator extends Component {
     calculate() {
         let temp = this.state;
         temp.calcs.graphData = {};
-        let { VOP, RENT, PTR, LTT, CF, MR, DP, AP, REA, SMA } = this.state;
-        let buyInitials = {};
-        let rentInitials = {};
-        let buyMonthlys = {};
-        let rentMonthlys = {};
-        let buyAfters = {};
-        let rentAfters = {};
+        let { VOP, RENT, PTR, LTT, MR, DP, AP, REA, SMA } = this.state;
 
         let xbuyCalcs = buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
         let xrentCalcs = rentCalcs(
@@ -39,130 +33,10 @@ class Calculator extends Component {
             REA,
             AP
         );
+        temp.calcs.buy = xbuyCalcs;
+        temp.calcs.rent = xrentCalcs;
 
-        // old but still maybe needed
-
-        // the order matters
-
-        // BUY INITIALS
-        buyInitials.Downpayment = Calculators.calcDownpayment(VOP, DP);
-        buyInitials.Land_Transfer_Tax = LTT;
-        buyInitials.Total =
-            buyInitials.Downpayment + buyInitials.Land_Transfer_Tax;
-
-        // RENT INITIALS
-        rentInitials.Stock_Investment = buyInitials.Total;
-        rentInitials.Total = rentInitials.Stock_Investment;
-
-        // MORTGAGE PRINCIPLE
-        temp.calcs.buy.Mortgage_Principle = VOP - buyInitials.Downpayment;
-
-        // RENT MONTHLY COSTS
-        rentMonthlys.Rent = RENT;
-        rentMonthlys.Total = RENT;
-
-        // BUY MONTHLY COSTS
-        buyMonthlys.Taxes = Calculators.calcMonthlyTaxes(PTR, VOP);
-        buyMonthlys.Maintenance = Calculators.calcMonthlyMaint(CF, VOP);
-        buyMonthlys.Mortgage_Payment = Calculators.calcMonthlyPMT(
-            MR,
-            AP,
-            temp.calcs.buy.Mortgage_Principle
-        );
-        buyMonthlys.Total = Calculators.calcMonthlyBuyTotal(buyMonthlys);
-
-        // DIFFERENCES TO RENT/BUY
-        temp.calcs.rent.analysis.Difference_To_Buy = parseFloat(
-            (buyMonthlys.Total - rentMonthlys.Total).toFixed(2)
-        );
-
-        temp.calcs.buy.analysis.Difference_To_Rent = parseFloat(
-            (rentMonthlys.Total - buyMonthlys.Total).toFixed(2)
-        );
-
-        // BUY AFTERS
-        let propertyValueCalcs = Calculators.calcEndPropertyValue(VOP, REA, AP);
-        buyAfters.Property_Value = propertyValueCalcs[0];
-        temp.calcs.graphData.propertyValue = propertyValueCalcs[1];
-
-        let buySunkCostCalcs = Calculators.calcBuySunkCosts(
-            PTR,
-            VOP,
-            AP,
-            buyMonthlys.Mortgage_Payment,
-            temp.calcs.buy.Mortgage_Principle,
-            temp.calcs.buy.analysis.Difference_To_Rent,
-            SMA,
-            REA,
-            LTT
-        );
-        buyAfters.Total_Sunk_Costs = buySunkCostCalcs[0];
-        temp.calcs.graphData.buySunkCosts = buySunkCostCalcs[1];
-
-        buyAfters.Net = parseFloat(
-            (buyAfters.Property_Value - buyAfters.Total_Sunk_Costs).toFixed(2)
-        );
-
-        // RENT AFTERS
-        rentAfters.Investments_Value = Calculators.calcEndStockValue(
-            temp.calcs.rent.analysis.Difference_To_Buy,
-            SMA,
-            rentInitials.Total,
-            AP
-        );
-        rentAfters.Total_Sunk_Costs = Calculators.calcRentSunkCosts(
-            RENT,
-            AP,
-            temp.calcs.rent.analysis.Difference_To_Buy,
-            REA
-        );
-        rentAfters.Net = parseFloat(
-            (
-                rentAfters.Investments_Value - rentAfters.Total_Sunk_Costs
-            ).toFixed(2)
-        );
-
-        // 5% RULE
         temp.calcs.percentRule = Calculators.calcPercentRule(VOP);
-
-        // new net stuff
-        let buyNets = Calculators.calcBuyNet(
-            VOP,
-            REA,
-            temp.calcs.buy.Mortgage_Principle,
-            MR,
-            buyMonthlys.Mortgage_Payment,
-            PTR,
-            SMA,
-            AP,
-            LTT,
-            RENT
-        );
-        // console.log("BN", buyNets);
-
-        let rentNets = Calculators.calcRentNet(
-            VOP,
-            PTR,
-            SMA,
-            rentInitials.Total,
-            RENT,
-            AP,
-            REA,
-            buyMonthlys.Mortgage_Payment
-        );
-        // console.log("RN", rentNets);
-
-        temp.calcs.graphData.buyNets = buyNets.graphData;
-        temp.calcs.graphData.rentNets = rentNets.graphData;
-
-        // ASSIGNING OBJECTS
-        temp.calcs.buy.initialCosts = buyInitials;
-        temp.calcs.buy.monthlyCosts = buyMonthlys;
-        temp.calcs.buy.afterPeriod = buyAfters;
-
-        temp.calcs.rent.initialCosts = rentInitials;
-        temp.calcs.rent.monthlyCosts = rentMonthlys;
-        temp.calcs.rent.afterPeriod = rentAfters;
 
         if (temp.calcs.percentRule < temp.calcs.rent.monthlyCosts.Rent) {
             temp.calcs.rentOrBuy = "buy";

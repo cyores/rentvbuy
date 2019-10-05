@@ -64,6 +64,7 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
     let pmt = calcs.monthlyCosts.Mortgage_Payment;
     for (var i = 1; i <= ap; i++) {
         // at the end of year i
+        //              tax         maint     interest
         sunkCosts += vop * ptr + vop * 0.01 + mp * mr;
         mp -= pmt * 12 - mp * mr;
         vop *= 1 + rea;
@@ -78,8 +79,6 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
     calcs.endValue.Total_Sunk_Costs = sunkCosts;
     calcs.endValue.Net =
         calcs.endValue.Property_Value - calcs.endValue.Total_Sunk_Costs;
-
-    console.log("new new new buy", calcs);
 
     return calcs;
 }
