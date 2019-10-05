@@ -6,7 +6,6 @@ import Button from "./Button";
 import CollectInfo from "./CollectInfo";
 
 // calculators
-import * as Calculators from "../utils/calculators/index.js";
 import buyCalcs from "../utils/buyCalcs";
 import rentCalcs from "../utils/rentCalcs";
 
@@ -36,7 +35,7 @@ class Calculator extends Component {
         temp.calcs.buy = xbuyCalcs;
         temp.calcs.rent = xrentCalcs;
 
-        temp.calcs.percentRule = Calculators.calcPercentRule(VOP);
+        temp.calcs.percentRule = parseFloat(((VOP * 0.05) / 12).toFixed(2));
 
         if (temp.calcs.percentRule < temp.calcs.rent.monthlyCosts.Rent) {
             temp.calcs.rentOrBuy = "buy";
