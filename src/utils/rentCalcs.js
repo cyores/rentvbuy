@@ -56,7 +56,6 @@ export default function rentCalcs(rent, iiv, bmp, sma, rea, ap) {
         assets *= 1 + sma;
         if (bmp - rent > 0) {
             assets += bmp - rent;
-            console.log(bmp-rent);
         }
 
         calcs.graphData.investments.push({ year: i, value: assets });
@@ -64,8 +63,8 @@ export default function rentCalcs(rent, iiv, bmp, sma, rea, ap) {
         calcs.graphData.net.push({ year: i, value: assets - sunkCosts });
 
         rent *= 1 + rea;
-        // approximation of bmp increase
-        bmp *= 1.01;
+        // approximation of bmp increase (2.5%) found experimentally
+        bmp *= 1.025;
     }
 
     // set end values
