@@ -22,6 +22,19 @@ const GraphWrapper = styled.div`
     margin-bottom: var(--space-md);
 `;
 
+const Left = styled.div`
+    position: fixed;
+    width: 25vw;
+    height: 100%;
+    background: var(--color-a-c-gradient);
+`;
+
+const Right = styled.div`
+    margin-left: 25vw;
+    // width: 75vw;
+    height: 100%:
+`;
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -99,11 +112,8 @@ class App extends React.Component {
 
     render() {
         return (
-            <Flex>
-                <div
-                    className="bg-grad"
-                    style={{ flex: "25", height: "100vh" }}
-                >
+            <>
+                <Left>
                     <Flex
                         dir="col"
                         style={{ justifyContent: "flex-start", height: "100%" }}
@@ -123,13 +133,10 @@ class App extends React.Component {
                             <Footer />
                         </div>
                     </Flex>
-                </div>
+                </Left>
 
-                <div style={{ flex: "75", minHeight: "100vh" }}>
-                    <Flex
-                        dir="col"
-                        style={{ height: "100%", padding: "var(--space-md)" }}
-                    >
+                <Right>
+                    <Flex dir="col" style={{ height: "100%" }}>
                         {this.state.calcs.donecalcs ? (
                             <>
                                 <Flex>
@@ -239,8 +246,8 @@ class App extends React.Component {
                             </>
                         )}
                     </Flex>
-                </div>
-            </Flex>
+                </Right>
+            </>
         );
     }
 }

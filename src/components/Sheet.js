@@ -3,14 +3,12 @@ import styled from "styled-components";
 
 // components
 import AreaGraph from "./AreaGraph";
+import Flex from "./utils/Flex";
 
 const StyledSheet = styled.div`
     background-color: #fff;
-    padding: 1.5rem;
-    margin-bottom: 5rem;
-    & > hr {
-        margin: 0 0 20px 0;
-    }
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
 `;
 
 class Sheet extends Component {
@@ -52,24 +50,18 @@ class Sheet extends Component {
         } = this.props;
         return (
             <StyledSheet>
-                <div className="row">
-                    <div className="column">
-                        <h3>{this.props.title}</h3>
-                        {this.props.subtitle ? (
-                            <h6>
-                                <em>{this.props.subtitle}</em>
-                            </h6>
-                        ) : null}
-                    </div>
-                </div>
+                <h3>{this.props.title}</h3>
+                {this.props.subtitle ? (
+                    <h6 style={{ margin: 0 }}>
+                        <em>{this.props.subtitle}</em>
+                    </h6>
+                ) : null}
+
                 <hr></hr>
-                <div className="row">
-                    <div className="column" style={{minHeight: "30vh"}}>
+                <div>
+                    <div style={{ minHeight: "30vh" }}>
                         <h5>Initial Costs</h5>
-                        <div
-                            className="u-full-width p-4"
-                            style={{ paddingTop: "0" }}
-                        >
+                        <div style={{ paddingTop: "0" }}>
                             <table>
                                 <thead>
                                     <tr>
@@ -97,13 +89,10 @@ class Sheet extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="column" style={{minHeight: "37vh"}}>
+                <div>
+                    <div style={{ minHeight: "37vh" }}>
                         <h5>Monthly Costs</h5>
-                        <div
-                            className="u-full-width p-4"
-                            style={{ paddingTop: "0" }}
-                        >
+                        <div style={{ paddingTop: "0" }}>
                             <table>
                                 <thead>
                                     <tr>
@@ -131,13 +120,10 @@ class Sheet extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="column" style={{minHeight: "30vh"}}>
+                <div>
+                    <div style={{ minHeight: "30vh" }}>
                         <h5>After {period} Years</h5>
-                        <div
-                            className="u-full-width p-4"
-                            style={{ paddingTop: "0" }}
-                        >
+                        <div style={{ paddingTop: "0" }}>
                             <table>
                                 <thead>
                                     <tr>
@@ -167,8 +153,8 @@ class Sheet extends Component {
                 </div>
                 {this.props.graphData ? (
                     <>
-                        <div className="row">
-                            <div className="column">
+                        <div>
+                            <div>
                                 <h5>Property Value Over Time</h5>
                                 <div style={{ height: "33vh" }}>
                                     <AreaGraph data={this.props.graphData} />
