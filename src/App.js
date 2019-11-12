@@ -13,12 +13,13 @@ import Verdict from "./components/Verdict";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
 import AreaGraph from "./components/AreaGraph";
+import Flex from "./components/utils/Flex";
 
 const GraphWrapper = styled.div`
     height: 40vh;
     background: white;
-    padding: 2rem;
-    margin-bottom: 3rem;
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
 `;
 
 class App extends React.Component {
@@ -98,44 +99,49 @@ class App extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <Flex>
                 <div
-                    className="left-panel u-full-height bg-grad"
-                    style={{ width: "25vw" }}
+                    className="bg-grad"
+                    style={{ flex: "25", height: "100vh" }}
                 >
-                    <div className="p-2">
-                        <h3 className="fancy-underline">Rent vs Buy</h3>
-                        {this.state.view === "calculator" ? (
-                            <Calculator
-                                defaultState={this.state}
-                                sendToApp={this.receiveFromCalculator}
-                            />
-                        ) : null}
-                        {this.state.view === "about" ? <About /> : null}
-                        {this.state.view === "help" ? <Help /> : null}
-                    </div>
-                    <Footer
-                        view={this.state.view}
-                        changeView={this.changeView}
-                    />
+                    <Flex
+                        dir="col"
+                        style={{ justifyContent: "flex-start", height: "100%" }}
+                    >
+                        <div>
+                            <h3 className="fancy-underline">Rent vs Buy</h3>
+                            {this.state.view === "calculator" ? (
+                                <Calculator
+                                    defaultState={this.state}
+                                    sendToApp={this.receiveFromCalculator}
+                                />
+                            ) : null}
+                            {this.state.view === "about" ? <About /> : null}
+                            {this.state.view === "help" ? <Help /> : null}
+                        </div>
+                        <div style={{ marginTop: "auto" }}>
+                            <Footer />
+                        </div>
+                    </Flex>
                 </div>
-                <div className="u-full-height" style={{ marginLeft: "25vw" }}>
-                    {/* <div className="four columns p-2 u-full-height" /> */}
-                    <div className="p-5 u-full-height">
+
+                <div style={{ flex: "75", minHeight: "100vh" }}>
+                    <Flex
+                        dir="col"
+                        style={{ height: "100%", padding: "var(--space-md)" }}
+                    >
                         {this.state.calcs.donecalcs ? (
-                            <React.Fragment>
-                                <div className="row">
-                                    <div className="u-full-width">
-                                        <Verdict
-                                            rentOrBuy={
-                                                this.state.calcs.rentOrBuy
-                                            }
-                                        />
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="column">
-                                        <h5>Rent vs Buy Net Value Over Time</h5>
+                            <>
+                                <Flex>
+                                    <Verdict
+                                        rentOrBuy={this.state.calcs.rentOrBuy}
+                                    />
+                                </Flex>
+                                <Flex>
+                                    <div style={{ flex: "1" }}>
+                                        <h5 style={{ marginTop: 0 }}>
+                                            Rent vs Buy Net Value Over Time
+                                        </h5>
                                         <GraphWrapper>
                                             <AreaGraph
                                                 data={[
@@ -147,9 +153,9 @@ class App extends React.Component {
                                             ></AreaGraph>
                                         </GraphWrapper>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="six columns">
+                                </Flex>
+                                <Flex>
+                                    <div style={{ flex: "50" }}>
                                         <Sheet
                                             type={"buy"}
                                             title={"Buy"}
@@ -177,7 +183,7 @@ class App extends React.Component {
                                             // ]}
                                         ></Sheet>
                                     </div>
-                                    <div className="six columns">
+                                    <div style={{ flex: "50" }}>
                                         <Sheet
                                             type={"rent"}
                                             title={"Rent"}
@@ -198,12 +204,11 @@ class App extends React.Component {
                                             }
                                         ></Sheet>
                                     </div>
-                                </div>
-                            </React.Fragment>
+                                </Flex>
+                            </>
                         ) : (
                             <>
                                 <div
-                                    className="u-full-height"
                                     style={{
                                         display: "flex",
                                         flexFlow: "column",
@@ -233,9 +238,9 @@ class App extends React.Component {
                                 </div>
                             </>
                         )}
-                    </div>
+                    </Flex>
                 </div>
-            </React.Fragment>
+            </Flex>
         );
     }
 }

@@ -1,0 +1,143 @@
+/**
+ * Colors:
+ * BG:              #e9e8e8
+ * Primary:         #7b3ddd
+ * Analogous Left:  #7ddce7 // not technically
+ * Complement:      #7de7bd // not technically
+ */
+
+:root {
+    /* Colors */
+    --color-bg: #e9e8e8;
+    --color-text: rgba(22, 22, 22, 1);
+
+    --color-primary: #7b3ddd;
+    --color-primary-transparent: rgba(123, 61, 221, 0.75);
+    --color-primary-shadow: rgba(123, 61, 221, 0.25);
+
+    --color-analogous: #7ddce7;
+
+    --color-complement: #7de7bd;
+
+    --color-a-c-gradient: linear-gradient(
+        -30deg,
+        var(--color-analogous),
+        var(--color-complement)
+    );
+
+    --color-danger: #d30930;
+
+    --color-shadow: rgba(55, 58, 75, 0.08);
+
+    /* Text Sizing */
+    --text-base-size: 1.1em;
+    --text-scale-ratio: 1.2;
+    --text-xs: calc((1em / var(--text-scale-ratio)) / var(--text-scale-ratio));
+    --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
+    --text-md: calc(
+        var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio)
+    );
+    --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
+    --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
+    --text-xxl: calc(var(--text-xl) * var(--text-scale-ratio));
+    --text-xxxl: calc(var(--text-xxl) * var(--text-scale-ratio));
+    --text-xxxxl: calc(var(--text-xxxl) * var(--text-scale-ratio));
+
+    /* Space */
+    --space-unit: 1em;
+    --space-xxxxs: calc(0.125 * var(--space-unit));
+    --space-xxxs: calc(0.25 * var(--space-unit));
+    --space-xxs: calc(0.375 * var(--space-unit));
+    --space-xs: calc(0.5 * var(--space-unit));
+    --space-sm: calc(0.75 * var(--space-unit));
+    --space-md: calc(1.25 * var(--space-unit));
+    --space-lg: calc(2 * var(--space-unit));
+    --space-xl: calc(3.25 * var(--space-unit));
+    --space-xxl: calc(5.25 * var(--space-unit));
+    --space-xxxl: calc(8.5 * var(--space-unit));
+    --space-xxxxl: calc(13.75 * var(--space-unit));
+}
+
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-size: var(--text-base-size);
+    line-height: calc(var(--space-unit) * 1.5);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+}
+
+/* Containers */
+.container {
+    position: relative;
+    width: 66vw;
+    min-height: 75vh;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+.container-full {
+    position: relative;
+    width: 100vw;
+    min-height: 75vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+@media only screen and (max-width: 1366px) {
+    .container {
+        width: 96vw;
+        padding: 0 2vw;
+    }
+}
+
+/* Text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 300;
+    letter-spacing: -0.1rem;
+    margin-bottom: var(--space-xs);
+}
+h1 {
+    font-size: var(--text-xxxxl);
+    line-height: 1.125;
+}
+h2 {
+    font-size: var(--text-xxxl);
+    line-height: 1.13;
+}
+h3 {
+    font-size: var(--text-xxl);
+    line-height: 1.135;
+}
+h4 {
+    font-size: var(--text-xl);
+    line-height: 1.14;
+}
+h5 {
+    font-size: var(--text-lg);
+    line-height: 1.15;
+}
+h6 {
+    font-size: var(--text-md);
+    line-height: 1.2;
+}
+p {
+    font-size: var(--text-base-size);
+}
+
+/* HR */
+hr {
+    border-width: 0;
+    border-top: var(--space-xxxxs) solid var(--color-primary);
+    margin: var(--space-lg) 0;
+}

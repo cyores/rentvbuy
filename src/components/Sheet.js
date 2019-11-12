@@ -7,9 +7,6 @@ import AreaGraph from "./AreaGraph";
 const StyledSheet = styled.div`
     background-color: #fff;
     padding: 1.5rem;
-    // margin: 0 auto;
-    // text-align: center;
-    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
     margin-bottom: 5rem;
     & > hr {
         margin: 0 0 20px 0;

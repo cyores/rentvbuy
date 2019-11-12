@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 // components
-import Button from "./Button";
+import Button from "./utils/Button";
 import CollectInfo from "./CollectInfo";
 
 // calculators
@@ -73,11 +73,12 @@ class Calculator extends Component {
                     SMA={this.state.SMA}
                 />
                 <Button
-                    type="button"
-                    className="button-primary"
+                    theme="primary"
                     text="Calculate"
-                    onPress={() => this.calculate()}
-                />
+                    onClick={() => this.calculate()}
+                >
+                    Calculate
+                </Button>
             </StyledCalculator>
         );
     }

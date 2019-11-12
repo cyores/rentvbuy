@@ -3,27 +3,19 @@ import styled from "styled-components";
 
 const StyledVerdict = styled.div`
     background-color: #fff;
-    background: linear-gradient(-30deg, #7ddce7, #7de7bd);
-    color: #333;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    background: var(--color-a-c-gradient);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
     text-align: center;
-
-    h4 {
-        margin: 0;
-    }
+    width: 100%;
 `;
 
-class Verdict extends Component {
-    render() {
-        return (
-            <StyledVerdict className="u-full-width">
-                <h4>
-                    You should <b className="fancy-underline">{this.props.rentOrBuy}</b>
-                </h4>
-            </StyledVerdict>
-        );
-    }
+export default function Verdict(props) {
+    return (
+        <StyledVerdict>
+            <h4 style={{ margin: 0 }}>
+                You should <b className="fancy-underline">{props.rentOrBuy}</b>
+            </h4>
+        </StyledVerdict>
+    );
 }
-
-export default Verdict;

@@ -1,60 +1,54 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const StyledFooter = styled.div`
-    position: absolute;
-    width: 100%;
-    margin: 0;
-    left: 0;
-    bottom: 0;
+// components
+import Flex from "./utils/Flex";
+
+const NavItem = styled.div`
+    flex: 1;
+    cursor: pointer;
+    padding: var(--space-sm) 0;
     text-align: center;
+    &:hover {
+        background: var(--color-primary-transparent);
+    }
 `;
 
 class Footer extends Component {
     render() {
-        var calculatorClasses = this.props.view === "calculator" ? "active" : "";
-        var aboutClasses = this.props.view === "about" ? "active" : "";
-        var helpClasses = this.props.view === "help" ? "active" : "";
         return (
-            <StyledFooter>
-                <div className="row">
-                    <div
-                        className={"four columns nav-item " + calculatorClasses}
+            <>
+                <Flex>
+                    <NavItem
                         onClick={() => {
                             this.props.changeView("calculator");
                         }}
                     >
-                        <p>calculator</p>
-                    </div>
-                    <div
-                        className={"four columns nav-item " + aboutClasses}
+                        Calculator
+                    </NavItem>
+
+                    <NavItem
                         onClick={() => {
                             this.props.changeView("about");
                         }}
                     >
-                        <p>about</p>
-                    </div>
-                    <div
-                        className={"four columns nav-item " + helpClasses}
+                        About
+                    </NavItem>
+
+                    <NavItem
                         onClick={() => {
                             this.props.changeView("help");
                         }}
                     >
-                        <p>help</p>
-                    </div>
-                </div>
-                <div className="row p-0 m-0">
-                    <div className="u-full-width">
-                        <p className="mb-1">
-                            <small>
-                                <em style={{ color: "#777" }}>
-                                    made by christian yores
-                                </em>
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </StyledFooter>
+                        Help
+                    </NavItem>
+                </Flex>
+                <Flex>
+                    <small>
+                        <em>made by christian yores</em>
+                    </small>
+                </Flex>
+            </>
         );
     }
 }

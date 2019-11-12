@@ -12,6 +12,7 @@
     "@vx/scale": "0.0.190",
     "@vx/shape": "0.0.190",
     "@vx/tooltip": "0.0.189",
+    "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
