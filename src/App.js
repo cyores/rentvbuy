@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
-import "./app.css";
-
 import contentPlaceholder from "./images/undraw_buy_house.svg";
 
 // Components

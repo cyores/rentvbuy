@@ -139,5 +139,24 @@ p {
 hr {
     border-width: 0;
     border-top: var(--space-xxxxs) solid var(--color-primary);
-    margin: var(--space-lg) 0;
+    margin: var(--space-md) 0;
+}
+
+/* main title */
+.fancy-underline {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+.fancy-underline:after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #7a3dddab;
+    height: 10px;
+    width: 105%;
+    left: 50%;
+    bottom: 3px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 }

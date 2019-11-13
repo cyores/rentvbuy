@@ -8,7 +8,7 @@ import Table from "./utils/Table";
 
 const StyledSheet = styled.div`
     background-color: #fff;
-    padding: var(--space-md);
+    padding: var(--space-xxxxs) var(--space-md);
     margin-bottom: var(--space-md);
 `;
 
@@ -23,17 +23,17 @@ class Sheet extends Component {
         } = this.props;
         return (
             <StyledSheet>
-                <h3>{this.props.title}</h3>
+                <h5>{this.props.title}</h5>
                 {this.props.subtitle ? (
-                    <h6 style={{ margin: 0 }}>
+                    <small style={{ margin: 0 }}>
                         <em>{this.props.subtitle}</em>
-                    </h6>
+                    </small>
                 ) : null}
 
                 <hr></hr>
                 <div>
-                    <div style={{ minHeight: "30vh" }}>
-                        <h5>Initial Costs</h5>
+                    <div style={{ minHeight: "24vh" }}>
+                        <h6>Initial Costs</h6>
                         <div style={{ paddingTop: "0" }}>
                             <Table
                                 headings={["Item", "Amount"]}
@@ -45,8 +45,8 @@ class Sheet extends Component {
                     </div>
                 </div>
                 <div>
-                    <div style={{ minHeight: "37vh" }}>
-                        <h5>Monthly Costs</h5>
+                    <div style={{ minHeight: "28vh" }}>
+                        <h6>Monthly Costs</h6>
                         <div style={{ paddingTop: "0" }}>
                             <Table
                                 headings={["Item", "Amount"]}
@@ -58,8 +58,8 @@ class Sheet extends Component {
                     </div>
                 </div>
                 <div>
-                    <div style={{ minHeight: "30vh" }}>
-                        <h5>After {period} Years</h5>
+                    <div style={{ minHeight: "24vh" }}>
+                        <h6>After {period} Years</h6>
                         <div style={{ paddingTop: "0" }}>
                             <Table
                                 headings={["Item", "Amount"]}
@@ -75,7 +75,7 @@ class Sheet extends Component {
                         <div>
                             <div>
                                 <h5>Property Value Over Time</h5>
-                                <div style={{ height: "33vh" }}>
+                                <div style={{ height: "28vh" }}>
                                     <AreaGraph data={this.props.graphData} />
                                 </div>
                             </div>
