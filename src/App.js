@@ -25,14 +25,14 @@ const GraphWrapper = styled.div`
 const Left = styled.div`
     position: fixed;
     width: 25vw;
-    height: 100%;
+    height: 100vh;
     background: var(--color-a-c-gradient);
 `;
 
 const Right = styled.div`
     margin-left: 25vw;
-    // width: 75vw;
-    height: 100%:
+    padding: var(--space-md);
+    min-height: 100vh;
 `;
 
 class App extends React.Component {
@@ -136,116 +136,109 @@ class App extends React.Component {
                 </Left>
 
                 <Right>
-                    <Flex dir="col" style={{ height: "100%" }}>
-                        {this.state.calcs.donecalcs ? (
-                            <>
-                                <Flex>
-                                    <Verdict
-                                        rentOrBuy={this.state.calcs.rentOrBuy}
-                                    />
-                                </Flex>
-                                <Flex>
-                                    <div style={{ flex: "1" }}>
-                                        <h5 style={{ marginTop: 0 }}>
-                                            Rent vs Buy Net Value Over Time
-                                        </h5>
-                                        <GraphWrapper>
-                                            <AreaGraph
-                                                data={[
-                                                    this.state.calcs.buy
-                                                        .graphData.net,
-                                                    this.state.calcs.rent
-                                                        .graphData.net
-                                                ]}
-                                            ></AreaGraph>
-                                        </GraphWrapper>
-                                    </div>
-                                </Flex>
-                                <Flex>
-                                    <div style={{ flex: "50" }}>
-                                        <Sheet
-                                            type={"buy"}
-                                            title={"Buy"}
-                                            subtitle={
-                                                "5% Rule: $" +
-                                                this.state.calcs.percentRule
-                                            }
-                                            initialCosts={
-                                                this.state.calcs.buy
-                                                    .initialCosts
-                                            }
-                                            monthlyCosts={
-                                                this.state.calcs.buy
-                                                    .monthlyCosts
-                                            }
-                                            period={this.state.AP}
-                                            afterPeriod={
-                                                this.state.calcs.buy.endValue
-                                            }
-                                            // graphData={[
-                                            //     this.state.calcs.graphData
-                                            //         .propertyValue,
-                                            //     this.state.calcs.graphData
-                                            //         .buySunkCosts
-                                            // ]}
-                                        ></Sheet>
-                                    </div>
-                                    <div style={{ flex: "50" }}>
-                                        <Sheet
-                                            type={"rent"}
-                                            title={"Rent"}
-                                            subtitle={
-                                                "Assumption: the downpayment is invested in the stock market."
-                                            }
-                                            initialCosts={
-                                                this.state.calcs.rent
-                                                    .initialCosts
-                                            }
-                                            monthlyCosts={
-                                                this.state.calcs.rent
-                                                    .monthlyCosts
-                                            }
-                                            period={this.state.AP}
-                                            afterPeriod={
-                                                this.state.calcs.rent.endValue
-                                            }
-                                        ></Sheet>
-                                    </div>
-                                </Flex>
-                            </>
-                        ) : (
-                            <>
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        flexFlow: "column",
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}
-                                >
-                                    <div>
-                                        <img
-                                            alt=""
-                                            src={contentPlaceholder}
-                                            width="500px"
-                                            height="auto"
-                                            style={{
-                                                opacity: "0.9",
-                                                margin: "2rem"
-                                            }}
-                                        />
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Fill out the details to the left to
-                                            see a full analysis of the Rent Vs
-                                            Buy decision
-                                        </p>
-                                    </div>
+                    {this.state.calcs.donecalcs ? (
+                        <Flex dir="col" style={{ height: "100%" }}>
+                            <Flex>
+                                <Verdict
+                                    rentOrBuy={this.state.calcs.rentOrBuy}
+                                />
+                            </Flex>
+                            <Flex>
+                                <div style={{ flex: "1" }}>
+                                    <h5 style={{ marginTop: 0 }}>
+                                        Rent vs Buy Net Value Over Time
+                                    </h5>
+                                    <GraphWrapper>
+                                        <AreaGraph
+                                            data={[
+                                                this.state.calcs.buy.graphData
+                                                    .net,
+                                                this.state.calcs.rent.graphData
+                                                    .net
+                                            ]}
+                                        ></AreaGraph>
+                                    </GraphWrapper>
                                 </div>
-                            </>
-                        )}
-                    </Flex>
+                            </Flex>
+                            <Flex>
+                                <div style={{ flex: "50" }}>
+                                    <Sheet
+                                        type={"buy"}
+                                        title={"Buy"}
+                                        subtitle={
+                                            "5% Rule: $" +
+                                            this.state.calcs.percentRule
+                                        }
+                                        initialCosts={
+                                            this.state.calcs.buy.initialCosts
+                                        }
+                                        monthlyCosts={
+                                            this.state.calcs.buy.monthlyCosts
+                                        }
+                                        period={this.state.AP}
+                                        afterPeriod={
+                                            this.state.calcs.buy.endValue
+                                        }
+                                        // graphData={[
+                                        //     this.state.calcs.graphData
+                                        //         .propertyValue,
+                                        //     this.state.calcs.graphData
+                                        //         .buySunkCosts
+                                        // ]}
+                                    ></Sheet>
+                                </div>
+                                <div style={{ flex: "1" }}></div>
+                                <div style={{ flex: "50" }}>
+                                    <Sheet
+                                        type={"rent"}
+                                        title={"Rent"}
+                                        subtitle={
+                                            "Assumption: the downpayment is invested in the stock market."
+                                        }
+                                        initialCosts={
+                                            this.state.calcs.rent.initialCosts
+                                        }
+                                        monthlyCosts={
+                                            this.state.calcs.rent.monthlyCosts
+                                        }
+                                        period={this.state.AP}
+                                        afterPeriod={
+                                            this.state.calcs.rent.endValue
+                                        }
+                                    ></Sheet>
+                                </div>
+                            </Flex>
+                        </Flex>
+                    ) : (
+                        <div
+                            style={{
+                                display: "flex",
+                                flexFlow: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                height: "100vh"
+                            }}
+                        >
+                            <div>
+                                <img
+                                    alt=""
+                                    src={contentPlaceholder}
+                                    width="500px"
+                                    height="auto"
+                                    style={{
+                                        opacity: "0.9",
+                                        margin: "2rem"
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <p>
+                                    Fill out the details to the left to see a
+                                    full analysis of the Rent Vs Buy decision
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </Right>
             </>
         );

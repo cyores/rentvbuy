@@ -4,6 +4,7 @@ import styled from "styled-components";
 // components
 import AreaGraph from "./AreaGraph";
 import Flex from "./utils/Flex";
+import Table from "./utils/Table";
 
 const StyledSheet = styled.div`
     background-color: #fff;
@@ -62,30 +63,12 @@ class Sheet extends Component {
                     <div style={{ minHeight: "30vh" }}>
                         <h5>Initial Costs</h5>
                         <div style={{ paddingTop: "0" }}>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(initialCosts).map(
-                                        (key, index) => (
-                                            <tr key={`ic-${type}-${index}`}>
-                                                <td>
-                                                    {this.formatKeyText(key)}
-                                                </td>
-                                                <td>
-                                                    {this.formatCurrency(
-                                                        initialCosts[key]
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    )}
-                                </tbody>
-                            </table>
+                            <Table
+                                headings={["Item", "Amount"]}
+                                rows={initialCosts}
+                                formatKeyText={this.formatKeyText}
+                                formatValueText={this.formatCurrency}
+                            />
                         </div>
                     </div>
                 </div>
@@ -93,30 +76,12 @@ class Sheet extends Component {
                     <div style={{ minHeight: "37vh" }}>
                         <h5>Monthly Costs</h5>
                         <div style={{ paddingTop: "0" }}>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(monthlyCosts).map(
-                                        (key, index) => (
-                                            <tr key={`mc-${type}-${index}`}>
-                                                <td>
-                                                    {this.formatKeyText(key)}
-                                                </td>
-                                                <td>
-                                                    {this.formatCurrency(
-                                                        monthlyCosts[key]
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    )}
-                                </tbody>
-                            </table>
+                            <Table
+                                headings={["Item", "Amount"]}
+                                rows={monthlyCosts}
+                                formatKeyText={this.formatKeyText}
+                                formatValueText={this.formatCurrency}
+                            />
                         </div>
                     </div>
                 </div>
@@ -124,30 +89,12 @@ class Sheet extends Component {
                     <div style={{ minHeight: "30vh" }}>
                         <h5>After {period} Years</h5>
                         <div style={{ paddingTop: "0" }}>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(afterPeriod).map(
-                                        (key, index) => (
-                                            <tr key={`ap-${type}-${index}`}>
-                                                <td>
-                                                    {this.formatKeyText(key)}
-                                                </td>
-                                                <td>
-                                                    {this.formatCurrency(
-                                                        afterPeriod[key]
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    )}
-                                </tbody>
-                            </table>
+                            <Table
+                                headings={["Item", "Amount"]}
+                                rows={afterPeriod}
+                                formatKeyText={this.formatKeyText}
+                                formatValueText={this.formatCurrency}
+                            />
                         </div>
                     </div>
                 </div>
