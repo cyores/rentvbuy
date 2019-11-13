@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 // components
@@ -14,43 +14,39 @@ const NavItem = styled.div`
     }
 `;
 
-class Footer extends Component {
-    render() {
-        return (
-            <>
-                <Flex>
-                    <NavItem
-                        onClick={() => {
-                            this.props.changeView("calculator");
-                        }}
-                    >
-                        Calculator
-                    </NavItem>
+export default function Footer(props) {
+    return (
+        <>
+            <Flex>
+                <NavItem
+                    onClick={() => {
+                        props.changeView("calculator");
+                    }}
+                >
+                    Calculator
+                </NavItem>
 
-                    <NavItem
-                        onClick={() => {
-                            this.props.changeView("about");
-                        }}
-                    >
-                        About
-                    </NavItem>
+                <NavItem
+                    onClick={() => {
+                        props.changeView("about");
+                    }}
+                >
+                    About
+                </NavItem>
 
-                    <NavItem
-                        onClick={() => {
-                            this.props.changeView("help");
-                        }}
-                    >
-                        Help
-                    </NavItem>
-                </Flex>
-                <Flex>
-                    <small>
-                        <em>made by christian yores</em>
-                    </small>
-                </Flex>
-            </>
-        );
-    }
+                <NavItem
+                    onClick={() => {
+                        props.changeView("help");
+                    }}
+                >
+                    Help
+                </NavItem>
+            </Flex>
+            <Flex>
+                <small>
+                    <em>made by christian yores</em>
+                </small>
+            </Flex>
+        </>
+    );
 }
-
-export default Footer;

@@ -5,9 +5,7 @@ import styled from "styled-components";
 import Input from "./utils/Input";
 import Flex from "./utils/Flex";
 
-const Wrapper = styled.div`
-    padding: var(--space-sm);
-`;
+const Wrapper = styled.div``;
 
 class CollectInfo extends Component {
     render() {

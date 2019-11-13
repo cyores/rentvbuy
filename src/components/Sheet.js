@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 // components
 import AreaGraph from "./AreaGraph";
-import Flex from "./utils/Flex";
 import Table from "./utils/Table";
 
 const StyledSheet = styled.div`

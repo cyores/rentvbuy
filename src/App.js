@@ -118,7 +118,7 @@ class App extends React.Component {
                         dir="col"
                         style={{ justifyContent: "flex-start", height: "100%" }}
                     >
-                        <div>
+                        <div style={{ padding: "0 var(--space-sm)" }}>
                             <h3 className="fancy-underline">Rent vs Buy</h3>
                             {this.state.view === "calculator" ? (
                                 <Calculator
@@ -130,7 +130,7 @@ class App extends React.Component {
                             {this.state.view === "help" ? <Help /> : null}
                         </div>
                         <div style={{ marginTop: "auto" }}>
-                            <Footer />
+                            <Footer changeView={this.changeView} />
                         </div>
                     </Flex>
                 </Left>
