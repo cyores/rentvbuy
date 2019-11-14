@@ -30,7 +30,7 @@
     --color-shadow: rgba(55, 58, 75, 0.08);
 
     /* Text Sizing */
-    --text-base-size: 1.1em;
+    --text-base-size: 1.075em;
     --text-scale-ratio: 1.2;
     --text-xs: calc((1em / var(--text-scale-ratio)) / var(--text-scale-ratio));
     --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
@@ -152,11 +152,12 @@ hr {
     content: "";
     display: block;
     position: absolute;
-    background-color: #7a3dddab;
-    height: 10px;
-    width: 105%;
+    background-color: var(--color-primary-transparent);
+    z-index: -1;
+    height: 8px;
+    width: 106%;
     left: 50%;
-    bottom: 3px;
+    bottom: 2px;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 }

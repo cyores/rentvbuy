@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledVerdict = styled.div`
-    background-color: #fff;
     background: var(--color-a-c-gradient);
     padding: var(--space-md);
     margin-bottom: var(--space-md);
     text-align: center;
     width: 100%;
+    z-index: -1;
 `;
 
 export default function Verdict(props) {

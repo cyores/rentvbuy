@@ -127,8 +127,8 @@ class AreaGraph extends Component {
                                                 y: margin.bottom - 10,
                                                 fill: "#000",
                                                 textAnchor: "middle",
-                                                fontSize: "1.5rem",
-                                                fontFamily: "Nunito"
+                                                fontSize: "var(--text-md)",
+                                                fontFamily: "Raleway"
                                             }}
                                         />
                                         <AxisLeft
@@ -140,8 +140,8 @@ class AreaGraph extends Component {
                                             labelProps={{
                                                 fill: "#000",
                                                 textAnchor: "middle",
-                                                fontSize: "1.5rem",
-                                                fontFamily: "Nunito"
+                                                fontSize: "var(--text-md)",
+                                                fontFamily: "Raleway"
                                             }}
                                         />
                                     </>
