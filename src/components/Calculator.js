@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 
 // components
 import Button from "./utils/Button";
 import CollectInfo from "./CollectInfo";
+import Flex from "./utils/Flex";
 
 // calculators
 import buyCalcs from "../utils/buyCalcs";
 import rentCalcs from "../utils/rentCalcs";
-
-const StyledCalculator = styled.div``;
 
 class Calculator extends Component {
     constructor(props) {
@@ -57,29 +55,33 @@ class Calculator extends Component {
 
     render() {
         return (
-            <StyledCalculator>
-                <CollectInfo
-                    handleChange={this.handleChange}
-                    advanced={this.state.advanced}
-                    VOP={this.state.VOP}
-                    RENT={this.state.RENT}
-                    PTR={this.state.PTR}
-                    LTT={this.state.LTT}
-                    CF={this.state.CF}
-                    MR={this.state.MR}
-                    DP={this.state.DP}
-                    AP={this.state.AP}
-                    REA={this.state.REA}
-                    SMA={this.state.SMA}
-                />
-                <Button
-                    theme="primary"
-                    text="Calculate"
-                    onClick={() => this.calculate()}
-                >
-                    Calculate
-                </Button>
-            </StyledCalculator>
+            <Flex dir="rowleft">
+                <div>
+                    <CollectInfo
+                        handleChange={this.handleChange}
+                        advanced={this.state.advanced}
+                        VOP={this.state.VOP}
+                        RENT={this.state.RENT}
+                        PTR={this.state.PTR}
+                        LTT={this.state.LTT}
+                        CF={this.state.CF}
+                        MR={this.state.MR}
+                        DP={this.state.DP}
+                        AP={this.state.AP}
+                        REA={this.state.REA}
+                        SMA={this.state.SMA}
+                    />
+                </div>
+                <div>
+                    <Button
+                        theme="primary"
+                        text="Calculate"
+                        onClick={() => this.calculate()}
+                    >
+                        Calculate
+                    </Button>
+                </div>
+            </Flex>
         );
     }
 }

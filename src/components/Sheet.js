@@ -12,79 +12,77 @@ const StyledSheet = styled.div`
     margin-bottom: var(--space-md);
 `;
 
-class Sheet extends Component {
-    render() {
-        const {
-            initialCosts,
-            monthlyCosts,
-            afterPeriod,
-            // type,
-            period
-        } = this.props;
-        return (
-            <StyledSheet>
-                <h5>{this.props.title}</h5>
-                {this.props.subtitle ? (
-                    <small style={{ margin: 0 }}>
-                        <em>{this.props.subtitle}</em>
-                    </small>
-                ) : null}
+export default function Sheet(props) {
+    const {
+        initialCosts,
+        monthlyCosts,
+        afterPeriod,
+        period,
+        title,
+        subtitle,
+        graphData
+    } = props;
+    return (
+        <StyledSheet>
+            <h5>{title}</h5>
+            {subtitle ? (
+                <small style={{ margin: 0 }}>
+                    <em>{subtitle}</em>
+                </small>
+            ) : null}
 
-                <hr></hr>
-                <div>
-                    <div style={{ minHeight: "24vh" }}>
-                        <h6>Initial Costs</h6>
-                        <div style={{ paddingTop: "0" }}>
-                            <Table
-                                headings={["Item", "Amount"]}
-                                rows={initialCosts}
-                                formatKeyText={formatKeyText}
-                                formatValueText={formatCurrency}
-                            />
-                        </div>
+            <hr></hr>
+            <div>
+                <div style={{ minHeight: "24vh" }}>
+                    <h6>Initial Costs</h6>
+                    <div style={{ paddingTop: "0" }}>
+                        <Table
+                            headings={["Item", "Amount"]}
+                            rows={initialCosts}
+                            formatKeyText={formatKeyText}
+                            formatValueText={formatCurrency}
+                        />
                     </div>
                 </div>
-                <div>
-                    <div style={{ minHeight: "28vh" }}>
-                        <h6>Monthly Costs</h6>
-                        <div style={{ paddingTop: "0" }}>
-                            <Table
-                                headings={["Item", "Amount"]}
-                                rows={monthlyCosts}
-                                formatKeyText={formatKeyText}
-                                formatValueText={formatCurrency}
-                            />
-                        </div>
+            </div>
+            <div>
+                <div style={{ minHeight: "28vh" }}>
+                    <h6>Monthly Costs</h6>
+                    <div style={{ paddingTop: "0" }}>
+                        <Table
+                            headings={["Item", "Amount"]}
+                            rows={monthlyCosts}
+                            formatKeyText={formatKeyText}
+                            formatValueText={formatCurrency}
+                        />
                     </div>
                 </div>
-                <div>
-                    <div style={{ minHeight: "24vh" }}>
-                        <h6>After {period} Years</h6>
-                        <div style={{ paddingTop: "0" }}>
-                            <Table
-                                headings={["Item", "Amount"]}
-                                rows={afterPeriod}
-                                formatKeyText={formatKeyText}
-                                formatValueText={formatCurrency}
-                            />
-                        </div>
+            </div>
+            <div>
+                <div style={{ minHeight: "24vh" }}>
+                    <h6>After {period} Years</h6>
+                    <div style={{ paddingTop: "0" }}>
+                        <Table
+                            headings={["Item", "Amount"]}
+                            rows={afterPeriod}
+                            formatKeyText={formatKeyText}
+                            formatValueText={formatCurrency}
+                        />
                     </div>
                 </div>
-                {this.props.graphData ? (
-                    <>
+            </div>
+            {graphData ? (
+                <>
+                    <div>
                         <div>
-                            <div>
-                                <h5>Property Value Over Time</h5>
-                                <div style={{ height: "28vh" }}>
-                                    <AreaGraph data={this.props.graphData} />
-                                </div>
+                            <h5>Property Value Over Time</h5>
+                            <div style={{ height: "28vh" }}>
+                                <AreaGraph data={graphData} />
                             </div>
                         </div>
-                    </>
-                ) : null}
-            </StyledSheet>
-        );
-    }
+                    </div>
+                </>
+            ) : null}
+        </StyledSheet>
+    );
 }
-
-export default Sheet;
