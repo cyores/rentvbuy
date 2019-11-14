@@ -21,10 +21,8 @@ class AreaGraph extends Component {
     state = {};
     render() {
         const { data } = this.props;
-        // const data = this.props.data[0];
-        // const data2 = this.props.data[1];
 
-        // console.log("data", this.props.data);
+        console.log("data", this.props.data);
 
         return (
             <ParentSize>
@@ -52,11 +50,23 @@ class AreaGraph extends Component {
                         nice: true
                     });
 
+                    const lowestValue = Math.min(
+                        min(data[0], y),
+                        min(data[1], y)
+                    );
+                    const highestValue = Math.max(
+                        max(data[0], y),
+                        max(data[1], y)
+                    );
+                    const yRange = Math.max(
+                        Math.abs(highestValue),
+                        Math.abs(lowestValue)
+                    );
                     const yScale = scaleLinear({
                         // range: [yMax, 0],
                         // domain: [0, Math.max(max(data[0], y), max(data[1], y))],
                         range: [yMax, 0],
-                        domain: [Math.min(min(data[0], y), min(data[1], y)), Math.max(max(data[0], y), max(data[1], y))],
+                        domain: [-yRange, yRange],
                         nice: true
                     });
 
@@ -116,7 +126,7 @@ class AreaGraph extends Component {
                                 <Group left={margin.left} top={margin.top}>
                                     <>
                                         <AxisBottom
-                                            top={yMax}
+                                            top={yMax / 2}
                                             left={0}
                                             scale={xScale}
                                             numTicks={data[0].length / 2}

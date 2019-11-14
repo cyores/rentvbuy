@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { formatCurrency, formatKeyText } from "../utils";
 import styled from "styled-components";
 
