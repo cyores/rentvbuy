@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ExpandableRow from "./ExpandableRow";
 
 const StyledTable = styled.table`
     width: 100%;
@@ -40,6 +41,7 @@ const StyledTable = styled.table`
 
 export default function Table(props) {
     const { headings, rows, formatKeyText, formatValueText } = props;
+    const numRows = Object.keys(rows).length;
     return (
         <StyledTable>
             <thead>
@@ -51,10 +53,29 @@ export default function Table(props) {
             </thead>
             <tbody>
                 {Object.keys(rows).map((key, index) => (
-                    <tr key={`ic-${key}-${index}`}>
-                        <td>{formatKeyText(key)}</td>
-                        <td>{formatValueText(rows[key])}</td>
-                    </tr>
+                    <React.Fragment key={`ic-${key}-${index}`}>
+                        {index !== numRows - 1 ? (
+                            <ExpandableRow
+                                values={[
+                                    formatKeyText(key),
+                                    formatValueText(rows[key])
+                                ]}
+                                index={index}
+                                numRows={numRows}
+                                numHeadings={headings.length}
+                            >
+                                <p>
+                                    Put the expandable content (like a graph)
+                                    here
+                                </p>
+                            </ExpandableRow>
+                        ) : (
+                            <tr>
+                                <td>{formatKeyText(key)}</td>
+                                <td>{formatValueText(rows[key])}</td>
+                            </tr>
+                        )}
+                    </React.Fragment>
                 ))}
             </tbody>
         </StyledTable>
