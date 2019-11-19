@@ -11,6 +11,7 @@
     "@vx/responsive": "0.0.189",
     "@vx/scale": "0.0.190",
     "@vx/shape": "0.0.190",
+    "@vx/threshold": "0.0.192",
     "@vx/tooltip": "0.0.189",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
