@@ -153,6 +153,7 @@ class App extends React.Component {
                                                 this.state.calcs.rent.graphData
                                                     .net
                                             ]}
+                                            labels={["Buy", "Rent"]}
                                         ></AreaGraph>
                                     </GraphWrapper>
                                 </div>

@@ -20,7 +20,7 @@ const max = (arr, fn) => Math.max(...arr.map(fn));
 class AreaGraph extends Component {
     state = {};
     render() {
-        const { data } = this.props;
+        const { data, labels } = this.props;
 
         console.log("data", this.props.data);
 
@@ -70,6 +70,17 @@ class AreaGraph extends Component {
                         nice: true
                     });
 
+                    let labelPos = [
+                        [
+                            xScale(x(data[0][data[0].length - 1])),
+                            yScale(y(data[0][data[0].length - 1]))
+                        ],
+                        [
+                            xScale(x(data[1][data[1].length - 1])),
+                            yScale(y(data[1][data[1].length - 1]))
+                        ]
+                    ];
+
                     return (
                         <div>
                             <svg width={width} height={height}>
@@ -107,19 +118,28 @@ class AreaGraph extends Component {
                                     right={margin.right}
                                 >
                                     {data.map((dataset, i) => (
-                                        <AreaClosed
-                                            key={`grapharea-${i}`}
-                                            data={dataset}
-                                            x={d => xScale(x(d))}
-                                            y={d => yScale(y(d))}
-                                            yScale={yScale}
-                                            strokeWidth={1}
-                                            stroke={"rgba(123, 61, 221, 1)"}
-                                            // fill={`rgba(123, 61, 221, ${(1 + i) * 0.3})`}
-                                            fill={`rgba(123, 61, 221, ${1 /
-                                                (i + 2)})`}
-                                            curve={curveMonotoneX}
-                                        />
+                                        <React.Fragment key={`grapharea-${i}`}>
+                                            <AreaClosed
+                                                data={dataset}
+                                                x={d => xScale(x(d))}
+                                                y={d => yScale(y(d))}
+                                                yScale={yScale}
+                                                strokeWidth={1}
+                                                stroke={"rgba(123, 61, 221, 1)"}
+                                                // fill={`rgba(123, 61, 221, ${(1 + i) * 0.3})`}
+                                                fill={`rgba(123, 61, 221, ${1 /
+                                                    (i + 2)})`}
+                                                curve={curveMonotoneX}
+                                            />
+                                            {labelPos[i] && (
+                                                <text
+                                                    x={labelPos[i][0]}
+                                                    y={labelPos[i][1]}
+                                                >
+                                                    {labels[i]}
+                                                </text>
+                                            )}
+                                        </React.Fragment>
                                     ))}
                                 </Group>
 
