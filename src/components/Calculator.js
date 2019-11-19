@@ -41,6 +41,11 @@ class Calculator extends Component {
         }
 
         temp.calcs.donecalcs = true;
+        temp.showOnGraph = [
+            { label: "Buy", data: temp.calcs.buy.graphData.net },
+            { label: "Rent", data: temp.calcs.rent.graphData.net }
+        ];
+
         this.setState({ calcs: temp.calcs });
         this.props.sendToApp(temp);
     }

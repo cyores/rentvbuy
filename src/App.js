@@ -6,11 +6,11 @@ import contentPlaceholder from "./images/undraw_buy_house.svg";
 import About from "./components/About";
 import Help from "./components/Help";
 import Sheet from "./components/Sheet";
-import Verdict from "./components/Verdict";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
 import AreaGraph from "./components/AreaGraph";
 import Flex from "./components/utils/Flex";
+import Input from "./components/utils/Input";
 
 const GraphWrapper = styled.div`
     height: 40vh;
@@ -92,7 +92,10 @@ class App extends React.Component {
                 rentOrBuy: "",
                 donecalcs: false
             },
-            view: "calculator"
+            view: "calculator",
+            showRentGraph: true,
+            showBuyGraph: true,
+            showOnGraph: []
         };
         this.receiveFromCalculator = this.receiveFromCalculator.bind(this);
         this.changeView = this.changeView.bind(this);
@@ -107,7 +110,34 @@ class App extends React.Component {
         this.setState({ view: view });
     }
 
+    changeGraphData(input, hideLabel) {
+        let value = input.target.checked;
+        let newGraphs = [];
+        if (value) {
+            // we need to show something
+            newGraphs = this.state.showOnGraph;
+            if (hideLabel === "Rent") {
+                newGraphs.push({
+                    label: "Rent",
+                    data: this.state.calcs.rent.graphData.net
+                });
+            } else if (hideLabel === "Buy") {
+                newGraphs.push({
+                    label: "Buy",
+                    data: this.state.calcs.buy.graphData.net
+                });
+            }
+        } else {
+            // we need to hide something
+            newGraphs = this.state.showOnGraph.filter(graph => {
+                return graph.label !== hideLabel;
+            });
+        }
+        this.setState({ showOnGraph: newGraphs });
+    }
+
     render() {
+        const { showRentGraph, showBuyGraph } = this.state;
         return (
             <>
                 <Left>
@@ -136,24 +166,76 @@ class App extends React.Component {
                     {this.state.calcs.donecalcs ? (
                         <Flex dir="col" style={{ height: "100%" }}>
                             <Flex>
-                                <Verdict
-                                    rentOrBuy={this.state.calcs.rentOrBuy}
-                                />
-                            </Flex>
-                            <Flex>
                                 <div style={{ flex: "1" }}>
-                                    <h5 style={{ marginTop: 0 }}>
-                                        Rent vs Buy Net Value Over Time
-                                    </h5>
+                                    <Flex>
+                                        <div style={{ flex: "66" }}>
+                                            <Flex dir="rowleft">
+                                                <h5 style={{ marginTop: 0 }}>
+                                                    Rent vs Buy Net Value Over
+                                                    Time
+                                                </h5>
+                                            </Flex>
+                                        </div>
+                                        <div style={{ flex: "33" }}>
+                                            <Flex dir="rowright">
+                                                <div style={{ flex: "1" }}>
+                                                    <h6
+                                                        style={{ marginTop: 0 }}
+                                                    >
+                                                        Show
+                                                    </h6>
+                                                </div>
+                                                <div style={{ flex: "1" }}>
+                                                    <Input
+                                                        type="checkbox"
+                                                        defaultValue={
+                                                            showRentGraph
+                                                        }
+                                                        label="Rent"
+                                                        labelTop={true}
+                                                        onChange={input =>
+                                                            this.changeGraphData(
+                                                                input,
+                                                                "Rent"
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <div style={{ flex: "1" }}>
+                                                    <Input
+                                                        type="checkbox"
+                                                        defaultValue={
+                                                            showBuyGraph
+                                                        }
+                                                        label="Buy"
+                                                        labelTop={true}
+                                                        onChange={input =>
+                                                            this.changeGraphData(
+                                                                input,
+                                                                "Buy"
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </Flex>
+                                        </div>
+                                    </Flex>
+
                                     <GraphWrapper>
                                         <AreaGraph
-                                            data={[
-                                                this.state.calcs.buy.graphData
-                                                    .net,
-                                                this.state.calcs.rent.graphData
-                                                    .net
-                                            ]}
-                                            labels={["Buy", "Rent"]}
+                                            // graphs={[
+                                            //     {
+                                            //         label: "Buy",
+                                            //         data: this.state.calcs.buy
+                                            //             .graphData.net
+                                            //     },
+                                            //     {
+                                            //         label: "Rent",
+                                            //         data: this.state.calcs.rent
+                                            //             .graphData.net
+                                            //     }
+                                            // ]}
+                                            graphs={this.state.showOnGraph}
                                         ></AreaGraph>
                                     </GraphWrapper>
                                 </div>

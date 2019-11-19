@@ -142,6 +142,7 @@ export default function Input(props) {
                             type={type}
                             placeholder={placeholder}
                             defaultValue={defaultValue}
+                            defaultChecked={defaultValue}
                             name={name}
                             value={value}
                             onChange={onChange}

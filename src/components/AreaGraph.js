@@ -8,13 +8,24 @@ import { GridRows, GridColumns } from "@vx/grid";
 import { scaleLinear } from "@vx/scale";
 import { AxisLeft, AxisBottom } from "@vx/axis";
 import { Group } from "@vx/group";
+import { LinePath } from "@vx/shape";
 
 // util
 const min = (arr, fn) => Math.min(...arr.map(fn));
 const max = (arr, fn) => Math.max(...arr.map(fn));
 
 export default function AreaGraph(props) {
-    const { data, labels } = props;
+    const { graphs } = props;
+    let data = [];
+    let labels = [];
+    let xDomainUpper = 0;
+    let lowestValue = 0;
+    let highestValue = 0;
+    let labelPos = [];
+
+    if (graphs.length === 0) {
+        return <p>Select a graph to view it</p>;
+    }
 
     return (
         <ParentSize>
@@ -35,15 +46,27 @@ export default function AreaGraph(props) {
                 const x = d => d.year + 0;
                 const y = d => d.value / 1000;
 
+                if (graphs[1]) {
+                    data = [graphs[0].data, graphs[1].data];
+                    labels = [graphs[0].label, graphs[1].label];
+                    xDomainUpper = Math.max(data[0].length, data[1].length);
+                    lowestValue = Math.min(min(data[0], y), min(data[1], y));
+                    highestValue = Math.max(max(data[0], y), max(data[1], y));
+                } else {
+                    data = [graphs[0].data];
+                    labels = [graphs[0].label];
+                    xDomainUpper = Math.max(data[0].length);
+                    lowestValue = Math.min(min(data[0], y));
+                    highestValue = Math.max(max(data[0], y));
+                }
+
                 // scalings
                 const xScale = scaleLinear({
                     range: [0, xMax],
-                    domain: [0, Math.max(data[0].length, data[1].length)],
+                    domain: [0, xDomainUpper],
                     nice: true
                 });
 
-                const lowestValue = Math.min(min(data[0], y), min(data[1], y));
-                const highestValue = Math.max(max(data[0], y), max(data[1], y));
                 const yRange = Math.max(
                     Math.abs(highestValue),
                     Math.abs(lowestValue)
@@ -56,16 +79,25 @@ export default function AreaGraph(props) {
                     nice: true
                 });
 
-                let labelPos = [
-                    [
-                        xScale(x(data[0][data[0].length - 1])),
-                        yScale(y(data[0][data[0].length - 1]))
-                    ],
-                    [
-                        xScale(x(data[1][data[1].length - 1])),
-                        yScale(y(data[1][data[1].length - 1]))
-                    ]
-                ];
+                if (graphs[1]) {
+                    labelPos = [
+                        [
+                            xScale(x(data[0][data[0].length - 1])),
+                            yScale(y(data[0][data[0].length - 1]))
+                        ],
+                        [
+                            xScale(x(data[1][data[1].length - 1])),
+                            yScale(y(data[1][data[1].length - 1]))
+                        ]
+                    ];
+                } else {
+                    labelPos = [
+                        [
+                            xScale(x(data[0][data[0].length - 1])),
+                            yScale(y(data[0][data[0].length - 1]))
+                        ]
+                    ];
+                }
 
                 return (
                     <div>
@@ -122,6 +154,14 @@ export default function AreaGraph(props) {
                                                 fill: "green",
                                                 fillOpacity: 0.4
                                             }}
+                                        />
+                                        <LinePath
+                                            data={dataset}
+                                            curve={curveBasis}
+                                            x={d => xScale(x(d))}
+                                            y={d => yScale(y(d))}
+                                            stroke="rgba(0, 0, 0, 0.5)"
+                                            strokeWidth={1.5}
                                         />
                                         {labelPos[i] && (
                                             <text
