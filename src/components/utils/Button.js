@@ -6,8 +6,11 @@ const Base = styled.div`
     margin-left: var(--space-xs);
     & > button {
         min-width: 3em;
-        font-size: var(--text-base-size);
-        padding: var(--space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        font-weight: 700;
+        font-size: var(--text-sm);
+        padding: var(--space-md);
         margin: var(--sapce-sm);
         text-align: center;
         text-decoration: none;
