@@ -22,11 +22,10 @@ export default function AreaGraph(props) {
     let lowestValue = 0;
     let highestValue = 0;
     let labelPos = [];
-    if (!graphs) return <p>Fuck up</p>;
+
     if (graphs.length === 0) {
         return <p>Select a graph to view it</p>;
     }
-    console.log("graphs", graphs);
 
     return (
         <ParentSize>

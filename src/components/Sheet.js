@@ -3,7 +3,6 @@ import { formatCurrency, formatKeyText } from "../utils";
 import styled from "styled-components";
 
 // components
-import AreaGraph from "./AreaGraph";
 import Table from "./utils/Table";
 
 const StyledSheet = styled.div`
@@ -74,18 +73,6 @@ export default function Sheet(props) {
                     </div>
                 </div>
             </div>
-            {graphData ? (
-                <>
-                    <div>
-                        <div>
-                            <h5>Property Value Over Time</h5>
-                            <div style={{ height: "28vh" }}>
-                                {/* <AreaGraph data={graphData} /> */}
-                            </div>
-                        </div>
-                    </div>
-                </>
-            ) : null}
         </StyledSheet>
     );
 }

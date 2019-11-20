@@ -45,7 +45,7 @@ export default function Table(props) {
     const numRows = Object.keys(rows).length;
     let haveGraphData = false;
     if (graphData) haveGraphData = true;
-    console.log("table", graphData);
+
     return (
         <StyledTable>
             <thead>
@@ -73,7 +73,8 @@ export default function Table(props) {
                                         <AreaGraph
                                             graphs={[
                                                 {
-                                                    label: key,
+                                                    // label: key,
+                                                    label: "",
                                                     data: graphData[key]
                                                 }
                                             ]}
