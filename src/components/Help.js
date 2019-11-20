@@ -15,16 +15,10 @@ export default function Help() {
                 <b>Stock Market Appreciation:</b> 6% per year
             </p>
             <p>
-                <b>Taxes (if left 0):</b> 1% of the value of the property per
-                year
+                <b>Taxes:</b> 1% of the value of the property per year
             </p>
             <p>
-                <b>Maintenance (if left 0):</b> 1% of the value of the property
-                per year
-            </p>
-            <p>
-                <b>Maintenance (if not left 0):</b> 0.5% of the value of the
-                property per year plus the condo fee entered per month
+                <b>Maintenance:</b> 1% of the value of the property per year
             </p>
             <p>
                 <small>
@@ -39,8 +33,7 @@ export default function Help() {
             <p>
                 Fill out the details in the Calculator tab and click "CALCULATE"
                 to see the results on the right. If you are unsure of what to
-                put for a field, leave it as default. If TAXES or MAINTENANCE
-                are left as 0, the above assumptions will be used.
+                put for a field, leave it as default.
             </p>
         </Flex>
     );

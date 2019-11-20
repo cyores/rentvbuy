@@ -41,6 +41,7 @@ export default function Sheet(props) {
                             rows={initialCosts}
                             formatKeyText={formatKeyText}
                             formatValueText={formatCurrency}
+                            graphData={graphData}
                         />
                     </div>
                 </div>
@@ -54,6 +55,7 @@ export default function Sheet(props) {
                             rows={monthlyCosts}
                             formatKeyText={formatKeyText}
                             formatValueText={formatCurrency}
+                            graphData={graphData}
                         />
                     </div>
                 </div>
@@ -67,6 +69,7 @@ export default function Sheet(props) {
                             rows={afterPeriod}
                             formatKeyText={formatKeyText}
                             formatValueText={formatCurrency}
+                            graphData={graphData}
                         />
                     </div>
                 </div>
@@ -77,7 +80,7 @@ export default function Sheet(props) {
                         <div>
                             <h5>Property Value Over Time</h5>
                             <div style={{ height: "28vh" }}>
-                                <AreaGraph data={graphData} />
+                                {/* <AreaGraph data={graphData} /> */}
                             </div>
                         </div>
                     </div>

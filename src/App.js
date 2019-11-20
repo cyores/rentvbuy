@@ -165,6 +165,7 @@ class App extends React.Component {
                 <Right>
                     {this.state.calcs.donecalcs ? (
                         <Flex dir="col" style={{ height: "100%" }}>
+                            <br></br>
                             <Flex>
                                 <div style={{ flex: "1" }}>
                                     <Flex>
@@ -178,14 +179,26 @@ class App extends React.Component {
                                         </div>
                                         <div style={{ flex: "33" }}>
                                             <Flex dir="rowright">
-                                                <div style={{ flex: "1" }}>
+                                                <div
+                                                    style={{
+                                                        flex: "0",
+                                                        margin:
+                                                            "0 var(--space-sm)"
+                                                    }}
+                                                >
                                                     <h6
                                                         style={{ marginTop: 0 }}
                                                     >
                                                         Show
                                                     </h6>
                                                 </div>
-                                                <div style={{ flex: "1" }}>
+                                                <div
+                                                    style={{
+                                                        flex: "0",
+                                                        margin:
+                                                            "0 var(--space-sm)"
+                                                    }}
+                                                >
                                                     <Input
                                                         type="checkbox"
                                                         defaultValue={
@@ -201,7 +214,13 @@ class App extends React.Component {
                                                         }
                                                     />
                                                 </div>
-                                                <div style={{ flex: "1" }}>
+                                                <div
+                                                    style={{
+                                                        flex: "0",
+                                                        margin:
+                                                            "0 var(--space-sm)"
+                                                    }}
+                                                >
                                                     <Input
                                                         type="checkbox"
                                                         defaultValue={
@@ -223,18 +242,6 @@ class App extends React.Component {
 
                                     <GraphWrapper>
                                         <AreaGraph
-                                            // graphs={[
-                                            //     {
-                                            //         label: "Buy",
-                                            //         data: this.state.calcs.buy
-                                            //             .graphData.net
-                                            //     },
-                                            //     {
-                                            //         label: "Rent",
-                                            //         data: this.state.calcs.rent
-                                            //             .graphData.net
-                                            //     }
-                                            // ]}
                                             graphs={this.state.showOnGraph}
                                         ></AreaGraph>
                                     </GraphWrapper>
@@ -259,12 +266,9 @@ class App extends React.Component {
                                         afterPeriod={
                                             this.state.calcs.buy.endValue
                                         }
-                                        // graphData={[
-                                        //     this.state.calcs.graphData
-                                        //         .propertyValue,
-                                        //     this.state.calcs.graphData
-                                        //         .buySunkCosts
-                                        // ]}
+                                        graphData={
+                                            this.state.calcs.buy.graphData
+                                        }
                                     ></Sheet>
                                 </div>
                                 <div style={{ flex: "1" }}></div>

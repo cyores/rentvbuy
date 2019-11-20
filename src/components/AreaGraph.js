@@ -22,10 +22,11 @@ export default function AreaGraph(props) {
     let lowestValue = 0;
     let highestValue = 0;
     let labelPos = [];
-
+    if (!graphs) return <p>Fuck up</p>;
     if (graphs.length === 0) {
         return <p>Select a graph to view it</p>;
     }
+    console.log("graphs", graphs);
 
     return (
         <ParentSize>
@@ -55,9 +56,9 @@ export default function AreaGraph(props) {
                 } else {
                     data = [graphs[0].data];
                     labels = [graphs[0].label];
-                    xDomainUpper = Math.max(data[0].length);
-                    lowestValue = Math.min(min(data[0], y));
-                    highestValue = Math.max(max(data[0], y));
+                    xDomainUpper = data[0].length;
+                    lowestValue = min(data[0], y);
+                    highestValue = max(data[0], y);
                 }
 
                 // scalings
@@ -72,8 +73,6 @@ export default function AreaGraph(props) {
                     Math.abs(lowestValue)
                 );
                 const yScale = scaleLinear({
-                    // range: [yMax, 0],
-                    // domain: [0, Math.max(max(data[0], y), max(data[1], y))],
                     range: [yMax, 0],
                     domain: [-yRange, yRange],
                     nice: true

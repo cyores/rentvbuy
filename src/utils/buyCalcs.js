@@ -36,7 +36,7 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
             Net: 0
         },
         graphData: {
-            propertyValue: [],
+            Property_Value: [],
             sunkCosts: [],
             net: []
         }
@@ -69,7 +69,7 @@ export default function buyCalcs(vop, mr, dpp, ltt, ap, ptr, rea) {
         mp -= pmt * 12 - mp * mr;
         vop *= 1 + rea;
 
-        calcs.graphData.propertyValue.push({ year: i, value: vop });
+        calcs.graphData.Property_Value.push({ year: i, value: vop });
         calcs.graphData.sunkCosts.push({ year: i, value: sunkCosts });
         calcs.graphData.net.push({ year: i, value: vop - mp - sunkCosts });
     }

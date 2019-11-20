@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ExpandableRow from "./ExpandableRow";
+import AreaGraph from "../AreaGraph";
 
 const StyledTable = styled.table`
     width: 100%;
@@ -40,8 +41,11 @@ const StyledTable = styled.table`
 `;
 
 export default function Table(props) {
-    const { headings, rows, formatKeyText, formatValueText } = props;
+    const { headings, rows, formatKeyText, formatValueText, graphData } = props;
     const numRows = Object.keys(rows).length;
+    let haveGraphData = false;
+    if (graphData) haveGraphData = true;
+    console.log("table", graphData);
     return (
         <StyledTable>
             <thead>
@@ -64,10 +68,18 @@ export default function Table(props) {
                                 numRows={numRows}
                                 numHeadings={headings.length}
                             >
-                                <p>
-                                    Put the expandable content (like a graph)
-                                    here
-                                </p>
+                                {haveGraphData && graphData[key] ? (
+                                    <div style={{ height: "300px" }}>
+                                        <AreaGraph
+                                            graphs={[
+                                                {
+                                                    label: key,
+                                                    data: graphData[key]
+                                                }
+                                            ]}
+                                        />
+                                    </div>
+                                ) : null}
                             </ExpandableRow>
                         ) : (
                             <tr>
