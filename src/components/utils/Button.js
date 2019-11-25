@@ -8,7 +8,7 @@ const Base = styled.div`
         min-width: 3em;
         text-transform: uppercase;
         letter-spacing: 0.15rem;
-        font-weight: 700;
+        // font-weight: 100;
         font-size: var(--text-sm);
         padding: var(--space-md);
         margin: var(--sapce-sm);
@@ -16,7 +16,7 @@ const Base = styled.div`
         text-decoration: none;
         cursor: pointer;
         outline: none;
-        transition: all 0.15s ease-in-out;
+        transition: all 0.25s ease-in-out;
         &:hover {
             box-shadow: inset 0 0 0 100vh rgba(255, 255, 255, 0.05),
                 0 2px 4px var(--box-shadow-color);
@@ -70,11 +70,12 @@ const FullOutline = styled.button`
 
 const Outline = styled.button`
     background: transparent;
-    border: 1px solid var(--color-primary);
+    border: 3px solid var(--color-primary);
     color: var(--color-primary);
     &:hover {
         background: var(--color-primary);
-        --box-shadow-color: var(--color-primary);
+        color: rgba(255, 255, 255, 91);
+        --box-shadow-color: rgba(0, 0, 0, 0.16);
     }
 `;
 

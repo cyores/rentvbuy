@@ -79,7 +79,7 @@ class Calculator extends Component {
                 </div>
                 <div>
                     <Button
-                        theme="primary"
+                        theme="outline"
                         text="Calculate"
                         onClick={() => this.calculate()}
                     >
