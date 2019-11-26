@@ -19,6 +19,18 @@ export const initialState = {
         },
         analysis: {
             Difference_To_Rent: 0
+        },
+        graphData: {
+            monthlyCosts: {
+                Taxes: [],
+                Maintenance: [],
+                Total: []
+            },
+            afterPeriod: {
+                Property_Value: [],
+                Total_Sunk_Costs: [],
+                Net: []
+            }
         }
     },
     rent: {
@@ -38,6 +50,18 @@ export const initialState = {
         },
         analysis: {
             Difference_To_Buy: 0
+        },
+        graphData: {
+            monthlyCosts: {
+                Rent: [],
+                Stock_Investment: [],
+                Total: []
+            },
+            afterPeriod: {
+                Investments_Value: [],
+                Total_Sunk_Costs: [],
+                Net: []
+            }
         }
     },
 

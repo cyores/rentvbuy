@@ -52,7 +52,40 @@ export default function calculator(
     calculations.rent.monthlyCosts.Total = Object.values(calculations.rent.monthlyCosts).reduce((acc, val) => acc + val);
 
     // Generate graph data and therefore end values
-    for (let year = 1; year <= AP; year++) {
+    let buyGraphData = calculations.buy.graphData;
+    let rentGraphData = calculations.rent.graphData;
+    let mortgagePMT = calculations.buy.monthlyCosts.Mortgage_Payment;
+    let mortgagePrinciple = calculations.buy.Mortgage_Principle;
+    let buySunkCosts = LAND_TAX;
+    let rentSunkCosts = 0;
+    let monthlyStockInvestment = calculations.rent.monthlyCosts.Stock_Investment;
+    let investmentsValue = calculations.rent.initialCosts.Stock_Investment;
+
+    // buy initial values
+    buyGraphData.monthlyCosts.Taxes.push({year: 0, value: (VOP * PROPTERY_TAX) / 12});
+    buyGraphData.monthlyCosts.Maintenance.push({year: 0, value: (VOP * 0.01) / 12});
+    buyGraphData.monthlyCosts.Mortgage_Payment.push({year: 0, value: mortgagePMT});
+    buyGraphData.monthlyCosts.Total.push({year: 0, value: monthlyTaxes + monthlyMaint + mortgagePMT});
+
+    buyGraphData.afterPeriod.Property_Value.push({year: 0, value: VOP});
+    buyGraphData.afterPeriod.Total_Sunk_Costs.push({year: year, value: buySunkCosts});
+    buyGraphData.afterPeriod.Net.push({year: 0, value: VOP - mortgagePrinciple - buySunkCosts});
+
+    // rent initial values
+    rentGraphData.monthlyCosts.Rent.push({year: 0, value: RENT});
+    rentGraphData.monthlyCosts.Stock_Investment.push({year: 0, value: monthlyStockInvestment});
+    rentGraphData.monthlyCosts.Total.push({year: 0, value: RENT + monthlyStockInvestment});
+
+    rentGraphData.afterPeriod.Investments_Value.push({year: 0, value: investmentsValue});
+    rentGraphData.afterPeriod.Total_Sunk_Costs.push({year: 0, value: rentSunkCosts});
+    rentGraphData.afterPeriod.Net.push({year: 0, value: investmentsValue - rentSunkCosts});
+
+
+
+    for(let year = 1; year <= AP; year++) {
+        
+
+
         for (let month = 1; month <= 12; month++) {}
     }
 
