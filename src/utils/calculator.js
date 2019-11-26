@@ -31,6 +31,7 @@ export default function calculator(
 
     let monthlyStockApp = equivalentMonthlyRate(STOCK_APPRECIATION);
     let monthlyRealEstateApp = equivalentMonthlyRate(REAL_ESTATE_APPRECIATION);
+    console.log(monthlyRealEstateApp)
 
     // Calculate initial values
     calculations.buy.initialCosts.Downpayment = VOP * DOWNPAYMENT_PERCENTAGE;
@@ -65,7 +66,7 @@ export default function calculator(
     buyGraphData.monthlyCosts.Taxes.push({year: 0, value: (VOP * PROPTERY_TAX) / 12});
     buyGraphData.monthlyCosts.Maintenance.push({year: 0, value: (VOP * 0.01) / 12});
     buyGraphData.monthlyCosts.Mortgage_Payment.push({year: 0, value: mortgagePMT});
-    buyGraphData.monthlyCosts.Total.push({year: 0, value: monthlyTaxes + monthlyMaint + mortgagePMT});
+    buyGraphData.monthlyCosts.Total.push({year: 0, value: ((VOP * PROPTERY_TAX) / 12) + ((VOP * 0.01) / 12) + mortgagePMT});
 
     buyGraphData.afterPeriod.Property_Value.push({year: 0, value: VOP});
     buyGraphData.afterPeriod.Total_Sunk_Costs.push({year: 0, value: buySunkCosts});
@@ -88,12 +89,12 @@ export default function calculator(
         let thisYearsMonthlyStockContribution = Math.max(0, thisYearsMonthlyTax + thisYearsMonthlyMaint + mortgagePMT - RENT);
 
         for (let month = 1; month <= 12; month++) {
-            VOP *= 1 + monthlyRealEstateApp;
+            VOP *= 1 + (monthlyRealEstateApp / 12);
             let thisMonthsMortgageInterest = (mortgagePrinciple * MORTGAGE_RATE) / 12;
             mortgagePrinciple -= mortgagePMT - thisMonthsMortgageInterest;
             buySunkCosts += thisYearsMonthlyTax + thisYearsMonthlyMaint + thisMonthsMortgageInterest;
 
-            investmentsValue *= 1 + monthlyStockApp;
+            investmentsValue *= 1 + (monthlyStockApp / 12);
             investmentsValue += thisYearsMonthlyStockContribution;
             rentSunkCosts += RENT;
         }
@@ -120,6 +121,19 @@ export default function calculator(
         RENT *= 1 + REAL_ESTATE_APPRECIATION;
     }
 
-    console.log(calculations);
+    calculations.buy.graphData = buyGraphData;
+    calculations.rent.graphData = rentGraphData;
+
+    // set end values
+    calculations.buy.afterPeriod.Property_Value = VOP;
+    calculations.buy.afterPeriod.Total_Sunk_Costs = buySunkCosts;
+    calculations.buy.afterPeriod.Net = VOP - buySunkCosts;
+
+    calculations.rent.afterPeriod.Investments_Value = investmentsValue;
+    calculations.rent.afterPeriod.Total_Sunk_Costs = rentSunkCosts;
+    calculations.rent.afterPeriod.Net = investmentsValue - rentSunkCosts;
+
+
+    console.log("new", calculations);
     return calculations;
 }

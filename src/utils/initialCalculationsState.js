@@ -24,6 +24,7 @@ export const initialState = {
             monthlyCosts: {
                 Taxes: [],
                 Maintenance: [],
+                Mortgage_Payment: [],
                 Total: []
             },
             afterPeriod: {

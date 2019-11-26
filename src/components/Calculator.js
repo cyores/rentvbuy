@@ -8,6 +8,7 @@ import Flex from "./utils/Flex";
 // calculators
 import buyCalcs from "../utils/buyCalcs";
 import rentCalcs from "../utils/rentCalcs";
+import { calculator } from "../utils/";
 
 class Calculator extends Component {
     constructor(props) {
@@ -19,6 +20,8 @@ class Calculator extends Component {
     calculate() {
         let temp = this.state;
         let { VOP, RENT, PTR, LTT, MR, DP, AP, REA, SMA } = this.state;
+
+        calculator(VOP, PTR / 100, LTT, MR / 100, DP / 100, RENT, AP);
 
         let xbuyCalcs = buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
         let xrentCalcs = rentCalcs(
