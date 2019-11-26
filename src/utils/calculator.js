@@ -68,7 +68,7 @@ export default function calculator(
     buyGraphData.monthlyCosts.Total.push({year: 0, value: monthlyTaxes + monthlyMaint + mortgagePMT});
 
     buyGraphData.afterPeriod.Property_Value.push({year: 0, value: VOP});
-    buyGraphData.afterPeriod.Total_Sunk_Costs.push({year: year, value: buySunkCosts});
+    buyGraphData.afterPeriod.Total_Sunk_Costs.push({year: 0, value: buySunkCosts});
     buyGraphData.afterPeriod.Net.push({year: 0, value: VOP - mortgagePrinciple - buySunkCosts});
 
     // rent initial values
@@ -83,10 +83,41 @@ export default function calculator(
 
 
     for(let year = 1; year <= AP; year++) {
+        let thisYearsMonthlyTax = (VOP * PROPTERY_TAX) / 12;
+        let thisYearsMonthlyMaint = (VOP * 0.01) / 12;
+        let thisYearsMonthlyStockContribution = Math.max(0, thisYearsMonthlyTax + thisYearsMonthlyMaint + mortgagePMT - RENT);
+
+        for (let month = 1; month <= 12; month++) {
+            VOP *= 1 + monthlyRealEstateApp;
+            let thisMonthsMortgageInterest = (mortgagePrinciple * MORTGAGE_RATE) / 12;
+            mortgagePrinciple -= mortgagePMT - thisMonthsMortgageInterest;
+            buySunkCosts += thisYearsMonthlyTax + thisYearsMonthlyMaint + thisMonthsMortgageInterest;
+
+            investmentsValue *= 1 + monthlyStockApp;
+            investmentsValue += thisYearsMonthlyStockContribution;
+            rentSunkCosts += RENT;
+        }
         
+        // buy graphs
+        buyGraphData.monthlyCosts.Taxes.push({year: year, value: thisYearsMonthlyTax});
+        buyGraphData.monthlyCosts.Maintenance.push({year: year, value: thisYearsMonthlyMaint});
+        buyGraphData.monthlyCosts.Mortgage_Payment.push({year: year, value: mortgagePMT});
+        buyGraphData.monthlyCosts.Total.push({year: year, value: thisYearsMonthlyTax + thisYearsMonthlyMaint + mortgagePMT});
 
+        buyGraphData.afterPeriod.Property_Value.push({year: year, value: VOP});
+        buyGraphData.afterPeriod.Total_Sunk_Costs.push({year: year, value: buySunkCosts});
+        buyGraphData.afterPeriod.Net.push({year: 0, value: VOP - mortgagePrinciple - buySunkCosts});
 
-        for (let month = 1; month <= 12; month++) {}
+        // rent graphs
+        rentGraphData.monthlyCosts.Rent.push({year: year, value: RENT});
+        rentGraphData.monthlyCosts.Stock_Investment.push({year: year, value: thisYearsMonthlyStockContribution});
+        rentGraphData.monthlyCosts.Total.push({year: year, value: RENT + thisYearsMonthlyStockContribution});
+    
+        rentGraphData.afterPeriod.Investments_Value.push({year: year, value: investmentsValue});
+        rentGraphData.afterPeriod.Total_Sunk_Costs.push({year: year, value: rentSunkCosts});
+        rentGraphData.afterPeriod.Net.push({year: year, value: investmentsValue - rentSunkCosts});
+
+        RENT *= 1 + REAL_ESTATE_APPRECIATION;
     }
 
     console.log(calculations);
