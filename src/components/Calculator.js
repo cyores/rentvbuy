@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
+// calculators
+import { calculator } from "../utils/";
+
 // components
 import Button from "./utils/Button";
 import CollectInfo from "./CollectInfo";
 import Flex from "./utils/Flex";
-
-// calculators
-import buyCalcs from "../utils/buyCalcs";
-import rentCalcs from "../utils/rentCalcs";
-import { calculator } from "../utils/";
 
 class Calculator extends Component {
     constructor(props) {
@@ -18,37 +16,23 @@ class Calculator extends Component {
     }
 
     calculate() {
-        let temp = this.state;
-        let { VOP, RENT, PTR, LTT, MR, DP, AP, REA, SMA } = this.state;
+        let temp = {};
+        let { VOP, RENT, PTR, LTT, MR, DP, AP } = this.state;
 
-        calculator(VOP, PTR / 100, LTT, MR / 100, DP / 100, RENT, AP);
-
-        let xbuyCalcs = buyCalcs(VOP, MR, DP, LTT, AP, PTR, REA);
-        let xrentCalcs = rentCalcs(
+        temp.calcs = calculator(
+            VOP,
+            PTR / 100,
+            LTT,
+            MR / 100,
+            DP / 100,
             RENT,
-            xbuyCalcs.initialCosts.Total,
-            xbuyCalcs.monthlyCosts.Total,
-            SMA,
-            REA,
             AP
         );
-        temp.calcs.buy = xbuyCalcs;
-        temp.calcs.rent = xrentCalcs;
 
-        temp.calcs.percentRule = parseFloat(((VOP * 0.05) / 12).toFixed(2));
-
-        if (temp.calcs.percentRule < temp.calcs.rent.monthlyCosts.Rent) {
-            temp.calcs.rentOrBuy = "buy";
-        } else {
-            temp.calcs.rentOrBuy = "rent";
-        }
-
-        temp.calcs.donecalcs = true;
         temp.showOnGraph = [
-            { label: "Buy", data: temp.calcs.buy.graphData.net },
-            { label: "Rent", data: temp.calcs.rent.graphData.net }
+            { label: "Buy", data: temp.calcs.buy.graphData.afterPeriod.Net },
+            { label: "Rent", data: temp.calcs.rent.graphData.afterPeriod.Net }
         ];
-
         this.setState({ calcs: temp.calcs });
         this.props.sendToApp(temp);
     }
