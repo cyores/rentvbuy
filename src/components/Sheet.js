@@ -21,6 +21,7 @@ export default function Sheet(props) {
         subtitle,
         graphData
     } = props;
+
     return (
         <StyledSheet>
             <h5>{title}</h5>
@@ -40,7 +41,7 @@ export default function Sheet(props) {
                             rows={initialCosts}
                             formatKeyText={formatKeyText}
                             formatValueText={formatCurrency}
-                            graphData={graphData}
+                            // graphData={graphData.initialCosts}
                         />
                     </div>
                 </div>
@@ -54,7 +55,7 @@ export default function Sheet(props) {
                             rows={monthlyCosts}
                             formatKeyText={formatKeyText}
                             formatValueText={formatCurrency}
-                            graphData={graphData}
+                            graphData={graphData.monthlyCosts}
                         />
                     </div>
                 </div>
@@ -68,7 +69,7 @@ export default function Sheet(props) {
                             rows={afterPeriod}
                             formatKeyText={formatKeyText}
                             formatValueText={formatCurrency}
-                            graphData={graphData}
+                            graphData={graphData.afterPeriod}
                         />
                     </div>
                 </div>

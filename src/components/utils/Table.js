@@ -78,6 +78,8 @@ export default function Table(props) {
                                                     data: graphData[key]
                                                 }
                                             ]}
+                                            divisor={1}
+                                            canBeNegative={false}
                                         />
                                     </div>
                                 ) : null}

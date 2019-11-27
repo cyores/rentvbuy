@@ -15,7 +15,8 @@ const min = (arr, fn) => Math.min(...arr.map(fn));
 const max = (arr, fn) => Math.max(...arr.map(fn));
 
 export default function AreaGraph(props) {
-    const { graphs } = props;
+    const { graphs, divisor, canBeNegative } = props;
+
     let data = [];
     let labels = [];
     let xDomainUpper = 0;
@@ -44,7 +45,7 @@ export default function AreaGraph(props) {
 
                 // x, y translations
                 const x = d => d.year + 0;
-                const y = d => d.value / 1000;
+                const y = d => d.value / divisor;
 
                 if (graphs[1]) {
                     data = [graphs[0].data, graphs[1].data];
@@ -67,13 +68,18 @@ export default function AreaGraph(props) {
                     nice: true
                 });
 
-                const yRange = Math.max(
+                let upperYRange = Math.max(
                     Math.abs(highestValue),
                     Math.abs(lowestValue)
                 );
+                let lowerYRange = 0;
+                if (canBeNegative) {
+                    lowerYRange = -upperYRange;
+                }
+
                 const yScale = scaleLinear({
                     range: [yMax, 0],
-                    domain: [-yRange, yRange],
+                    domain: [lowerYRange, upperYRange],
                     nice: true
                 });
 
@@ -140,14 +146,21 @@ export default function AreaGraph(props) {
                                             x={d => xScale(x(d))}
                                             y={d => yScale(y(d))}
                                             y0={d => yScale(y(d))}
-                                            y1={yMax / 2}
+                                            y1={canBeNegative ? yMax / 2 : yMax}
                                             clipAboveTo={0}
                                             clipBelowTo={yMax}
                                             curve={curveBasis}
-                                            belowAreaProps={{
-                                                fill: "red",
-                                                fillOpacity: 0.4
-                                            }}
+                                            belowAreaProps={
+                                                canBeNegative
+                                                    ? {
+                                                          fill: "red",
+                                                          fillOpacity: 0.4
+                                                      }
+                                                    : {
+                                                          fill: "green",
+                                                          fillOpacity: 0.4
+                                                      }
+                                            }
                                             aboveAreaProps={{
                                                 fill: "green",
                                                 fillOpacity: 0.4
@@ -176,7 +189,7 @@ export default function AreaGraph(props) {
                             <Group left={margin.left} top={margin.top}>
                                 <>
                                     <AxisBottom
-                                        top={yMax / 2}
+                                        top={canBeNegative ? yMax / 2 : yMax}
                                         left={0}
                                         scale={xScale}
                                         numTicks={data[0].length / 2}
@@ -204,7 +217,7 @@ export default function AreaGraph(props) {
                                         left={0}
                                         scale={yScale}
                                         numTicks={10}
-                                        label="Value (x1000)"
+                                        label={`Value (x${divisor})`}
                                         labelProps={{
                                             fill: "#000",
                                             textAnchor: "middle",

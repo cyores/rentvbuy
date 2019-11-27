@@ -200,6 +200,8 @@ class App extends React.Component {
                                     <GraphWrapper>
                                         <AreaGraph
                                             graphs={this.state.showOnGraph}
+                                            divisor={1000}
+                                            canBeNegative={true}
                                         ></AreaGraph>
                                     </GraphWrapper>
                                 </div>
@@ -245,6 +247,9 @@ class App extends React.Component {
                                         period={this.state.AP}
                                         afterPeriod={
                                             this.state.calcs.rent.afterPeriod
+                                        }
+                                        graphData={
+                                            this.state.calcs.rent.graphData
                                         }
                                     ></Sheet>
                                 </div>
