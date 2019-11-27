@@ -4,6 +4,7 @@
 export default function formatCurrency(num) {
     const negativeSign = num < 0 ? "-" : "";
     num = Math.abs(num);
+    num = parseFloat(num.toFixed(2));
     let splitNum = num.toString().split(".");
     let dollars = splitNum[0];
     let cents = splitNum.length > 1 ? splitNum[1] : "00";
