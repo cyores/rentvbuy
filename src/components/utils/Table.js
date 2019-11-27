@@ -58,7 +58,7 @@ export default function Table(props) {
             <tbody>
                 {Object.keys(rows).map((key, index) => (
                     <React.Fragment key={`ic-${key}-${index}`}>
-                        {index !== numRows - 1 && graphData ? (
+                        {graphData ? (
                             <ExpandableRow
                                 values={[
                                     formatKeyText(key),
