@@ -154,16 +154,16 @@ export default function AreaGraph(props) {
                                                 canBeNegative
                                                     ? {
                                                           fill: "red",
-                                                          fillOpacity: 0.4
+                                                          fillOpacity: 0.7
                                                       }
                                                     : {
                                                           fill: "green",
-                                                          fillOpacity: 0.4
+                                                          fillOpacity: 0.7
                                                       }
                                             }
                                             aboveAreaProps={{
                                                 fill: "green",
-                                                fillOpacity: 0.4
+                                                fillOpacity: 0.7
                                             }}
                                         />
                                         <LinePath
@@ -172,7 +172,10 @@ export default function AreaGraph(props) {
                                             x={d => xScale(x(d))}
                                             y={d => yScale(y(d))}
                                             stroke="rgba(0, 0, 0, 0.5)"
-                                            strokeWidth={1.5}
+                                            strokeWidth={2}
+                                            strokeDasharray={
+                                                i !== 0 ? "4,2" : "0,0"
+                                            }
                                         />
                                         {labelPos[i] && (
                                             <text
