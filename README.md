@@ -8,6 +8,8 @@ The tool focuses on the sunk costs of each case and the appreciation of the asse
 
 I am not a financial advisor. I do not have any formal financial or economic education. This tool is not substitute for real financial advice. It is only meant to help or supplement the decision making process.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1c61304d-6b5a-4be9-aebb-5e3c4e6df1c9/deploy-status)](https://app.netlify.com/sites/rentvbuy/deploys)
+
 <!-- The tool was largely inspired by this YouTube video by Ben Felix.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Uwl3-jBNEd4/0.jpg)](https://www.youtube.com/watch?v=Uwl3-jBNEd4) -->
