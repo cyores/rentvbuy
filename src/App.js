@@ -24,12 +24,23 @@ const Left = styled.div`
     width: 25vw;
     height: 100vh;
     background: var(--color-a-c-gradient);
+    @media (max-width: 768px) {
+        position: relative;
+        width: 100vw;
+        height: auto;
+    }
 `;
 
 const Right = styled.div`
     margin-left: 25vw;
     padding: var(--space-md);
     min-height: 100vh;
+    @media (max-width: 768px) {
+        width: 100vw;
+        margin-left: 0;
+        height: auto;
+        padding: 0;
+    }
 `;
 
 class App extends React.Component {
@@ -273,7 +284,8 @@ class App extends React.Component {
                                     height="auto"
                                     style={{
                                         opacity: "0.9",
-                                        margin: "2rem"
+                                        margin: "2rem",
+                                        maxWidth: "80vw"
                                     }}
                                 />
                             </div>
