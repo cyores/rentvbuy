@@ -87,12 +87,12 @@ class App extends React.Component {
             if (hideLabel === "Rent") {
                 newGraphs.push({
                     label: "Rent",
-                    data: this.state.calcs.rent.graphData.net
+                    data: this.state.calcs.rent.graphData.afterPeriod.Net
                 });
             } else if (hideLabel === "Buy") {
                 newGraphs.push({
                     label: "Buy",
-                    data: this.state.calcs.buy.graphData.net
+                    data: this.state.calcs.buy.graphData.afterPeriod.Net
                 });
             }
         } else {
