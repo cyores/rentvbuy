@@ -1,14 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 
 // components
-import Button from './components/Button';
+import Button from './components/prims/Button';
+import LeftPanel from './components/LeftPanel';
 
 export default function App() {
-  return (
-    <div>
-      <h1>Rent vs Buy</h1>
-      <p>Help make the Rent vs Buy decision easier.</p>
-      <Button>Hello!</Button>
-    </div>
-  );
+  return <LeftPanel />;
 }

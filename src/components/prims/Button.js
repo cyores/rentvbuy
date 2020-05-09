@@ -2,15 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
+  flex: 1;
   padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-primary);
-  color: var(--color-primary);
+  // margin: var(--space-xs);
+  border: 1px solid var(--color-text);
+  color: var(--color-text);
   background: transparent;
-  margin: 0 var(--spacing-sm);
   cursor: pointer;
+  font-size: var(--text-base-size);
+  transition: var(--transition);
   &:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
+    background: var(--color-text);
+    color: var(--color-primary);
   }
   &:active {
     box-shadow: inset 0 0 0 100vh rgba(0, 0, 0, 0.1);
@@ -18,9 +21,5 @@ const StyledButton = styled.button`
 `;
 
 export default function Button(props) {
-  return (
-    <StyledButton onClick={() => console.log('button clicked')}>
-      {props.children}
-    </StyledButton>
-  );
+  return <StyledButton {...props}>{props.children}</StyledButton>;
 }

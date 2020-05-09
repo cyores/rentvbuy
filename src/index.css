@@ -1,10 +1,8 @@
 /* https://raw.githubusercontent.com/michael-andreuzza/images/master/Sport.png */
 /**
- * BG:               #1648bf
- * FG:               #2754f2
- * FG2:              #
- * Primary:          #fdd5b9
- * Complement:       #b9e1fd
+ * BG:               #071733
+ * FG:               #0d2b60
+ * Primary:          #1648bf
  * Text:             #fdd5b9
  */
 
@@ -14,22 +12,18 @@
 
 :root {
   /* Colors */
-  --color-bg: #1648bf;
-  --color-fg: #2754f2;
+  --color-bg: #071733;
+  --color-fg: #0d2b60;
   --color-text: #fdd5b9;
 
-  --color-primary: #fdd5b9;
-
-  --color-complement: #b9e1fd;
+  --color-primary: #1648bf;
 
   --color-danger: #d30930;
 
   --color-success: #14cc67;
 
-  --color-shadow: rgba(55, 58, 75, 0.08);
-
   /* Text Sizing */
-  --text-base-size: 1em;
+  --text-base-size: 1rem;
   --text-scale-ratio: 1.2;
   --text-xs: calc((1em / var(--text-scale-ratio)) / var(--text-scale-ratio));
   --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
@@ -43,7 +37,7 @@
   --text-xxxxl: calc(var(--text-xxxl) * var(--text-scale-ratio));
 
   /* Space */
-  --space-unit: 1em;
+  --space-unit: 1rem;
   --space-xxxxs: calc(0.125 * var(--space-unit));
   --space-xxxs: calc(0.25 * var(--space-unit));
   --space-xxs: calc(0.375 * var(--space-unit));
@@ -55,9 +49,11 @@
   --space-xxl: calc(5.25 * var(--space-unit));
   --space-xxxl: calc(8.5 * var(--space-unit));
   --space-xxxxl: calc(13.75 * var(--space-unit));
+
+  /* Default transition */
+  --transition: all 0.15s ease-in-out;
 }
 
-/* https://raw.githubusercontent.com/michael-andreuzza/images/master/font_pairings/Poppins %2B Lato.png */
 @import url('https://fonts.googleapis.com/css?family=Monsterrat|Prata');
 
 html {
