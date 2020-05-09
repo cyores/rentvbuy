@@ -3,21 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@vx/axis": "0.0.191",
-    "@vx/curve": "0.0.189",
-    "@vx/event": "0.0.189",
-    "@vx/grid": "0.0.190",
-    "@vx/group": "0.0.190",
-    "@vx/responsive": "0.0.189",
-    "@vx/scale": "0.0.190",
-    "@vx/shape": "0.0.190",
-    "@vx/threshold": "0.0.192",
-    "@vx/tooltip": "0.0.189",
-    "normalize.css": "^8.0.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.3.0",
-    "styled-components": "^4.3.2"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +31,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-plugin-styled-components": "^1.10.7",
+    "prettier": "2.0.5"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2,
+    "semi": true,
+    "trailingComma": "es5"
   }
 }
