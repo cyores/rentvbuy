@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ColCenter = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
@@ -9,12 +10,14 @@ const ColCenter = styled.div`
 `;
 
 const ColLeft = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
 `;
 
 const ColRight = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;

@@ -5,10 +5,8 @@ import styled from 'styled-components';
 import Col from './Col';
 
 const StyledInput = styled.input`
-  flex: 1;
   min-width: 0;
   padding: var(--space-xs);
-  margin-bottom: var(--space-sm);
   outline: none;
   border: 2px solid transparent;
   background: var(--color-bg);
@@ -20,19 +18,17 @@ const StyledInput = styled.input`
     opacity: 1;
     border-bottom: 2px solid var(--color-text);
   }
-`;
-
-const Label = styled.label`
-  margin-top: var(--space-sm);
-  margin-left: 1px;
+  &:hover {
+    opacity: 0.95;
+  }
 `;
 
 export default function Input(props) {
   const { label } = props;
   return (
-    <Col>
-      <Label>{label}</Label>
-      <StyledInput {...props} />
+    <Col style={{ margin: 'var(--space-sm) var(--space-xs)' }} {...props}>
+      <label>{label}</label>
+      <StyledInput style={props.inputStyle} />
     </Col>
   );
 }

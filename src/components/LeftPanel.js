@@ -12,9 +12,7 @@ const Panel = styled.div`
   height: 100vh;
   width: 25%;
   background: var(--color-primary);
-  border 1px  white;
-  border-radius: 0px 16px 16px 0px;
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-sm);
 `;
 
 export default function LeftPanel(props) {
@@ -28,7 +26,6 @@ export default function LeftPanel(props) {
 
       <Row>
         <Input type="number" label="Property Tax Rate (%)" />
-
         <Input type="number" label="Land Transfer Tax ($)" />
       </Row>
 

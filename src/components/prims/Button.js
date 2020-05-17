@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
   flex: 1;
   padding: var(--space-sm) var(--space-md);
-  // margin: var(--space-xs);
-  border: 1px solid var(--color-text);
+  margin: var(--space-xs);
+  border: 2px solid var(--color-text);
   color: var(--color-text);
   background: transparent;
   cursor: pointer;

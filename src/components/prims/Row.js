@@ -2,18 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 const RowDefault = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 `;
 
 const RowStart = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
 `;
 
 const RowEnd = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
