@@ -8,9 +8,8 @@ import Input from './prims/Input';
 import Button from './prims/Button';
 
 const Panel = styled.div`
-  position: absolute;
-  height: 100vh;
-  width: 25%;
+  height: 100%;
+  width: 100%;
   background: var(--color-primary);
   padding: 0 var(--space-sm);
 `;
